@@ -1,4 +1,6 @@
 import os
+import json
+from functools import lru_cache
 from pathlib import Path
 from dotenv import load_dotenv
 from src.aaroh.entity.config_entity import (
@@ -13,9 +15,21 @@ from src.aaroh.entity.config_entity import (
     VoiceConfig,
     CopilotEdgeConfig,
     GamificationConfig,
+    DistrictAdminConfig,
 )
 from src.aaroh.utils.common import read_yaml
 from src.aaroh.utils.logger import logger
+
+
+@lru_cache(maxsize=8)
+def _get_database_password_from_secret(secret_arn: str) -> str:
+    import boto3
+
+    response = boto3.client("secretsmanager", region_name=os.getenv("AWS_REGION", "ap-south-1")).get_secret_value(
+        SecretId=secret_arn
+    )
+    secret = json.loads(response["SecretString"])
+    return secret["password"]
 
 load_dotenv()
 
@@ -55,7 +69,10 @@ class ConfigurationManager:
             port=int(os.getenv("DB_PORT", db["port"])),
             name=os.getenv("DB_NAME", db["name"]),
             user=os.getenv("DB_USER", db["user"]),
-            password=os.getenv("DB_PASSWORD", db["password"]),
+            password=(
+                os.getenv("DB_PASSWORD")
+                or (_get_database_password_from_secret(os.environ["DB_SECRET_ARN"]) if os.getenv("DB_SECRET_ARN") else db["password"])
+            ),
             pool_size=int(db.get("pool_size", 10)),
             max_overflow=int(db.get("max_overflow", 20)),
             echo=bool(db.get("echo", False)),
@@ -197,6 +214,16 @@ class ConfigurationManager:
             streak_bonus_multiplier=float(g_conf.get("streak_bonus_multiplier", 1.2)),
             badges_catalog_path=Path(g_conf.get("badges_catalog_path", "data/gamification/badges.json")),
             flashcards_output_dir=Path(g_conf.get("flashcards_output_dir", "data/flashcards")),
+        )
+
+    def get_district_admin_config(self) -> DistrictAdminConfig:
+        d_conf = self.config.get("district_admin", {})
+        return DistrictAdminConfig(
+            parent_voice_output_dir=Path(d_conf.get("parent_voice_output_dir", "data/parent_audio")),
+            enable_mock_ivr_dispatch=bool(d_conf.get("enable_mock_ivr_dispatch", True)),
+            district_code=str(d_conf.get("district_code", "CG-BASTAR")),
+            state_name=str(d_conf.get("state_name", "Chhattisgarh")),
+            max_pathway_steps=int(d_conf.get("max_pathway_steps", 4)),
         )
 
     def get_prompt_config(self) -> dict:

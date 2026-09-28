@@ -22,15 +22,26 @@ variable "db_username" {
   default     = "aaroh_admin"
 }
 
-variable "db_password" {
-  description = "PostgreSQL Master Password"
+variable "github_repository" {
+  description = "GitHub owner/repository allowed to assume the deployment role (for example owner/Aaroh)"
   type        = string
-  sensitive   = true
-  default     = "AarohSecurePass2026!"
+  default     = ""
 }
 
 variable "db_name" {
   description = "PostgreSQL Database Name"
   type        = string
   default     = "aaroh_db"
+}
+
+variable "acm_certificate_arn" {
+  description = "Optional ACM certificate ARN in this region for HTTPS on the API ALB"
+  type        = string
+  default     = ""
+}
+
+variable "api_image_tag" {
+  description = "Container tag for the AAROH API image"
+  type        = string
+  default     = "latest"
 }

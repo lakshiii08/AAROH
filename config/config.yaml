@@ -143,6 +143,14 @@ gamification:
   badges_catalog_path: "data/gamification/badges.json"
   flashcards_output_dir: "data/flashcards"
 
+district_admin:
+  parent_voice_output_dir: "data/parent_audio"
+  enable_mock_ivr_dispatch: true
+  district_code: "CG-BASTAR"
+  state_name: "Chhattisgarh"
+  max_pathway_steps: 4
+
+
 
 
 

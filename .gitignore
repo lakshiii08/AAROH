@@ -1,0 +1,4 @@
+# Terraform work files and generated deployment archive
+aws/terraform/.terraform/
+aws/terraform/.terraform-temp/
+aws/terraform/ingestion.zip

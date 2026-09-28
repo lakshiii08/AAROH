@@ -68,3 +68,16 @@ resource "aws_iam_role_policy_attachment" "attach_phase1_policy" {
   role       = aws_iam_role.lambda_execution_role.name
   policy_arn = aws_iam_policy.lambda_phase1_policy.arn
 }
+
+resource "aws_iam_role_policy" "lambda_read_database_secret" {
+  name = "${var.project_name}-lambda-read-db-secret"
+  role = aws_iam_role.lambda_execution_role.id
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect   = "Allow"
+      Action   = ["secretsmanager:GetSecretValue"]
+      Resource = aws_secretsmanager_secret.database.arn
+    }]
+  })
+}

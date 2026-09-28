@@ -1,0 +1,8 @@
+[2026-09-28 18:50:29,074] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:50:29,077] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:50:29,087] botocore.credentials - INFO - credentials.py:1252 - Found credentials in environment variables.
+[2026-09-28 18:50:29,172] AAROH - INFO - remedial_intervention.py:70 - Created remedial pathway 'pathway_student_sukru_08_evs-g3-wat-01_d9b926' for student 'student_sukru_08' on 'EVS-G3-WAT-01'
+[2026-09-28 18:50:29,182] AAROH - INFO - district_admin_pipeline.py:210 - Intervention pathway 'pathway_student_sukru_08_evs-g3-wat-01_d9b926' saved.
+[2026-09-28 18:50:29,370] AAROH - INFO - voice_tts.py:92 - Local audio synthesized: data\audio\parent_student_sukru_08_hi_62288095.wav (19.85s)
+[2026-09-28 18:50:29,370] AAROH - INFO - parent_voice_bridge.py:61 - Parent Voice Advisory generated: 'adv_student_sukru_08_f5f69e' for Sukru Gond (Phone: +91-9876543210)
+[2026-09-28 18:50:29,379] AAROH - INFO - district_admin_pipeline.py:235 - Parent voice advisory 'adv_student_sukru_08_f5f69e' saved.

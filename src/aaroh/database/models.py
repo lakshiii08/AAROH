@@ -287,4 +287,55 @@ class VisualFlashcardModel(Base):
     created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
 
 
+# ──────────────────────────────────────────────────────────────
+# Phase 8 — District Administration & Parent Voice Bridge Tables
+# ──────────────────────────────────────────────────────────────
+
+class InterventionPathwayModel(Base):
+    """Stores personalized 4-step remedial learning pathways for struggling students."""
+    __tablename__ = "intervention_pathways"
+
+    id = Column(String(64), primary_key=True, default=lambda: str(uuid.uuid4()))
+    student_id = Column(String(64), nullable=False, index=True)
+    student_name = Column(String(128), default="Student")
+    concept_code = Column(String(64), nullable=False, index=True)
+    concept_name = Column(String(255), nullable=True)
+    weak_bloom_level = Column(String(32), default="Understand")
+    steps_json = Column(JSON, nullable=False)    # List[InterventionStep dicts]
+    status = Column(String(32), default="ASSIGNED") # ASSIGNED, IN_PROGRESS, COMPLETED
+    assigned_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+
+
+class ParentVoiceAdvisoryModel(Base):
+    """Stores mother-tongue voice advisory notes generated for non-literate parents."""
+    __tablename__ = "parent_voice_advisories"
+
+    id = Column(String(64), primary_key=True, default=lambda: str(uuid.uuid4()))
+    student_id = Column(String(64), nullable=False, index=True)
+    student_name = Column(String(128), default="Student")
+    parent_phone = Column(String(32), nullable=False)
+    target_language = Column(String(16), default="hi")
+    target_dialect = Column(String(32), nullable=True)
+    concept_learned = Column(String(255), nullable=False)
+    speech_script = Column(Text, nullable=False)
+    audio_file_path = Column(String(512), nullable=False)
+    dispatch_status = Column(String(32), default="SENT")
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+
+
+class DistrictSchoolModel(Base):
+    """Stores registered schools across districts."""
+    __tablename__ = "district_schools"
+
+    id = Column(String(64), primary_key=True, default=lambda: str(uuid.uuid4()))
+    school_id = Column(String(64), nullable=False, unique=True, index=True)
+    school_name = Column(String(255), nullable=False)
+    district_code = Column(String(64), nullable=False, index=True)
+    state_name = Column(String(64), default="Chhattisgarh")
+    block_name = Column(String(64), default="Central")
+    total_enrolled = Column(Integer, default=50)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+
+
+
 

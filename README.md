@@ -134,6 +134,12 @@ Aaroh/
 
 ---
 
+## Phase 8: District Dashboard & Deployment
+
+The district dashboard supports district-level learning insights, remedial pathway creation, and parent voice advisories. Deployment infrastructure includes a private S3 + CloudFront frontend, Cognito staff sign-in, an ECS/Fargate API behind an ALB, ECR, Secrets Manager, scoped GitHub Actions OIDC deployment, and CloudWatch logs/alarms.
+
+See [aws/PHASE8_DEPLOYMENT.md](aws/PHASE8_DEPLOYMENT.md) for first-time AWS setup, GitHub variables, and staff account creation.
+
 ## Running Tests
 
 ```bash

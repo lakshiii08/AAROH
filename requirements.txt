@@ -24,4 +24,5 @@ botocore
 tqdm
 numpy
 requests
+PyJWT[crypto]
 pytest

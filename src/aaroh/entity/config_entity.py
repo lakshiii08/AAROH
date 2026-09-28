@@ -110,9 +110,18 @@ class CopilotEdgeConfig:
 # Phase 7 — Gamification & Visual Storytelling
 @dataclass(frozen=True)
 class GamificationConfig:
-    points_per_lesson_complete: int  # e.g. 50 XP
-    points_per_quiz_pass: int        # e.g. 100 XP
-    points_per_quest_complete: int    # e.g. 75 XP
-    streak_bonus_multiplier: float   # 1.2x
-    badges_catalog_path: Path        # data/gamification/badges.json
-    flashcards_output_dir: Path      # data/flashcards
+    points_per_lesson_complete: int
+    points_per_quiz_pass: int
+    points_per_quest_complete: int
+    streak_bonus_multiplier: float
+    badges_catalog_path: Path
+    flashcards_output_dir: Path
+
+# Phase 8 — District Administration & Parent Voice Bridge
+@dataclass(frozen=True)
+class DistrictAdminConfig:
+    parent_voice_output_dir: Path     # data/parent_audio
+    enable_mock_ivr_dispatch: bool
+    district_code: str               # e.g., "CG-BASTAR"
+    state_name: str                  # e.g., "Chhattisgarh"
+    max_pathway_steps: int           # 4 steps per remedial pathway

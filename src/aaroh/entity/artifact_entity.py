@@ -393,4 +393,66 @@ class StudentPortfolioEntity:
     last_active: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
 
 
+# ──────────────────────────────────────────────────────────────
+# Phase 8: District Administration & Parent Voice Advisory Entities
+# ──────────────────────────────────────────────────────────────
+
+@dataclass
+class InterventionStepEntity:
+    """A single step in a child's personalized remedial learning pathway."""
+    step_number: int
+    step_type: str              # "story_audio" | "hands_on_activity" | "micro_quest" | "oral_quiz"
+    title: str
+    instruction: str
+    resource_url: Optional[str] = None
+    is_completed: bool = False
+
+
+@dataclass
+class InterventionPathwayEntity:
+    """Complete 4-step personalized remedial roadmap for struggling students."""
+    pathway_id: str
+    student_id: str
+    student_name: str
+    concept_code: str
+    concept_name: str
+    weak_bloom_level: str
+    steps: List[InterventionStepEntity]
+    status: str = "ASSIGNED"    # "ASSIGNED" | "IN_PROGRESS" | "COMPLETED"
+    assigned_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+
+
+@dataclass
+class ParentVoiceAdvisoryEntity:
+    """A 45-second mother-tongue audio advisory call/note for non-literate parents."""
+    advisory_id: str
+    student_id: str
+    student_name: str
+    parent_phone: str
+    target_language: str
+    target_dialect: Optional[str]
+    concept_learned: str
+    speech_script: str
+    audio_file_path: str
+    stream_url: str
+    dispatch_status: str = "SENT" # "SENT" | "SCHEDULED" | "DELIVERED"
+    created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+
+
+@dataclass
+class DistrictAnalyticsSummaryEntity:
+    """High-level district administrative metrics across tribal schools."""
+    district_code: str
+    state_name: str
+    total_schools: int
+    total_students: int
+    total_assessments_conducted: int
+    district_average_score_pct: float
+    total_remedials_active: int
+    top_performing_concepts: List[str]
+    critical_gap_concepts: List[str]
+    school_rankings: List[Dict[str, Any]]
+
+
+
 

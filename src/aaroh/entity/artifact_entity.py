@@ -71,3 +71,32 @@ class IngestionPipelineResult:
     total_concepts: int
     s3_uri: Optional[str] = None
     message: str = ""
+
+# Phase 2: Translation Entities
+@dataclass
+class GlossaryEntryEntity:
+    source_term: str
+    translated_term: str
+    source_lang: str
+    target_lang: str
+    domain: str = "general"
+    dialects: Dict[str, str] = field(default_factory=dict)
+    phonetic_hint: Optional[str] = None
+    notes: Optional[str] = None
+    created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+
+@dataclass
+class TranslationResponseEntity:
+    original_text: str
+    translated_text: str
+    source_lang: str
+    target_lang: str
+    applied_glossary_terms: List[Dict[str, str]] = field(default_factory=list)
+    latency_ms: float = 0.0
+    backend_used: str = "indictrans2"
+
+@dataclass
+class BatchTranslationResponseEntity:
+    results: List[TranslationResponseEntity]
+    total_count: int
+    total_time_ms: float

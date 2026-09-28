@@ -1,0 +1,19 @@
+[2026-09-28 17:11:14,687] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 17:11:14,689] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 17:11:14,699] botocore.credentials - INFO - credentials.py:1252 - Found credentials in environment variables.
+[2026-09-28 17:11:14,830] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 17:11:14,831] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 17:11:14,862] AAROH - INFO - glossary_db.py:57 - Loaded 11 glossary terms into local memory cache.
+[2026-09-28 17:11:14,888] httpx2 - INFO - _client.py:1085 - HTTP Request: GET http://testserver/api/v1/translation/languages "HTTP/1.1 200 OK"
+[2026-09-28 17:11:14,891] AAROH - INFO - translation.py:72 - Translated (en->hi) in 0.35ms with 2 glossary terms.
+[2026-09-28 17:11:14,892] httpx2 - INFO - _client.py:1085 - HTTP Request: POST http://testserver/api/v1/translation/translate "HTTP/1.1 200 OK"
+[2026-09-28 17:11:14,894] AAROH - INFO - translation.py:72 - Translated (en->hi) in 0.06ms with 2 glossary terms.
+[2026-09-28 17:11:14,894] AAROH - INFO - translation.py:72 - Translated (en->hi) in 0.03ms with 1 glossary terms.
+[2026-09-28 17:11:14,895] httpx2 - INFO - _client.py:1085 - HTTP Request: POST http://testserver/api/v1/translation/batch "HTTP/1.1 200 OK"
+[2026-09-28 17:11:14,899] httpx2 - INFO - _client.py:1085 - HTTP Request: GET http://testserver/api/v1/translation/glossary/lookup?term=evaporation&source_lang=en&target_lang=hi "HTTP/1.1 200 OK"
+[2026-09-28 17:11:15,106] httpx2 - INFO - _client.py:1085 - HTTP Request: POST http://testserver/api/v1/translation/glossary/term "HTTP/1.1 200 OK"
+[2026-09-28 17:11:15,108] httpx2 - INFO - _client.py:1085 - HTTP Request: GET http://testserver/api/v1/translation/glossary/lookup?term=seed&source_lang=en&target_lang=hi "HTTP/1.1 200 OK"
+[2026-09-28 17:11:15,121] httpx2 - INFO - _client.py:1085 - HTTP Request: GET http://testserver/api/v1/content/documents "HTTP/1.1 200 OK"
+[2026-09-28 17:11:15,128] AAROH - INFO - translation.py:72 - Translated (en->hi) in 0.26ms with 4 glossary terms.
+[2026-09-28 17:11:15,128] AAROH - INFO - translation.py:72 - Translated (en->hi) in 0.19ms with 4 glossary terms.
+[2026-09-28 17:11:15,130] httpx2 - INFO - _client.py:1085 - HTTP Request: POST http://testserver/api/v1/translation/lessons/d6604496-1eb4-41a4-9562-35619372ca85 "HTTP/1.1 200 OK"

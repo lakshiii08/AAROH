@@ -9,6 +9,24 @@ bedrock:
     temperature: 0.1
     top_p: 0.9
 
+translation:
+  backend: "indictrans2" # "indictrans2" or "nllb" or "sagemaker" or "llm_fallback"
+  indictrans2:
+    en_indic_model: "ai4bharat/indictrans2-en-indic-1B"
+    indic_en_model: "ai4bharat/indictrans2-indic-en-1B"
+    indic_indic_model: "ai4bharat/indictrans2-indic-indic-1B"
+  nllb:
+    model_name: "facebook/nllb-200-distilled-600M"
+  sagemaker:
+    endpoint_name: "aaroh-indictrans2-endpoint"
+    region_name: "ap-south-1"
+  inference:
+    max_length: 512
+    num_beams: 4
+    batch_size: 16
+    use_gpu: false # Automatically detected at runtime
+
 fallback:
   enable_mock_llm: true # If AWS Bedrock credentials not provided, use high-fidelity rule & heuristic extraction
   enable_mock_embeddings: true
+  enable_mock_translation: true # High-fidelity translation fallback for local development & testing

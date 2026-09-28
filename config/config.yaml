@@ -1,6 +1,6 @@
 app:
   name: "AAROH - AI Rural & Tribal Primary Education Platform"
-  version: "0.1.0"
+  version: "0.2.0"
   env: "development"
   log_level: "INFO"
 
@@ -11,6 +11,8 @@ aws:
     processed_bucket: "aaroh-processed-lessons-storage"
     upload_prefix: "raw_uploads/"
     processed_prefix: "extracted_artifacts/"
+  dynamodb:
+    glossary_table: "aaroh_glossary"
 
 database:
   dialect: "postgresql"
@@ -43,3 +45,51 @@ ingestion:
     chunk_overlap: 120
     split_by_sections: true
     min_chunk_length: 80
+
+translation:
+  default_source_lang: "en"
+  default_target_lang: "hi"
+  enable_glossary_lookup: true
+  glossary_cache_size: 10000
+  max_batch_size: 50
+  supported_languages:
+    - code: "en"
+      name: "English"
+      script: "Latin"
+    - code: "hi"
+      name: "Hindi"
+      script: "Devanagari"
+    - code: "bn"
+      name: "Bengali"
+      script: "Bengali"
+    - code: "mr"
+      name: "Marathi"
+      script: "Devanagari"
+    - code: "or"
+      name: "Odia"
+      script: "Odia"
+    - code: "te"
+      name: "Telugu"
+      script: "Telugu"
+    - code: "gu"
+      name: "Gujarati"
+      script: "Gujarati"
+    - code: "sat"
+      name: "Santali"
+      script: "Ol Chiki / Devanagari"
+      tribal: true
+    - code: "gon"
+      name: "Gondi"
+      script: "Gunjala Gondi / Devanagari"
+      tribal: true
+    - code: "bhi"
+      name: "Bhili"
+      script: "Devanagari"
+      tribal: true
+    - code: "hne"
+      name: "Chhattisgarhi"
+      script: "Devanagari"
+      dialect: true
+    - code: "mai"
+      name: "Maithili"
+      script: "Devanagari"

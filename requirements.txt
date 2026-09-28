@@ -1,27 +1,27 @@
 # Core Framework & API
-fastapi>=0.110.0
-uvicorn[standard]>=0.29.0
-pydantic>=2.7.0
-pydantic-settings>=2.2.0
-python-dotenv>=1.0.1
-pyyaml>=6.0.1
+fastapi
+uvicorn
+pydantic
+pydantic-settings
+python-dotenv
+pyyaml
 
 # Document Processing (Phase 1)
-pymupdf>=1.24.0
-pypdf>=4.2.0
-pdfplumber>=0.11.0
+pymupdf
+pypdf
+pdfplumber
 
 # Database & Vector Storage
-sqlalchemy>=2.0.29
-psycopg2-binary>=2.9.9
-pgvector>=0.2.5
+sqlalchemy
+psycopg2-binary
+pgvector
 
 # Cloud & LLM Providers (AWS Bedrock, etc.)
-boto3>=1.34.80
-botocore>=1.34.80
+boto3
+botocore
 
 # Utilities
-tqdm>=4.66.2
-numpy>=1.26.0
-requests>=2.31.0
-pytest>=8.1.0
+tqdm
+numpy
+requests
+pytest

@@ -1,0 +1,6 @@
+[2026-09-28 17:10:59,270] botocore.credentials - INFO - credentials.py:1252 - Found credentials in environment variables.
+[2026-09-28 17:10:59,339] AAROH - INFO - glossary_db.py:57 - Loaded 11 glossary terms into local memory cache.
+[2026-09-28 17:10:59,350] AAROH - INFO - translation.py:72 - Translated (en->hi) in 0.32ms with 1 glossary terms.
+[2026-09-28 17:10:59,350] AAROH - INFO - translation.py:72 - Translated (en->hi) in 0.07ms with 2 glossary terms.
+[2026-09-28 17:10:59,350] AAROH - INFO - translation.py:72 - Translated (en->hi) in 0.29ms with 1 glossary terms.
+[2026-09-28 17:10:59,350] AAROH - INFO - translation.py:72 - Translated (en->hi) in 0.04ms with 1 glossary terms.

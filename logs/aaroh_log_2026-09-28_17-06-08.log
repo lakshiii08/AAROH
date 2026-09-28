@@ -1,0 +1,17 @@
+[2026-09-28 17:06:09,062] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 17:06:09,064] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 17:06:09,077] botocore.credentials - INFO - credentials.py:1252 - Found credentials in environment variables.
+[2026-09-28 17:06:09,180] AAROH - INFO - content_ingestion_pipeline.py:36 - ============================================================
+[2026-09-28 17:06:09,181] AAROH - INFO - content_ingestion_pipeline.py:37 - Starting Content Ingestion Pipeline for: data\raw\sample_class3_evs_water.pdf
+[2026-09-28 17:06:09,181] AAROH - INFO - content_ingestion_pipeline.py:38 - ============================================================
+[2026-09-28 17:06:09,182] AAROH - INFO - data_ingestion.py:85 - Parsing document: sample_class3_evs_water.pdf (Size: 2630 bytes, Extension: .pdf)
+[2026-09-28 17:06:09,187] AAROH - INFO - data_ingestion.py:140 - Successfully parsed sample_class3_evs_water.pdf: 2 pages, 1606 characters.
+[2026-09-28 17:06:09,187] AAROH - INFO - data_ingestion.py:207 - Generated 2 educational chunks for document 'sample_class3_evs_water.pdf'
+[2026-09-28 17:06:09,188] AAROH - INFO - content_transformation.py:42 - Extracting concepts for document: sample_class3_evs_water.pdf...
+[2026-09-28 17:06:09,188] AAROH - INFO - content_transformation.py:86 - Extracted 3 concepts from 'sample_class3_evs_water.pdf'
+[2026-09-28 17:06:09,188] AAROH - INFO - rag_pipeline.py:30 - Indexing document 'sample_class3_evs_water.pdf' into database/vector store...
+[2026-09-28 17:06:09,222] AAROH - INFO - rag_pipeline.py:116 - Successfully indexed 2 chunks and 3 concepts.
+[2026-09-28 17:06:09,225] AAROH - INFO - content_ingestion_pipeline.py:64 - ============================================================
+[2026-09-28 17:06:09,225] AAROH - INFO - content_ingestion_pipeline.py:65 - Pipeline Completed Successfully: SUCCESS
+[2026-09-28 17:06:09,225] AAROH - INFO - content_ingestion_pipeline.py:66 - Document ID: d6604496-1eb4-41a4-9562-35619372ca85 | Chunks: 2 | Concepts: 3
+[2026-09-28 17:06:09,225] AAROH - INFO - content_ingestion_pipeline.py:67 - ============================================================

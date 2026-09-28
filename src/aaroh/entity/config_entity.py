@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import List, Optional
+from typing import List, Dict, Any, Optional
 
 @dataclass(frozen=True)
 class IngestionConfig:
@@ -47,3 +47,21 @@ class VectorStoreConfig:
     dimension: int
     metric: str
     table_name: str
+
+@dataclass(frozen=True)
+class DynamoDBConfig:
+    table_name: str
+    region_name: str
+
+@dataclass(frozen=True)
+class TranslationConfig:
+    backend: str
+    default_source_lang: str
+    default_target_lang: str
+    enable_glossary_lookup: bool
+    glossary_cache_size: int
+    max_batch_size: int
+    sagemaker_endpoint_name: str
+    region_name: str
+    enable_mock_translation: bool
+    supported_languages: List[Dict[str, Any]]

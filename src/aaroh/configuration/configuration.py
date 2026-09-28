@@ -6,6 +6,8 @@ from src.aaroh.entity.config_entity import (
     DatabaseConfig,
     BedrockModelConfig,
     VectorStoreConfig,
+    DynamoDBConfig,
+    TranslationConfig,
 )
 from src.aaroh.utils.common import read_yaml
 from src.aaroh.utils.logger import logger
@@ -82,6 +84,37 @@ class ConfigurationManager:
             dimension=int(v_conf.get("dimension", 1536)),
             metric=v_conf.get("metric", "cosine"),
             table_name=v_conf.get("table_name", "content_chunks"),
+        )
+
+    def get_dynamodb_config(self) -> DynamoDBConfig:
+        d_conf = self.config.get("aws", {}).get("dynamodb", {})
+        return DynamoDBConfig(
+            table_name=os.getenv("DYNAMODB_GLOSSARY_TABLE", d_conf.get("glossary_table", "aaroh_glossary")),
+            region_name=os.getenv("AWS_REGION", self.config.get("aws", {}).get("region", "ap-south-1")),
+        )
+
+    def get_translation_config(self) -> TranslationConfig:
+        t_conf = self.config.get("translation", {})
+        m_conf = self.model_config.get("translation", {})
+        f_conf = self.model_config.get("fallback", {})
+
+        return TranslationConfig(
+            backend=m_conf.get("backend", "indictrans2"),
+            default_source_lang=t_conf.get("default_source_lang", "en"),
+            default_target_lang=t_conf.get("default_target_lang", "hi"),
+            enable_glossary_lookup=bool(t_conf.get("enable_glossary_lookup", True)),
+            glossary_cache_size=int(t_conf.get("glossary_cache_size", 10000)),
+            max_batch_size=int(t_conf.get("max_batch_size", 50)),
+            sagemaker_endpoint_name=os.getenv(
+                "SAGEMAKER_TRANSLATION_ENDPOINT",
+                m_conf.get("sagemaker", {}).get("endpoint_name", "aaroh-indictrans2-endpoint")
+            ),
+            region_name=os.getenv("AWS_REGION", self.config.get("aws", {}).get("region", "ap-south-1")),
+            enable_mock_translation=os.getenv(
+                "ENABLE_MOCK_TRANSLATION",
+                str(f_conf.get("enable_mock_translation", True))
+            ).lower() == "true",
+            supported_languages=t_conf.get("supported_languages", []),
         )
 
     def get_prompt_config(self) -> dict:

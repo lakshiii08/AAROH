@@ -8,6 +8,7 @@ from src.aaroh.entity.config_entity import (
     VectorStoreConfig,
     DynamoDBConfig,
     TranslationConfig,
+    LocalizationConfig,
 )
 from src.aaroh.utils.common import read_yaml
 from src.aaroh.utils.logger import logger
@@ -115,6 +116,23 @@ class ConfigurationManager:
                 str(f_conf.get("enable_mock_translation", True))
             ).lower() == "true",
             supported_languages=t_conf.get("supported_languages", []),
+        )
+
+    def get_localization_config(self) -> LocalizationConfig:
+        l_conf = self.config.get("localization", {})
+        d_conf = self.config.get("aws", {}).get("dynamodb", {})
+        s_conf = self.config.get("aws", {}).get("s3", {})
+
+        return LocalizationConfig(
+            enable_cache=bool(l_conf.get("enable_cache", True)),
+            cache_ttl_days=int(l_conf.get("cache_ttl_days", 30)),
+            max_retrieved_chunks=int(l_conf.get("max_retrieved_chunks", 3)),
+            cache_table_name=os.getenv(
+                "DYNAMODB_CONTENT_CACHE_TABLE",
+                d_conf.get("content_cache_table", "aaroh_localized_content_cache")
+            ),
+            s3_localized_prefix=s_conf.get("localized_prefix", "localized_lessons/"),
+            local_cache_path=Path(l_conf.get("local_cache_path", "data/cache/localized_content_cache.json")),
         )
 
     def get_prompt_config(self) -> dict:

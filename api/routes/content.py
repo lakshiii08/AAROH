@@ -21,28 +21,6 @@ class SearchRequest(BaseModel):
     grade_level: Optional[int] = None
     subject: Optional[str] = None
 
-class ConceptResponse(BaseModel):
-    id: str
-    concept_code: str
-    name: str
-    definition: str
-    blooms_level: str
-    difficulty_level: int
-    prerequisite_concepts: list
-    rural_tribal_anchors: list
-    key_vocabulary: list
-
-class DocumentResponse(BaseModel):
-    id: str
-    filename: str
-    title: Optional[str]
-    subject: Optional[str]
-    grade_level: Optional[int]
-    language: Optional[str]
-    summary: Optional[str]
-    total_pages: int
-    status: str
-    created_at: str
 
 @router.post("/upload")
 async def upload_and_ingest_lesson(
@@ -59,7 +37,6 @@ async def upload_and_ingest_lesson(
             detail=f"Unsupported file format '{ext}'. Allowed: .pdf, .txt, .md",
         )
 
-    # Save to temporary upload path
     temp_dir = Path("data/uploads")
     temp_dir.mkdir(parents=True, exist_ok=True)
     temp_file_path = temp_dir / filename
@@ -89,6 +66,7 @@ async def upload_and_ingest_lesson(
         logger.error(f"Error processing upload: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
+
 @router.get("/documents")
 def list_documents():
     """Returns all ingested documents with metadata."""
@@ -112,6 +90,7 @@ def list_documents():
         ]
     finally:
         session.close()
+
 
 @router.get("/documents/{document_id}/concepts")
 def get_document_concepts(document_id: str):
@@ -145,6 +124,7 @@ def get_document_concepts(document_id: str):
         }
     finally:
         session.close()
+
 
 @router.post("/search")
 def search_curriculum_vectors(request: SearchRequest):

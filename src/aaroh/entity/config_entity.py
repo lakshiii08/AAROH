@@ -52,6 +52,7 @@ class VectorStoreConfig:
 class DynamoDBConfig:
     table_name: str
     region_name: str
+    cache_table_name: Optional[str] = "aaroh_localized_content_cache"
 
 @dataclass(frozen=True)
 class TranslationConfig:
@@ -65,3 +66,12 @@ class TranslationConfig:
     region_name: str
     enable_mock_translation: bool
     supported_languages: List[Dict[str, Any]]
+
+@dataclass(frozen=True)
+class LocalizationConfig:
+    enable_cache: bool
+    cache_ttl_days: int
+    max_retrieved_chunks: int
+    cache_table_name: str
+    s3_localized_prefix: str
+    local_cache_path: Path

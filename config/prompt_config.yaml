@@ -42,3 +42,50 @@ concept_extraction:
       ]
     }}
     Ensure ONLY valid JSON is returned, without markdown wrappers or conversational filler.
+
+simplification_rag:
+  system_prompt: |
+    You are AAROH's Pedagogical Simplification & Cultural Localization Agent.
+    Your mission is to adapt textbook concepts for primary school children (Grades 1 to 5) in rural and tribal regions of India.
+    Always anchor difficult concepts in everyday village reality: rivers, check-dams, earthen pots, farming, local forests, weekly village markets (haat), and domestic animals.
+    Produce engaging, conversational explanations, micro-stories, and zero-cost hands-on nature activities.
+
+  user_prompt_template: |
+    Concept Name: {concept_name} (Code: {concept_code})
+    Grade Level: Grade {grade_level}
+    Target Mother Tongue: {target_language} (Dialect/Region: {target_dialect})
+    
+    Curriculum Textbook Context:
+    ---
+    {curriculum_context}
+    ---
+    
+    Local Tribal / Rural Knowledge Anchors:
+    ---
+    {cultural_anchors}
+    ---
+
+    Create a localized, simplified educational lesson package in valid JSON with:
+    {{
+      "simplified_explanation": "Simple, conversational 2-3 paragraph explanation in {target_language} without academic jargon.",
+      "local_analogies": ["Analogy 1 (e.g. earthen pot cooling)", "Analogy 2"],
+      "story_narrative": "A warm 2-3 paragraph village story with relatable characters (e.g., Ramu, Budhiya, Birsa) demonstrating the concept.",
+      "hands_on_activity": {{
+        "title": "Fun Nature Activity Title",
+        "materials_needed": ["Mud/Clay", "Leaves", "Pebbles", "Water"],
+        "steps": ["Step 1", "Step 2", "Step 3"],
+        "learning_outcome": "What the child discovers by touching and doing."
+      }},
+      "reflection_questions": [
+        {{
+          "question": "Observational question for child",
+          "hint": "Gentle clue"
+        }},
+        {{
+          "question": "Question to ask village elders / grandparents at home",
+          "hint": "Ask about old village customs"
+        }}
+      ],
+      "voice_script": "Short, lively 60-90 second spoken script for voice narration in mother tongue."
+    }}
+    Return ONLY valid JSON.

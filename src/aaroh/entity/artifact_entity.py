@@ -100,3 +100,23 @@ class BatchTranslationResponseEntity:
     results: List[TranslationResponseEntity]
     total_count: int
     total_time_ms: float
+
+# Phase 3: Simplification & Localization Entities
+@dataclass
+class LocalizedLessonEntity:
+    concept_code: str
+    concept_name: str
+    grade_level: int
+    target_language: str
+    target_dialect: Optional[str]
+    simplified_explanation: str
+    local_analogies: List[str]
+    story_narrative: str
+    hands_on_activity: Dict[str, Any]
+    reflection_questions: List[Dict[str, str]]
+    voice_script: str
+    source_chunks: List[str] = field(default_factory=list)
+    cultural_anchors_used: List[str] = field(default_factory=list)
+    cached: bool = False
+    s3_uri: Optional[str] = None
+    generated_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))

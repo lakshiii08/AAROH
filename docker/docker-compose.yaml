@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   aaroh-postgres-pgvector:
     image: pgvector/pgvector:pg16
@@ -20,8 +18,8 @@ services:
 
   aaroh-api:
     build:
-      context: ..
-      dockerfile: docker/Dockerfile
+      context: .
+      dockerfile: Dockerfile
     container_name: aaroh-api-server
     environment:
       - DB_DIALECT=postgresql

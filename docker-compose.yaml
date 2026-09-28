@@ -22,6 +22,11 @@ services:
       dockerfile: Dockerfile
     container_name: aaroh-api-server
     environment:
+      # App
+      - APP_ENV=development
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      # Phase 1 – Database (PostgreSQL + pgvector)
       - DB_DIALECT=postgresql
       - DB_HOST=aaroh-postgres-pgvector
       - DB_PORT=5432
@@ -29,9 +34,29 @@ services:
       - DB_USER=postgres
       - DB_PASSWORD=password
       - DB_USE_SQLITE_FALLBACK=false
+      # Phase 1 & 2 – AWS
       - AWS_REGION=ap-south-1
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID:-}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY:-}
+      # Phase 1 – S3 buckets
+      - S3_RAW_BUCKET=aaroh-raw-lessons-storage
+      - S3_PROCESSED_BUCKET=aaroh-processed-lessons-storage
+      # Phase 1 – Bedrock LLM & Embeddings
+      - BEDROCK_MODEL_ID=anthropic.claude-3-5-sonnet-20241022-v2:0
+      - BEDROCK_EMBEDDING_MODEL_ID=amazon.titan-embed-text-v2:0
+      - ENABLE_MOCK_LLM_FALLBACK=true
+      - ENABLE_MOCK_TRANSLATION=true
+      # Phase 2 – DynamoDB Glossary
+      - DYNAMODB_GLOSSARY_TABLE=aaroh_glossary
+      # Phase 3 – Content Cache (DynamoDB)
+      - DYNAMODB_CONTENT_CACHE_TABLE=aaroh_localized_content_cache
+      # Phase 2 – IndicTrans2 SageMaker endpoint
+      - SAGEMAKER_TRANSLATION_ENDPOINT=aaroh-indictrans2-endpoint
     ports:
       - "8000:8000"
+    volumes:
+      - ./data:/app/data        # persist uploaded lessons, SQLite DB, and content cache
+      - ./logs:/app/logs        # persist application logs
     depends_on:
       aaroh-postgres-pgvector:
         condition: service_healthy

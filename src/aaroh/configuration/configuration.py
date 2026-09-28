@@ -9,6 +9,7 @@ from src.aaroh.entity.config_entity import (
     DynamoDBConfig,
     TranslationConfig,
     LocalizationConfig,
+    QuizConfig,
 )
 from src.aaroh.utils.common import read_yaml
 from src.aaroh.utils.logger import logger
@@ -135,5 +136,21 @@ class ConfigurationManager:
             local_cache_path=Path(l_conf.get("local_cache_path", "data/cache/localized_content_cache.json")),
         )
 
+    def get_quiz_config(self) -> QuizConfig:
+        q_conf = self.config.get("quiz", {})
+        return QuizConfig(
+            max_questions_per_quiz=int(q_conf.get("max_questions_per_quiz", 5)),
+            mcq_options_count=int(q_conf.get("mcq_options_count", 4)),
+            enable_difficulty_adaptation=bool(q_conf.get("enable_difficulty_adaptation", True)),
+            enable_bilingual_questions=bool(q_conf.get("enable_bilingual_questions", False)),
+            student_results_table=os.getenv(
+                "DYNAMODB_STUDENT_RESULTS_TABLE",
+                q_conf.get("student_results_table", "aaroh_student_assessment_results")
+            ),
+            local_results_path=Path(q_conf.get("local_results_path", "data/cache/student_assessment_results.json")),
+            remedial_threshold_pct=float(q_conf.get("remedial_threshold_pct", 60.0)),
+        )
+
     def get_prompt_config(self) -> dict:
         return self.prompt_config
+

@@ -120,3 +120,83 @@ class LocalizedLessonEntity:
     cached: bool = False
     s3_uri: Optional[str] = None
     generated_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+
+# ──────────────────────────────────────────────────────────────
+# Phase 4: Quiz Generation & Student Assessment Entities
+# ──────────────────────────────────────────────────────────────
+
+@dataclass
+class QuizQuestionEntity:
+    """A single quiz question — MCQ, Fill-in-Blank, or True/False."""
+    question_id: str
+    concept_code: str
+    question_type: str          # "mcq" | "fill_blank" | "true_false"
+    question_text: str          # In target language (e.g., Hindi)
+    options: List[str]          # MCQ options (A, B, C, D); empty for fill_blank
+    correct_answer: str         # "A" / "B" / exact text / "True" / "False"
+    explanation: str            # Why this answer is correct (in mother tongue)
+    blooms_level: str           # Remember / Understand / Apply
+    difficulty_level: int       # 1-5
+    cultural_anchor: Optional[str] = None  # Village analogy hint
+
+
+@dataclass
+class QuizEntity:
+    """A full quiz for one concept and student."""
+    quiz_id: str
+    concept_code: str
+    concept_name: str
+    grade_level: int
+    target_language: str
+    target_dialect: Optional[str]
+    questions: List[QuizQuestionEntity]
+    generated_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+
+
+@dataclass
+class StudentAnswerEntity:
+    """A student's answer to one question."""
+    question_id: str
+    student_answer: str
+    is_correct: bool
+    time_taken_sec: Optional[float] = None
+
+
+@dataclass
+class QuizSubmissionEntity:
+    """Full quiz submission by one student."""
+    submission_id: str
+    quiz_id: str
+    student_id: str
+    concept_code: str
+    answers: List[StudentAnswerEntity]
+    score_pct: float            # 0.0 – 100.0
+    submitted_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+
+
+@dataclass
+class LearningGapEntity:
+    """A detected gap for one concept + student."""
+    concept_code: str
+    concept_name: str
+    blooms_level: str
+    gap_severity: str           # "low" | "medium" | "high" | "critical"
+    weak_question_ids: List[str]
+    wrong_answers: List[Dict[str, str]]
+    remedial_suggested: bool = True
+
+
+@dataclass
+class AssessmentResultEntity:
+    """Full assessment result: score + gaps + remedial suggestions."""
+    student_id: str
+    quiz_id: str
+    concept_code: str
+    score_pct: float
+    grade_level: int
+    target_language: str
+    gaps: List[LearningGapEntity]
+    remedial_concepts: List[str]   # concept_codes that need re-teaching
+    teacher_insight: str           # 1-paragraph actionable summary for teacher
+    needs_remedial: bool = False
+    assessed_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))

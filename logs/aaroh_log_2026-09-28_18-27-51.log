@@ -1,0 +1,36 @@
+[2026-09-28 18:27:52,251] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:27:52,253] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:27:52,263] botocore.credentials - INFO - credentials.py:1252 - Found credentials in environment variables.
+[2026-09-28 18:27:52,387] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:27:52,388] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:27:52,420] AAROH - INFO - glossary_db.py:57 - Loaded 12 glossary terms into local memory cache.
+[2026-09-28 18:27:52,999] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:27:53,000] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:27:53,005] AAROH - INFO - content_cache.py:31 - Loaded 7 entries from local content cache.
+[2026-09-28 18:27:53,011] AAROH - INFO - content_cache.py:31 - Loaded 7 entries from local content cache.
+[2026-09-28 18:27:53,027] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:27:53,028] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:27:53,034] AAROH - INFO - content_cache.py:31 - Loaded 7 entries from local content cache.
+[2026-09-28 18:27:53,059] httpx2 - INFO - _client.py:1085 - HTTP Request: GET http://testserver/ "HTTP/1.1 200 OK"
+[2026-09-28 18:27:53,106] AAROH - INFO - localization.py:57 - Cache HIT for concept 'EVS-G3-WAT-01' (hi/gon)
+[2026-09-28 18:27:53,106] AAROH - INFO - quiz_generator.py:69 - Quiz generated: 'EVS-G3-WAT-01' — 5 questions
+[2026-09-28 18:27:53,113] AAROH - INFO - quiz_assessment_pipeline.py:339 - Quiz '251da46e-5515-4a02-b28a-a4dc7fea6e04' saved to database.
+[2026-09-28 18:27:53,114] httpx2 - INFO - _client.py:1085 - HTTP Request: POST http://testserver/api/v1/assessment/quizzes/generate "HTTP/1.1 200 OK"
+[2026-09-28 18:27:53,117] AAROH - INFO - localization.py:57 - Cache HIT for concept 'EVS-G3-WAT-01' (hi/None)
+[2026-09-28 18:27:53,117] AAROH - INFO - quiz_generator.py:69 - Quiz generated: 'EVS-G3-WAT-01' — 5 questions
+[2026-09-28 18:27:53,123] AAROH - INFO - quiz_assessment_pipeline.py:339 - Quiz '9ab12150-6e62-4e93-bbaf-681cdc150a5d' saved to database.
+[2026-09-28 18:27:53,124] httpx2 - INFO - _client.py:1085 - HTTP Request: POST http://testserver/api/v1/assessment/quizzes/generate "HTTP/1.1 200 OK"
+[2026-09-28 18:27:53,128] AAROH - INFO - assessment_engine.py:58 - Student 'student_deepa_03' scored 100.0% on quiz '9ab12150-6e62-4e93-bbaf-681cdc150a5d'
+[2026-09-28 18:27:53,136] AAROH - INFO - quiz_assessment_pipeline.py:396 - Submission 'a9dca860-eb74-4f41-86fb-00fcc55b38dd' and assessment saved.
+[2026-09-28 18:27:53,137] httpx2 - INFO - _client.py:1085 - HTTP Request: POST http://testserver/api/v1/assessment/quizzes/9ab12150-6e62-4e93-bbaf-681cdc150a5d/submit "HTTP/1.1 200 OK"
+[2026-09-28 18:27:53,140] AAROH - INFO - localization.py:57 - Cache HIT for concept 'EVS-G3-WAT-01' (hi/None)
+[2026-09-28 18:27:53,140] AAROH - INFO - quiz_generator.py:69 - Quiz generated: 'EVS-G3-WAT-01' — 5 questions
+[2026-09-28 18:27:53,146] AAROH - INFO - quiz_assessment_pipeline.py:339 - Quiz '823109a3-c649-4186-b16b-9d2d26ae65e9' saved to database.
+[2026-09-28 18:27:53,147] httpx2 - INFO - _client.py:1085 - HTTP Request: POST http://testserver/api/v1/assessment/quizzes/generate "HTTP/1.1 200 OK"
+[2026-09-28 18:27:53,150] AAROH - INFO - assessment_engine.py:58 - Student 'student_vikram_04' scored 0.0% on quiz '823109a3-c649-4186-b16b-9d2d26ae65e9'
+[2026-09-28 18:27:53,150] AAROH - INFO - quiz_assessment_pipeline.py:121 - Triggering remedial lesson for student 'student_vikram_04' (score: 0.0%)
+[2026-09-28 18:27:53,150] AAROH - INFO - localization.py:57 - Cache HIT for concept 'EVS-G3-WAT-01' (hi/None)
+[2026-09-28 18:27:53,156] AAROH - INFO - quiz_assessment_pipeline.py:396 - Submission '35b962f8-ed29-47b4-88ad-17de6c4afaf6' and assessment saved.
+[2026-09-28 18:27:53,157] httpx2 - INFO - _client.py:1085 - HTTP Request: POST http://testserver/api/v1/assessment/quizzes/823109a3-c649-4186-b16b-9d2d26ae65e9/submit "HTTP/1.1 200 OK"
+[2026-09-28 18:27:53,180] httpx2 - INFO - _client.py:1085 - HTTP Request: GET http://testserver/api/v1/assessment/students/student_vikram_04/history "HTTP/1.1 200 OK"
+[2026-09-28 18:27:53,187] httpx2 - INFO - _client.py:1085 - HTTP Request: GET http://testserver/api/v1/assessment/teachers/reports/EVS-G3-WAT-01 "HTTP/1.1 200 OK"

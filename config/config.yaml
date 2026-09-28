@@ -101,3 +101,13 @@ localization:
   cache_ttl_days: 30
   max_retrieved_chunks: 3
   local_cache_path: "data/cache/localized_content_cache.json"
+
+quiz:
+  max_questions_per_quiz: 5
+  mcq_options_count: 4
+  enable_difficulty_adaptation: true
+  enable_bilingual_questions: false
+  student_results_table: "aaroh_student_assessment_results"
+  local_results_path: "data/cache/student_assessment_results.json"
+  remedial_threshold_pct: 60.0
+

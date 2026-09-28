@@ -75,3 +75,14 @@ class LocalizationConfig:
     cache_table_name: str
     s3_localized_prefix: str
     local_cache_path: Path
+
+# Phase 4 — Quiz & Assessment
+@dataclass(frozen=True)
+class QuizConfig:
+    max_questions_per_quiz: int
+    mcq_options_count: int
+    enable_difficulty_adaptation: bool
+    enable_bilingual_questions: bool
+    student_results_table: str       # DynamoDB table for student responses
+    local_results_path: Path         # local JSON fallback
+    remedial_threshold_pct: float    # below this score → trigger remedial

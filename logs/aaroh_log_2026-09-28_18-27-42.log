@@ -1,0 +1,13 @@
+[2026-09-28 18:27:42,469] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:27:42,471] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:27:42,481] botocore.credentials - INFO - credentials.py:1252 - Found credentials in environment variables.
+[2026-09-28 18:27:42,562] AAROH - INFO - content_cache.py:31 - Loaded 7 entries from local content cache.
+[2026-09-28 18:27:42,591] AAROH - INFO - localization.py:57 - Cache HIT for concept 'EVS-G3-WAT-01' (hi/gon)
+[2026-09-28 18:27:42,591] AAROH - INFO - quiz_generator.py:69 - Quiz generated: 'EVS-G3-WAT-01' — 5 questions
+[2026-09-28 18:27:42,603] AAROH - INFO - quiz_assessment_pipeline.py:339 - Quiz '7a132912-8986-420b-aef1-17a2de81aaf9' saved to database.
+[2026-09-28 18:27:42,605] AAROH - INFO - assessment_engine.py:58 - Student 'student_soma_01' scored 100.0% on quiz '7a132912-8986-420b-aef1-17a2de81aaf9'
+[2026-09-28 18:27:42,615] AAROH - INFO - quiz_assessment_pipeline.py:396 - Submission '70866725-c2bd-4542-9d72-e04ecdcb63f2' and assessment saved.
+[2026-09-28 18:27:42,616] AAROH - INFO - assessment_engine.py:58 - Student 'student_ramu_02' scored 0.0% on quiz '7a132912-8986-420b-aef1-17a2de81aaf9'
+[2026-09-28 18:27:42,616] AAROH - INFO - quiz_assessment_pipeline.py:121 - Triggering remedial lesson for student 'student_ramu_02' (score: 0.0%)
+[2026-09-28 18:27:42,616] AAROH - INFO - localization.py:57 - Cache HIT for concept 'EVS-G3-WAT-01' (hi/gon)
+[2026-09-28 18:27:42,623] AAROH - INFO - quiz_assessment_pipeline.py:396 - Submission '6f7cfc2e-34b8-48f5-9736-6881180aeb74' and assessment saved.

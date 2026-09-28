@@ -200,3 +200,56 @@ class AssessmentResultEntity:
     teacher_insight: str           # 1-paragraph actionable summary for teacher
     needs_remedial: bool = False
     assessed_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+
+# ──────────────────────────────────────────────────────────────
+# Phase 5: Voice & Speech Intelligence Entities
+# ──────────────────────────────────────────────────────────────
+
+@dataclass
+class AudioSegmentEntity:
+    """A generated audio track for one section of a lesson."""
+    segment_id: str
+    section_name: str           # "simplified_explanation" | "story_narrative" | "activity" | "voice_script"
+    text_content: str
+    audio_file_path: str
+    duration_seconds: float
+    format: str = "wav"
+    sample_rate: int = 22050
+    voice_id: str = "hi-IN-Kajal"
+
+
+@dataclass
+class VoiceLessonEntity:
+    """Full voice package for a localized concept lesson."""
+    concept_code: str
+    concept_name: str
+    target_language: str
+    target_dialect: Optional[str]
+    segments: List[AudioSegmentEntity]
+    total_duration_seconds: float
+    audio_output_dir: str
+    generated_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+
+
+@dataclass
+class TranscriptionResultEntity:
+    """Result of transcribing student oral audio response."""
+    audio_file_path: str
+    transcribed_text: str
+    confidence_score: float
+    detected_language: str
+    latency_ms: float = 0.0
+
+
+@dataclass
+class OralQuizResultEntity:
+    """Grading of a student's spoken answer against expected answer."""
+    question_id: str
+    student_id: str
+    transcribed_speech: str
+    expected_answer: str
+    is_correct: bool
+    confidence_score: float
+    feedback_audio_script: str
+    feedback_audio_path: Optional[str] = None
+

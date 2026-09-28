@@ -83,6 +83,17 @@ class QuizConfig:
     mcq_options_count: int
     enable_difficulty_adaptation: bool
     enable_bilingual_questions: bool
-    student_results_table: str       # DynamoDB table for student responses
-    local_results_path: Path         # local JSON fallback
-    remedial_threshold_pct: float    # below this score → trigger remedial
+    student_results_table: str
+    local_results_path: Path
+    remedial_threshold_pct: float
+
+# Phase 5 — Voice / Speech Intelligence
+@dataclass(frozen=True)
+class VoiceConfig:
+    tts_engine: str                  # "polly" | "indic_tts" | "local_synthesizer"
+    stt_engine: str                  # "whisper" | "transcribe" | "local_stt"
+    default_voice_gender: str        # "FEMALE" | "MALE"
+    audio_output_dir: Path           # Path to store generated .wav/.mp3
+    sample_rate: int                 # 22050
+    enable_mock_voice: bool          # Fallback synth for local execution
+    polly_language_voice_map: Dict[str, str]

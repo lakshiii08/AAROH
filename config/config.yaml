@@ -111,3 +111,21 @@ quiz:
   local_results_path: "data/cache/student_assessment_results.json"
   remedial_threshold_pct: 60.0
 
+voice:
+  tts_engine: "polly"               # "polly" | "indic_tts" | "local_synthesizer"
+  stt_engine: "whisper"             # "whisper" | "transcribe" | "local_stt"
+  default_voice_gender: "FEMALE"
+  audio_output_dir: "data/audio"
+  sample_rate: 22050
+  enable_mock_voice: true           # Uses lightweight audio synthesizer when AWS Polly is offline
+  polly_voices:
+    hi: "Kajal"
+    en: "Aditi"
+    bn: "Kajal"
+    mr: "Kajal"
+    te: "Kajal"
+    or: "Kajal"
+    gon: "Kajal"
+    sat: "Kajal"
+
+

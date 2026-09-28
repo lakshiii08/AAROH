@@ -10,6 +10,7 @@ from src.aaroh.entity.config_entity import (
     TranslationConfig,
     LocalizationConfig,
     QuizConfig,
+    VoiceConfig,
 )
 from src.aaroh.utils.common import read_yaml
 from src.aaroh.utils.logger import logger
@@ -151,6 +152,31 @@ class ConfigurationManager:
             remedial_threshold_pct=float(q_conf.get("remedial_threshold_pct", 60.0)),
         )
 
+    def get_voice_config(self) -> VoiceConfig:
+        v_conf = self.config.get("voice", {})
+        return VoiceConfig(
+            tts_engine=v_conf.get("tts_engine", "polly"),
+            stt_engine=v_conf.get("stt_engine", "whisper"),
+            default_voice_gender=v_conf.get("default_voice_gender", "FEMALE"),
+            audio_output_dir=Path(v_conf.get("audio_output_dir", "data/audio")),
+            sample_rate=int(v_conf.get("sample_rate", 22050)),
+            enable_mock_voice=os.getenv(
+                "ENABLE_MOCK_VOICE",
+                str(v_conf.get("enable_mock_voice", True))
+            ).lower() == "true",
+            polly_language_voice_map=v_conf.get("polly_voices", {
+                "hi": "Kajal",
+                "en": "Aditi",
+                "bn": "Kajal",
+                "mr": "Kajal",
+                "te": "Kajal",
+                "or": "Kajal",
+                "gon": "Kajal",
+                "sat": "Kajal",
+            }),
+        )
+
     def get_prompt_config(self) -> dict:
         return self.prompt_config
+
 

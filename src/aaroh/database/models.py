@@ -134,3 +134,41 @@ class AssessmentResultModel(Base):
     assessed_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
 
     submission = relationship("QuizSubmissionModel", back_populates="assessment")
+
+
+# ──────────────────────────────────────────────────────────────
+# Phase 5 — Voice & Speech Intelligence Tables
+# ──────────────────────────────────────────────────────────────
+
+class VoiceLessonModel(Base):
+    """Stores synthesized voice lessons metadata and file paths."""
+    __tablename__ = "voice_lessons"
+
+    id = Column(String(64), primary_key=True, default=lambda: str(uuid.uuid4()))
+    concept_code = Column(String(64), nullable=False, index=True)
+    concept_name = Column(String(255), nullable=True)
+    target_language = Column(String(16), nullable=False)
+    target_dialect = Column(String(32), nullable=True)
+    audio_file_path = Column(String(512), nullable=False)
+    segments = Column(JSON, default=list)        # List[AudioSegment dicts]
+    total_duration_seconds = Column(Float, default=0.0)
+    voice_id = Column(String(64), default="hi-IN-Kajal")
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+
+
+class OralQuizAttemptModel(Base):
+    """Stores oral audio responses submitted by students and their grading."""
+    __tablename__ = "oral_quiz_attempts"
+
+    id = Column(String(64), primary_key=True, default=lambda: str(uuid.uuid4()))
+    student_id = Column(String(64), nullable=False, index=True)
+    quiz_id = Column(String(64), nullable=False, index=True)
+    question_id = Column(String(64), nullable=False)
+    audio_file_path = Column(String(512), nullable=True)
+    transcribed_text = Column(Text, nullable=False)
+    expected_answer = Column(Text, nullable=False)
+    is_correct = Column(Boolean, nullable=False)
+    confidence_score = Column(Float, default=1.0)
+    feedback_audio_path = Column(String(512), nullable=True)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+

@@ -1,0 +1,8 @@
+[2026-09-28 18:32:13,692] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:32:13,695] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:32:13,706] botocore.credentials - INFO - credentials.py:1252 - Found credentials in environment variables.
+[2026-09-28 18:32:13,791] fastapi - ERROR - utils.py:128 - Form data requires "python-multipart" to be installed. 
+You can install "python-multipart" with: 
+
+pip install python-multipart
+

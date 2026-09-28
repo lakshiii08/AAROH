@@ -1,0 +1,33 @@
+[2026-09-28 18:46:43,368] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:46:43,371] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:46:43,381] botocore.credentials - INFO - credentials.py:1252 - Found credentials in environment variables.
+[2026-09-28 18:46:43,526] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:46:43,530] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:46:43,579] AAROH - INFO - glossary_db.py:57 - Loaded 12 glossary terms into local memory cache.
+[2026-09-28 18:46:44,218] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:46:44,220] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:46:44,224] AAROH - INFO - content_cache.py:31 - Loaded 9 entries from local content cache.
+[2026-09-28 18:46:44,230] AAROH - INFO - content_cache.py:31 - Loaded 9 entries from local content cache.
+[2026-09-28 18:46:44,248] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:46:44,251] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:46:44,258] AAROH - INFO - content_cache.py:31 - Loaded 9 entries from local content cache.
+[2026-09-28 18:46:44,279] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:46:44,281] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:46:44,292] AAROH - INFO - content_cache.py:31 - Loaded 9 entries from local content cache.
+[2026-09-28 18:46:44,320] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:46:44,322] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:46:44,329] AAROH - INFO - content_cache.py:31 - Loaded 9 entries from local content cache.
+[2026-09-28 18:46:44,353] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:46:44,357] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:46:44,387] httpx2 - INFO - _client.py:1085 - HTTP Request: GET http://testserver/ "HTTP/1.1 200 OK"
+[2026-09-28 18:46:44,407] AAROH - INFO - gamification_engine.py:111 - Generated learning quest: 'quest_evs-g3-wat-01_41a0d1' for concept 'EVS-G3-WAT-01'
+[2026-09-28 18:46:44,424] AAROH - INFO - gamification_pipeline.py:211 - Learning quest 'quest_evs-g3-wat-01_41a0d1' saved.
+[2026-09-28 18:46:44,425] httpx2 - INFO - _client.py:1085 - HTTP Request: POST http://testserver/api/v1/gamification/quests/generate "HTTP/1.1 200 OK"
+[2026-09-28 18:46:44,441] httpx2 - INFO - _client.py:1085 - HTTP Request: POST http://testserver/api/v1/gamification/students/student_api_01/activity "HTTP/1.1 200 OK"
+[2026-09-28 18:46:44,446] httpx2 - INFO - _client.py:1085 - HTTP Request: GET http://testserver/api/v1/gamification/students/student_api_01/portfolio "HTTP/1.1 200 OK"
+[2026-09-28 18:46:44,449] AAROH - INFO - visual_storytelling.py:70 - Generated 4 visual flashcards for 'EVS-G3-WAT-01'
+[2026-09-28 18:46:44,449] AAROH - INFO - visual_storytelling.py:120 - Printable flashcard HTML deck saved: data\flashcards\deck_evs-g3-wat-01_gon.html
+[2026-09-28 18:46:44,457] AAROH - INFO - gamification_pipeline.py:234 - 4 flashcards saved to DB.
+[2026-09-28 18:46:44,460] httpx2 - INFO - _client.py:1085 - HTTP Request: POST http://testserver/api/v1/gamification/flashcards/generate "HTTP/1.1 200 OK"
+[2026-09-28 18:46:44,468] httpx2 - INFO - _client.py:1085 - HTTP Request: GET http://testserver/api/v1/gamification/flashcards/deck/deck_evs-g3-wat-01_gon.html "HTTP/1.1 200 OK"
+[2026-09-28 18:46:44,476] httpx2 - INFO - _client.py:1085 - HTTP Request: GET http://testserver/api/v1/gamification/leaderboards/school_dantewada_01 "HTTP/1.1 200 OK"

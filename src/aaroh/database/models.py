@@ -219,3 +219,72 @@ class EdgeSyncLogModel(Base):
     created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
 
 
+# ──────────────────────────────────────────────────────────────
+# Phase 7 — Gamification, Badges & Visual Flashcard Tables
+# ──────────────────────────────────────────────────────────────
+
+class StudentProfileModel(Base):
+    """Tracks individual student learning profile, XP, streak, and level."""
+    __tablename__ = "student_profiles"
+
+    id = Column(String(64), primary_key=True, default=lambda: str(uuid.uuid4()))
+    student_id = Column(String(64), nullable=False, unique=True, index=True)
+    student_name = Column(String(128), default="Student")
+    school_id = Column(String(64), default="primary_school_01", index=True)
+    grade_level = Column(Integer, default=3)
+    total_xp = Column(Integer, default=0)
+    level = Column(Integer, default=1)
+    current_streak_days = Column(Integer, default=1)
+    completed_quests_count = Column(Integer, default=0)
+    concepts_mastered = Column(JSON, default=list)
+    last_active = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+
+
+class StudentBadgeModel(Base):
+    """Stores educational badges unlocked by students."""
+    __tablename__ = "student_badges"
+
+    id = Column(String(64), primary_key=True, default=lambda: str(uuid.uuid4()))
+    student_id = Column(String(64), nullable=False, index=True)
+    badge_id = Column(String(64), nullable=False)
+    badge_name = Column(String(128), nullable=False)
+    title_local = Column(String(128), nullable=False)
+    icon_symbol = Column(String(32), default="🏆")
+    tier = Column(String(32), default="Bronze")
+    unlocked_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+
+
+class LearningQuestModel(Base):
+    """Stores generated nature observation micro-quests for concepts."""
+    __tablename__ = "learning_quests"
+
+    id = Column(String(64), primary_key=True, default=lambda: str(uuid.uuid4()))
+    quest_id = Column(String(64), nullable=False, index=True)
+    concept_code = Column(String(64), nullable=False, index=True)
+    title = Column(String(255), nullable=False)
+    story_mission = Column(Text, nullable=False)
+    action_prompt = Column(Text, nullable=False)
+    reward_xp = Column(Integer, default=75)
+    badge_unlock = Column(String(64), nullable=True)
+    target_language = Column(String(16), default="hi")
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+
+
+class VisualFlashcardModel(Base):
+    """Stores generated multilingual visual flashcards."""
+    __tablename__ = "visual_flashcards"
+
+    id = Column(String(64), primary_key=True, default=lambda: str(uuid.uuid4()))
+    concept_code = Column(String(64), nullable=False, index=True)
+    primary_term = Column(String(128), nullable=False)
+    english_term = Column(String(128), nullable=False)
+    mother_tongue_term = Column(String(128), nullable=False)
+    phonetic_transliteration = Column(String(128), nullable=True)
+    svg_icon = Column(Text, nullable=True)
+    definition_simple = Column(Text, nullable=False)
+    village_example = Column(Text, nullable=False)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+
+
+

@@ -330,3 +330,67 @@ class ClassroomMasteryEntity:
     common_gap_bloom: str
 
 
+# ──────────────────────────────────────────────────────────────
+# Phase 7: Gamification, Quests & Visual Storytelling Entities
+# ──────────────────────────────────────────────────────────────
+
+@dataclass
+class BadgeEntity:
+    """An educational achievement badge earned by a child."""
+    badge_id: str
+    badge_name: str
+    title_local: str            # e.g., "जल रक्षक (Water Protector)"
+    description: str
+    icon_symbol: str            # e.g., "💧", "🌱", "🔬"
+    tier: str = "Bronze"        # "Bronze" | "Silver" | "Gold" | "Diamond"
+    xp_bonus: int = 100
+    unlocked_at: Optional[datetime] = None
+
+
+@dataclass
+class LearningQuestEntity:
+    """A 2-minute daily village observation micro-challenge."""
+    quest_id: str
+    concept_code: str
+    concept_name: str
+    title: str
+    story_mission: str
+    action_prompt: str
+    reward_xp: int = 75
+    badge_unlock: Optional[str] = None
+    target_language: str = "hi"
+    created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+
+
+@dataclass
+class VisualFlashcardEntity:
+    """A multilingual visual flashcard with village iconography."""
+    card_id: str
+    concept_code: str
+    concept_name: str
+    primary_term: str
+    english_term: str
+    mother_tongue_term: str
+    phonetic_transliteration: str
+    svg_icon_or_symbol: str
+    simple_definition: str
+    village_example: str
+
+
+@dataclass
+class StudentPortfolioEntity:
+    """Complete gamified learning portfolio for a student."""
+    student_id: str
+    student_name: str
+    school_id: str
+    grade_level: int
+    total_xp: int
+    level: int
+    current_streak_days: int
+    badges: List[BadgeEntity]
+    completed_quests_count: int
+    concepts_mastered: List[str]
+    last_active: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+
+
+

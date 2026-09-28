@@ -135,5 +135,14 @@ copilot_edge:
   enable_offline_compression: true
   multigrade_support: true
 
+gamification:
+  points_per_lesson_complete: 50
+  points_per_quiz_pass: 100
+  points_per_quest_complete: 75
+  streak_bonus_multiplier: 1.2
+  badges_catalog_path: "data/gamification/badges.json"
+  flashcards_output_dir: "data/flashcards"
+
+
 
 

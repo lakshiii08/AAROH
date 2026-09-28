@@ -101,8 +101,18 @@ class VoiceConfig:
 # Phase 6 — Teacher Copilot & Edge Sync
 @dataclass(frozen=True)
 class CopilotEdgeConfig:
-    packages_export_dir: Path        # Directory to store exported zip bundles
-    sync_import_dir: Path            # Directory to store incoming offline sync payloads
-    max_bundle_size_mb: int          # Max export bundle size
+    packages_export_dir: Path
+    sync_import_dir: Path
+    max_bundle_size_mb: int
     enable_offline_compression: bool
     multigrade_support: bool
+
+# Phase 7 — Gamification & Visual Storytelling
+@dataclass(frozen=True)
+class GamificationConfig:
+    points_per_lesson_complete: int  # e.g. 50 XP
+    points_per_quiz_pass: int        # e.g. 100 XP
+    points_per_quest_complete: int    # e.g. 75 XP
+    streak_bonus_multiplier: float   # 1.2x
+    badges_catalog_path: Path        # data/gamification/badges.json
+    flashcards_output_dir: Path      # data/flashcards

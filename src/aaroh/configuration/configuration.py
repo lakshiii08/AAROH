@@ -12,6 +12,7 @@ from src.aaroh.entity.config_entity import (
     QuizConfig,
     VoiceConfig,
     CopilotEdgeConfig,
+    GamificationConfig,
 )
 from src.aaroh.utils.common import read_yaml
 from src.aaroh.utils.logger import logger
@@ -187,8 +188,20 @@ class ConfigurationManager:
             multigrade_support=bool(c_conf.get("multigrade_support", True)),
         )
 
+    def get_gamification_config(self) -> GamificationConfig:
+        g_conf = self.config.get("gamification", {})
+        return GamificationConfig(
+            points_per_lesson_complete=int(g_conf.get("points_per_lesson_complete", 50)),
+            points_per_quiz_pass=int(g_conf.get("points_per_quiz_pass", 100)),
+            points_per_quest_complete=int(g_conf.get("points_per_quest_complete", 75)),
+            streak_bonus_multiplier=float(g_conf.get("streak_bonus_multiplier", 1.2)),
+            badges_catalog_path=Path(g_conf.get("badges_catalog_path", "data/gamification/badges.json")),
+            flashcards_output_dir=Path(g_conf.get("flashcards_output_dir", "data/flashcards")),
+        )
+
     def get_prompt_config(self) -> dict:
         return self.prompt_config
+
 
 
 

@@ -1,0 +1,7 @@
+[2026-09-28 18:46:34,165] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:46:34,168] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:46:34,187] AAROH - INFO - gamification_engine.py:111 - Generated learning quest: 'quest_evs-g3-wat-01_60fd9e' for concept 'EVS-G3-WAT-01'
+[2026-09-28 18:46:34,201] AAROH - INFO - gamification_pipeline.py:211 - Learning quest 'quest_evs-g3-wat-01_60fd9e' saved.
+[2026-09-28 18:46:34,217] AAROH - INFO - visual_storytelling.py:70 - Generated 4 visual flashcards for 'EVS-G3-WAT-01'
+[2026-09-28 18:46:34,218] AAROH - INFO - visual_storytelling.py:120 - Printable flashcard HTML deck saved: data\flashcards\deck_evs-g3-wat-01_gon.html
+[2026-09-28 18:46:34,226] AAROH - INFO - gamification_pipeline.py:234 - 4 flashcards saved to DB.

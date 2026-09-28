@@ -1,0 +1,45 @@
+app:
+  name: "AAROH - AI Rural & Tribal Primary Education Platform"
+  version: "0.1.0"
+  env: "development"
+  log_level: "INFO"
+
+aws:
+  region: "ap-south-1" # Mumbai region for low latency in India
+  s3:
+    raw_bucket: "aaroh-raw-lessons-storage"
+    processed_bucket: "aaroh-processed-lessons-storage"
+    upload_prefix: "raw_uploads/"
+    processed_prefix: "extracted_artifacts/"
+
+database:
+  dialect: "postgresql"
+  host: "localhost"
+  port: 5432
+  name: "aaroh_db"
+  user: "postgres"
+  password: "password"
+  pool_size: 10
+  max_overflow: 20
+  echo: false
+  use_sqlite_fallback: true # Uses local sqlite with pgvector simulation if Postgres is unavailable
+  sqlite_db_path: "data/aaroh_local.db"
+
+vector_store:
+  backend: "pgvector" # "pgvector" or "opensearch"
+  dimension: 1536
+  metric: "cosine"
+  table_name: "content_chunks"
+  index_name: "idx_content_chunks_embedding"
+
+ingestion:
+  allowed_extensions:
+    - ".pdf"
+    - ".txt"
+    - ".md"
+  max_file_size_mb: 50
+  chunking:
+    target_chunk_size: 800
+    chunk_overlap: 120
+    split_by_sections: true
+    min_chunk_length: 80

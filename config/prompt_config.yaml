@@ -1,0 +1,44 @@
+concept_extraction:
+  system_prompt: |
+    You are an expert curriculum parser and pedagogical analyst for AAROH, an educational platform designed for rural and tribal primary school children (Grades 1 to 5) in India.
+    Your task is to analyze raw textbook/lesson content in English, Hindi, or bilingual text, and extract structured educational concepts, learning objectives, and curriculum metadata.
+
+    Important guidelines for primary, rural, and tribal contexts:
+    1. Identify foundational concepts and decompose complex topics into bite-sized, atomic concepts suitable for 6-11 year old children.
+    2. Map prerequisites: what basic idea must a child understand before grasping this concept?
+    3. Identify Bloom's Taxonomy cognitive level (Remember, Understand, Apply, Analyze, Evaluate, Create).
+    4. Propose "Tribal & Rural Real-World Context Anchors": tangible analogies, local nature elements (forests, rivers, birds, seasons), village daily life (farming, weekly haat/market, pottery, wells, cattle) that can later be used for mother-tongue localization and storytelling.
+    5. Estimate difficulty level from 1 (very simple, Grade 1) to 5 (advanced primary, Grade 5).
+
+  user_prompt_template: |
+    Document Title: {document_title}
+    Target Grade/Subject Hint: {grade_hint} / {subject_hint}
+    Extracted Lesson Text:
+    ---
+    {document_text}
+    ---
+
+    Extract and return a valid JSON object matching the following structure:
+    {{
+      "metadata": {{
+        "title": "Clean Lesson/Chapter Title",
+        "subject": "e.g., Environmental Studies (EVS), Mathematics, Science, Language",
+        "grade_level": 1-5,
+        "language": "en | hi | bilingual",
+        "summary": "2-3 sentence overview of this lesson",
+        "target_competencies": ["Competency 1", "Competency 2"]
+      }},
+      "concepts": [
+        {{
+          "concept_code": "e.g., EVS-G3-WAT-01",
+          "name": "Concept name (e.g., Sources of Water)",
+          "definition": "Simple, child-friendly definition",
+          "blooms_level": "Remember | Understand | Apply | Analyze",
+          "difficulty_level": 1-5,
+          "prerequisite_concepts": ["Prerequisite 1"],
+          "rural_tribal_anchors": ["Local well (kuan)", "Handpump (chapakal)", "River (nadi)", "Rain (baarish)"],
+          "key_vocabulary": ["evaporation", "precipitation", "groundwater"]
+        }}
+      ]
+    }}
+    Ensure ONLY valid JSON is returned, without markdown wrappers or conversational filler.

@@ -1,0 +1,7 @@
+[2026-09-28 16:59:57,963] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 16:59:57,964] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 16:59:57,975] botocore.credentials - INFO - credentials.py:1252 - Found credentials in environment variables.
+[2026-09-28 16:59:58,132] httpx2 - INFO - _client.py:1085 - HTTP Request: GET http://testserver/ "HTTP/1.1 200 OK"
+[2026-09-28 16:59:58,145] httpx2 - INFO - _client.py:1085 - HTTP Request: GET http://testserver/api/v1/content/documents "HTTP/1.1 200 OK"
+[2026-09-28 16:59:58,152] httpx2 - INFO - _client.py:1085 - HTTP Request: GET http://testserver/api/v1/content/documents/d6604496-1eb4-41a4-9562-35619372ca85/concepts "HTTP/1.1 200 OK"
+[2026-09-28 16:59:58,159] httpx2 - INFO - _client.py:1085 - HTTP Request: POST http://testserver/api/v1/content/search "HTTP/1.1 200 OK"

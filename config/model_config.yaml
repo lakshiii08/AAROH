@@ -1,0 +1,14 @@
+bedrock:
+  region_name: "ap-south-1"
+  llm_model_id: "anthropic.claude-3-5-sonnet-20241022-v2:0" # High accuracy for structured curriculum extraction
+  fast_llm_model_id: "anthropic.claude-3-haiku-20240307-v1:0" # Fast / low-cost extraction alternative
+  embedding_model_id: "amazon.titan-embed-text-v2:0"
+  embedding_dimension: 1536
+  inference_params:
+    max_tokens: 4096
+    temperature: 0.1
+    top_p: 0.9
+
+fallback:
+  enable_mock_llm: true # If AWS Bedrock credentials not provided, use high-fidelity rule & heuristic extraction
+  enable_mock_embeddings: true

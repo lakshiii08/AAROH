@@ -90,10 +90,19 @@ class QuizConfig:
 # Phase 5 — Voice / Speech Intelligence
 @dataclass(frozen=True)
 class VoiceConfig:
-    tts_engine: str                  # "polly" | "indic_tts" | "local_synthesizer"
-    stt_engine: str                  # "whisper" | "transcribe" | "local_stt"
-    default_voice_gender: str        # "FEMALE" | "MALE"
-    audio_output_dir: Path           # Path to store generated .wav/.mp3
-    sample_rate: int                 # 22050
-    enable_mock_voice: bool          # Fallback synth for local execution
+    tts_engine: str
+    stt_engine: str
+    default_voice_gender: str
+    audio_output_dir: Path
+    sample_rate: int
+    enable_mock_voice: bool
     polly_language_voice_map: Dict[str, str]
+
+# Phase 6 — Teacher Copilot & Edge Sync
+@dataclass(frozen=True)
+class CopilotEdgeConfig:
+    packages_export_dir: Path        # Directory to store exported zip bundles
+    sync_import_dir: Path            # Directory to store incoming offline sync payloads
+    max_bundle_size_mb: int          # Max export bundle size
+    enable_offline_compression: bool
+    multigrade_support: bool

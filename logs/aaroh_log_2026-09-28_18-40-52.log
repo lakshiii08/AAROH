@@ -1,0 +1,23 @@
+[2026-09-28 18:40:53,076] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:40:53,078] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:40:53,091] botocore.credentials - INFO - credentials.py:1252 - Found credentials in environment variables.
+[2026-09-28 18:40:53,175] AAROH - INFO - content_cache.py:31 - Loaded 7 entries from local content cache.
+[2026-09-28 18:40:53,220] AAROH - INFO - teacher_copilot.py:96 - Multigrade lesson plan generated: 'Sources of Water' (Plan ID: 83c4ca6d)
+[2026-09-28 18:40:53,228] AAROH - INFO - copilot_edge_pipeline.py:292 - Lesson plan '83c4ca6d' saved to DB.
+[2026-09-28 18:40:53,229] AAROH - INFO - teacher_copilot.py:155 - Remedial teaching aid generated for 'EVS-G3-WAT-01' (Understand)
+[2026-09-28 18:40:53,231] AAROH - INFO - localization.py:57 - Cache HIT for concept 'EVS-G3-WAT-01' (hi/gon)
+[2026-09-28 18:40:53,232] AAROH - INFO - quiz_generator.py:69 - Quiz generated: 'EVS-G3-WAT-01' — 5 questions
+[2026-09-28 18:40:53,427] AAROH - INFO - voice_tts.py:92 - Local audio synthesized: data\audio\track_EVS-G3-WAT-01_hi_0132c4c5.wav (46.15s)
+[2026-09-28 18:40:53,437] AAROH - INFO - localization.py:78 - Generating localized lesson: 'EVS-G3-WAT-02' \u2192 hi/gon
+[2026-09-28 18:40:53,438] AAROH - INFO - content_cache.py:71 - Cached localized lesson for concept 'EVS-G3-WAT-02' (hi/gon) in local store.
+[2026-09-28 18:40:53,438] AAROH - INFO - localization.py:91 - Localized lesson generated in 10.85ms for 'EVS-G3-WAT-02'
+[2026-09-28 18:40:53,439] AAROH - INFO - quiz_generator.py:69 - Quiz generated: 'EVS-G3-WAT-02' — 5 questions
+[2026-09-28 18:40:53,612] AAROH - INFO - voice_tts.py:92 - Local audio synthesized: data\audio\track_EVS-G3-WAT-02_hi_ad2131df.wav (46.15s)
+[2026-09-28 18:40:53,616] AAROH - INFO - localization.py:78 - Generating localized lesson: 'EVS-G3-WAT-03' \u2192 hi/gon
+[2026-09-28 18:40:53,618] AAROH - INFO - content_cache.py:71 - Cached localized lesson for concept 'EVS-G3-WAT-03' (hi/gon) in local store.
+[2026-09-28 18:40:53,618] AAROH - INFO - localization.py:91 - Localized lesson generated in 5.45ms for 'EVS-G3-WAT-03'
+[2026-09-28 18:40:53,618] AAROH - INFO - quiz_generator.py:69 - Quiz generated: 'EVS-G3-WAT-03' — 5 questions
+[2026-09-28 18:40:53,797] AAROH - INFO - voice_tts.py:92 - Local audio synthesized: data\audio\track_EVS-G3-WAT-03_hi_36fcbdf3.wav (46.15s)
+[2026-09-28 18:40:53,852] AAROH - INFO - edge_sync.py:119 - Offline package exported: aaroh_bundle_g3_env_hi_gon_b125c703.zip (1270972 bytes)
+[2026-09-28 18:40:53,860] AAROH - INFO - copilot_edge_pipeline.py:319 - Offline package record 'b125c703' saved.
+[2026-09-28 18:40:53,871] AAROH - INFO - edge_sync.py:192 - Edge Sync: 1 submissions ingested from device 'rpi_kiosk_school_14' (School: bastar_primary_gov_school)

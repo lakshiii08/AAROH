@@ -11,6 +11,7 @@ from src.aaroh.entity.config_entity import (
     LocalizationConfig,
     QuizConfig,
     VoiceConfig,
+    CopilotEdgeConfig,
 )
 from src.aaroh.utils.common import read_yaml
 from src.aaroh.utils.logger import logger
@@ -176,7 +177,18 @@ class ConfigurationManager:
             }),
         )
 
+    def get_copilot_edge_config(self) -> CopilotEdgeConfig:
+        c_conf = self.config.get("copilot_edge", {})
+        return CopilotEdgeConfig(
+            packages_export_dir=Path(c_conf.get("packages_export_dir", "data/packages")),
+            sync_import_dir=Path(c_conf.get("sync_import_dir", "data/sync")),
+            max_bundle_size_mb=int(c_conf.get("max_bundle_size_mb", 250)),
+            enable_offline_compression=bool(c_conf.get("enable_offline_compression", True)),
+            multigrade_support=bool(c_conf.get("multigrade_support", True)),
+        )
+
     def get_prompt_config(self) -> dict:
         return self.prompt_config
+
 
 

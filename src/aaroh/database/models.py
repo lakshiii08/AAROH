@@ -172,3 +172,50 @@ class OralQuizAttemptModel(Base):
     feedback_audio_path = Column(String(512), nullable=True)
     created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
 
+
+# ──────────────────────────────────────────────────────────────
+# Phase 6 — Teacher Copilot & Offline Edge Sync Tables
+# ──────────────────────────────────────────────────────────────
+
+class LessonPlanModel(Base):
+    """Stores generated teacher multigrade lesson plans."""
+    __tablename__ = "lesson_plans"
+
+    id = Column(String(64), primary_key=True, default=lambda: str(uuid.uuid4()))
+    title = Column(String(255), nullable=False)
+    grade_level = Column(Integer, nullable=False, index=True)
+    target_language = Column(String(16), nullable=False)
+    target_dialect = Column(String(32), nullable=True)
+    concept_codes = Column(JSON, default=list)
+    content_json = Column(JSON, nullable=False)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+
+
+class OfflinePackageModel(Base):
+    """Stores exported offline bundle zip packages for Edge devices."""
+    __tablename__ = "offline_packages"
+
+    id = Column(String(64), primary_key=True, default=lambda: str(uuid.uuid4()))
+    package_name = Column(String(255), nullable=False)
+    grade_level = Column(Integer, nullable=False, index=True)
+    subject = Column(String(64), nullable=False)
+    target_language = Column(String(16), nullable=False)
+    target_dialect = Column(String(32), nullable=True)
+    zip_file_path = Column(String(512), nullable=False)
+    file_size_bytes = Column(Integer, default=0)
+    metadata_json = Column(JSON, default=dict)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+
+
+class EdgeSyncLogModel(Base):
+    """Logs data sync events from offline kiosks/tablets to central server."""
+    __tablename__ = "edge_sync_logs"
+
+    id = Column(String(64), primary_key=True, default=lambda: str(uuid.uuid4()))
+    device_id = Column(String(64), nullable=False, index=True)
+    school_id = Column(String(64), nullable=False, index=True)
+    total_synced_attempts = Column(Integer, default=0)
+    sync_status = Column(String(32), default="SUCCESS")
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+
+

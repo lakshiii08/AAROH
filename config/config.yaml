@@ -128,4 +128,12 @@ voice:
     gon: "Kajal"
     sat: "Kajal"
 
+copilot_edge:
+  packages_export_dir: "data/packages"
+  sync_import_dir: "data/sync"
+  max_bundle_size_mb: 250
+  enable_offline_compression: true
+  multigrade_support: true
+
+
 

@@ -253,3 +253,80 @@ class OralQuizResultEntity:
     feedback_audio_script: str
     feedback_audio_path: Optional[str] = None
 
+
+# ──────────────────────────────────────────────────────────────
+# Phase 6: Teacher Copilot & Offline Edge Sync Entities
+# ──────────────────────────────────────────────────────────────
+
+@dataclass
+class LessonPlanEntity:
+    """A multigrade pedagogical lesson plan for rural single-teacher classrooms."""
+    plan_id: str
+    title: str
+    grade_level: int
+    target_language: str
+    target_dialect: Optional[str]
+    concept_codes: List[str]
+    time_allocation_mins: Dict[str, int]
+    multigrade_strategies: Dict[str, str]
+    blackboard_activity: str
+    teaching_aids: List[str]
+    hands_on_experiments: List[str]
+    homework_village_inquiry: str
+    generated_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+
+
+@dataclass
+class RemedialTeachingAidEntity:
+    """Targeted remedial aid generated for teachers based on class gap analysis."""
+    aid_id: str
+    concept_code: str
+    concept_name: str
+    target_language: str
+    identified_gap_summary: str
+    simplified_activity: str
+    story_analogy: str
+    check_questions: List[Dict[str, str]]
+    printable_guide: str
+    generated_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+
+
+@dataclass
+class OfflinePackageMetadataEntity:
+    """Metadata for an exported offline .zip bundle for zero-internet rural schools."""
+    package_id: str
+    package_name: str
+    grade_level: int
+    subject: str
+    target_language: str
+    target_dialect: Optional[str]
+    total_lessons: int
+    total_quizzes: int
+    total_audio_files: int
+    package_size_bytes: int
+    package_zip_path: str
+    created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+
+
+@dataclass
+class SyncPayloadEntity:
+    """Offline quiz attempts batch imported from an Edge device (kiosk / tablet)."""
+    batch_id: str
+    device_id: str
+    school_id: str
+    total_submissions: int
+    synced_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+
+
+@dataclass
+class ClassroomMasteryEntity:
+    """Mastery metrics for teacher dashboard analytics."""
+    concept_code: str
+    concept_name: str
+    grade_level: int
+    total_students_assessed: int
+    mastery_rate_pct: float
+    average_score_pct: float
+    common_gap_bloom: str
+
+

@@ -6,11 +6,12 @@ from api.routes.translation import router as translation_router
 from api.routes.simplification import router as simplification_router
 from api.routes.assessment import router as assessment_router
 from api.routes.voice import router as voice_router
+from api.routes.copilot import router as copilot_router
 
 app = FastAPI(
     title="AAROH Education Platform - API",
     description="Backend services for AAROH: AI-powered educational platform for rural and tribal primary education.",
-    version="0.5.0",
+    version="0.6.0",
 )
 
 app.add_middleware(
@@ -21,25 +22,27 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Phases 1, 2, 3, 4, 5
+# Phases 1, 2, 3, 4, 5, 6
 app.include_router(content_router, prefix="/api/v1")
 app.include_router(translation_router, prefix="/api/v1")
 app.include_router(simplification_router, prefix="/api/v1")
 app.include_router(assessment_router, prefix="/api/v1")
 app.include_router(voice_router, prefix="/api/v1")
+app.include_router(copilot_router, prefix="/api/v1")
 
 
 @app.get("/")
 def root():
     return {
         "platform": "AAROH - AI Rural & Tribal Primary Education",
-        "phase": "Phase 1, 2, 3, 4 & 5 Active",
+        "phase": "Phase 1, 2, 3, 4, 5 & 6 Active",
         "phases_active": [
             "Phase 1 - Content Ingestion & Concept Extraction",
             "Phase 2 - Mother-Tongue Translation Layer",
             "Phase 3 - Simplification & Localization (RAG + LangGraph)",
             "Phase 4 - Quiz Generation & Student Assessment Engine",
             "Phase 5 - Voice & Speech Intelligence (TTS & Oral Assessment)",
+            "Phase 6 - Teacher Copilot & Offline-First Edge Sync Engine",
         ],
         "status": "operational",
         "docs_url": "/docs",
@@ -48,4 +51,4 @@ def root():
 
 @app.get("/health")
 def health_check():
-    return {"status": "healthy", "service": "aaroh-core-api", "version": "0.5.0"}
+    return {"status": "healthy", "service": "aaroh-core-api", "version": "0.6.0"}

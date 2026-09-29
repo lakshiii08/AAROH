@@ -21,7 +21,7 @@ class AssessmentEngine:
       40–59%         → medium gap → re-teach with different analogy
       < 40%          → critical   → full remedial lesson trigger
     """
-
+    
     SEVERITY_THRESHOLDS = [
         (80, "none"),
         (60, "low"),

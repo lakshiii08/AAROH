@@ -96,7 +96,7 @@ class ConfigurationManager:
             temperature=float(b_conf["inference_params"].get("temperature", 0.1)),
             top_p=float(b_conf["inference_params"].get("top_p", 0.9)),
             enable_mock_llm=os.getenv("ENABLE_MOCK_LLM_FALLBACK", str(f_conf.get("enable_mock_llm", True))).lower() == "true",
-            enable_mock_embeddings=bool(f_conf.get("enable_mock_embeddings", True)),
+            enable_mock_embeddings=os.getenv("ENABLE_MOCK_EMBEDDINGS", str(f_conf.get("enable_mock_embeddings", True))).lower() == "true",
         )
 
     def get_vector_store_config(self) -> VectorStoreConfig:

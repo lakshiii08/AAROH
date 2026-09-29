@@ -1,4 +1,18 @@
+# Secrets and Environment Variables
+.env
+.env.*
+!.env.example
+
 # Terraform work files and generated deployment archive
 aws/terraform/.terraform/
 aws/terraform/.terraform-temp/
 aws/terraform/ingestion.zip
+
+# Local audio and cache data
+data/audio/*.wav
+data/audio/*.mp3
+data/packages/*.zip
+data/sync/*
+__pycache__/
+*.pyc
+

@@ -211,9 +211,10 @@ class ContentTransformationComponent:
         for text in texts:
             if self.bedrock_runtime and not self.config.enable_mock_embeddings:
                 try:
+                    embed_dim = min(self.config.embedding_dimension, 1024) if "titan-embed-text-v2" in self.config.embedding_model_id else self.config.embedding_dimension
                     body = json.dumps({
                         "inputText": text[:2000],
-                        "dimensions": self.config.embedding_dimension,
+                        "dimensions": embed_dim,
                         "normalize": True,
                     })
                     response = self.bedrock_runtime.invoke_model(

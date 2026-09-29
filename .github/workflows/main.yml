@@ -36,7 +36,7 @@ jobs:
       - name: Build and push API image
         env:
           REGISTRY: ${{ steps.ecr.outputs.registry }}
-          REPOSITORY: ${{ vars.ECR_REPOSITORY }}
+          REPOSITORY: ${{ vars.ECR_REPOSITORY || 'aaroh-api' }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
           docker build --pull -t "$REGISTRY/$REPOSITORY:$IMAGE_TAG" -t "$REGISTRY/$REPOSITORY:latest" -f Dockerfile .
@@ -44,6 +44,7 @@ jobs:
           docker push "$REGISTRY/$REPOSITORY:latest"
 
       - name: Deploy API service
+        if: ${{ vars.ECS_CLUSTER != '' && vars.ECS_SERVICE != '' }}
         env:
           CLUSTER: ${{ vars.ECS_CLUSTER }}
           SERVICE: ${{ vars.ECS_SERVICE }}
@@ -52,6 +53,7 @@ jobs:
           aws ecs wait services-stable --cluster "$CLUSTER" --services "$SERVICE"
 
       - name: Publish district dashboard
+        if: ${{ vars.FRONTEND_BUCKET != '' }}
         env:
           BUCKET: ${{ vars.FRONTEND_BUCKET }}
           COGNITO_DOMAIN: ${{ vars.COGNITO_DOMAIN }}
@@ -64,6 +66,7 @@ jobs:
           aws s3 cp frontend/config.js "s3://$BUCKET/config.js" --content-type "application/javascript" --cache-control "no-cache"
 
       - name: Invalidate CloudFront cache
+        if: ${{ vars.CLOUDFRONT_DISTRIBUTION_ID != '' }}
         env:
           DISTRIBUTION_ID: ${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}
         run: aws cloudfront create-invalidation --distribution-id "$DISTRIBUTION_ID" --paths '/*'

@@ -81,11 +81,18 @@ def test_glossary_lookup_and_add_api():
     assert "बीज" in verify_resp.json()["term"]["translated_term"]
 
 def test_translate_ingested_lesson():
-    # Get first document id
+    # Find a document that has content chunks (skip minimal test uploads)
     docs_resp = client.get("/api/v1/content/documents")
     docs = docs_resp.json()
-    if docs:
-        doc_id = docs[0]["id"]
+    doc_id = None
+    for doc in docs:
+        # Prefer documents with more than 1 page (real ingested PDFs)
+        if doc.get("total_pages", 0) > 1:
+            doc_id = doc["id"]
+            break
+    if doc_id is None and docs:
+        doc_id = docs[-1]["id"]  # fallback to last document
+    if doc_id:
         res = client.post(
             f"/api/v1/translation/lessons/{doc_id}",
             json={"target_lang": "hi", "target_dialect": "gon"}

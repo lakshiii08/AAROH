@@ -1,6 +1,7 @@
 # Core Framework & API
 fastapi
 uvicorn
+python-multipart
 pydantic
 pydantic-settings
 python-dotenv
@@ -19,6 +20,10 @@ pgvector
 # Cloud & LLM Providers (AWS Bedrock, etc.)
 boto3
 botocore
+langgraph
+langchain
+langchain-core
+pydub
 
 # Utilities
 tqdm

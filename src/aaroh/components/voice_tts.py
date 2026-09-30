@@ -55,8 +55,13 @@ class VoiceTTSComponent:
         out_filename = f"{section_name}_{target_language}_{segment_id}.wav"
         out_path = self.output_dir / out_filename
 
+        # Clean and prepare text for TTS (remove markdown formatting, bullet symbols, etc.)
+        clean_text = text.replace("*", "").replace("#", "").replace("`", "").replace("~", "").replace(">", "").strip()
+        if not clean_text:
+            clean_text = "नमस्ते।"
+
         # Estimate duration: ~130 words per minute for primary school tempo
-        word_count = len(text.split())
+        word_count = len(clean_text.split())
         estimated_duration = max(1.5, round((word_count / 130) * 60, 2))
 
         # 1. Try AWS Polly if enabled and client available
@@ -64,7 +69,7 @@ class VoiceTTSComponent:
             try:
                 logger.info(f"Synthesizing with AWS Polly (Voice: {voice_id}) for {word_count} words...")
                 response = self.polly_client.synthesize_speech(
-                    Text=text[:3000],
+                    Text=clean_text[:3000],
                     OutputFormat="mp3",
                     VoiceId=voice_id,
                     Engine="neural",

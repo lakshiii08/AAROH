@@ -33,12 +33,12 @@ class ParentVoiceBridgeComponent:
         """Generates a mother-tongue voice advisory audio message for a parent."""
         advisory_id = f"adv_{student_id}_{str(uuid.uuid4())[:6]}"
 
-        if target_language == "hi":
+        if target_language in ["hi", "gon", "sat", "bhi", "hne", "mr"]:
             speech_script = (
-                f"Namaste! Aaj aapke bachhe {student_name} ne primary school mein "
-                f"'{concept_name}' aur mitti ke matke se paani thanda hone ka jaadu seekha. "
-                f"Aap ghar par unse poochhiye ki matka paani kaise thanda rakhta hai! "
-                f"Aapka aashirvaad unhe aur aage badhayega. Dhanyawaad!"
+                f"नमस्ते! आज आपके बच्चे {student_name} ने प्राथमिक विद्यालय में "
+                f"'{concept_name}' और मिट्टी के मटके से पानी ठंडा होने का अनोखा विज्ञान सीखा। "
+                f"आप घर पर उनसे ज़रूर पूछिए कि मटका पानी को कैसे ठंडा रखता है! "
+                f"आपका प्रोत्साहन और आशीर्वाद उन्हें जीवन में और आगे बढ़ाएगा। धन्यवाद!"
             )
         else:
             speech_script = (

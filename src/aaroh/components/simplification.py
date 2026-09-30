@@ -90,62 +90,56 @@ class SimplificationComponent:
             return self._build_fallback_lesson(concept, target_language, target_dialect)
 
     def _heuristic_lesson_fallback(self, prompt: str) -> str:
-        """High-quality fallback lesson when Bedrock is not configured."""
+        """High-quality fallback lesson with authentic Devanagari Hindi for TTS voice clarity."""
         lesson = {
             "simplified_explanation": (
-                "Kya tumne kabhi dekha hai ki ek mitti ka matka paani ko thand rakhta hai? "
-                "Yeh isliye hota hai kyunki mitti ke andar bahut chhote-chhote chhed hote hain. "
-                "Paani un chhedon se dhire-dhire bahar aata hai aur phir suraj ki garmi se bhaap ban jaata hai. "
-                "Jab paani bhaap banta hai, toh woh apne saath thodi thandi le jaata hai — aur matka ke andar ka paani thanda rehta hai! "
-                "Yeh wahi cheez hai jo humein 'vashpikaran' (evaporation) kehte hain. "
-                "Jab dhoop talaab ya khet ke paani ko garam karti hai, toh paani bhi aise hi bhaap ban jaata hai aur upar uthta hai."
+                "क्या तुमने कभी देखा है कि मिट्टी का मटका पानी को कितना ठंडा और ताज़ा रखता है? "
+                "यह इसलिए होता है क्योंकि मिट्टी के घड़े में बहुत छोटे-छोटे छेद होते हैं। "
+                "पानी उन छेदों से धीरे-धीरे बाहर आता है और सूरज की धूप व हवा से भाप बनकर उड़ जाता है। "
+                "जब पानी भाप बनता है, तो वह अपने साथ थोड़ी गर्मी ले जाता है — और मटके के अंदर का पानी बिल्कुल ठंडा रहता है! "
+                "इसी प्रक्रिया को हम वाष्पीकरण कहते हैं। "
+                "जब धूप नदी या तालाब के पानी को गर्म करती है, तो वह भी इसी तरह भाप बनकर आसमान की ओर उठता है।"
             ),
             "local_analogies": [
-                "Mitti ka matka (clay pot cooling) — jaise matke ka paani thanda rehta hai garmi mein.",
-                "Roti pakane ke baad bhap — chapaati ke upar jo bhap aati hai woh vashpikaran hai.",
-                "Khet ke upar subah ki os — raat ko patti par bane paani ki boondein kitni thandak deti hain!",
+                "मिट्टी का मटका (Clay Pot Cooling) — जैसे मटके का पानी गर्मी में ठंडा रहता है।",
+                "रोटी से उठती भाप — तवे पर गरम रोटी से जो भाप निकलती है वह वाष्पीकरण है।",
+                "सुबह घास पर ओस की बूँदें — रात में ठंडी हवा से बनी पानी की बूँदें!",
             ],
             "story_narrative": (
-                "Ek baar Ramu ki daadi ne use bataya: 'Beta, dekh yeh matka. Raat bhar hum isme paani rakhte hain. "
-                "Subah tak paani kitna thanda ho jaata hai!' Ramu hairaan tha.\n\n"
-                "Dono akad gaye gaon ke bahar jahan ek bada talab tha. Daadi ne kaha: 'Dekh, suraj ki garmi se "
-                "talab ka paani dhire-dhire upar uth raha hai — bhaap ban raha hai. Wahi bhaap upar jaake "
-                "bade-bade badal banati hai. Phir wahi badal baarish ban ke vapas hamare khet aur talab mein girte hain.'\n\n"
-                "Ramu ne apni aankhon se badliya dekheen aur samajh gaya — paani kabhi khatam nahi hota, "
-                "woh ghoomta rehta hai — matke se bhaap, bhaap se badal, badal se baarish!"
+                "एक बार रामू की दादी ने उसे बताया: 'बेटा, देख यह मिट्टी का मटका। रात भर हम इसमें पानी रखते हैं और सुबह तक पानी कितना ठंडा और मीठा हो जाता है!' रामू हैरान था।\n\n"
+                "दोनों गाँव के बड़े तालाब के किनारे गए। दादी ने कहा: 'देख, सूरज की धूप से तालाब का पानी धीरे-धीरे भाप बनकर ऊपर आसमान में उड़ रहा है। वही भाप ऊपर जाकर बड़े-बड़े बादल बनाती है। फिर वही बादल बारिश बनकर हमारे खेतों और तालाबों में बरसते हैं।'\n\n"
+                "रामू ने बादलों को देखा और समझ गया — पानी कभी खत्म नहीं होता, वह घूमता रहता है — मटके से भाप, भाप से बादल, और बादल से बारिश!"
             ),
             "hands_on_activity": {
-                "title": "Bhaap aur Thandi — Matke ka Jaadu",
-                "materials_needed": ["Ek chhota mitti ka bartan ya matka", "Paani", "Dhoop (bahar)", "Ek saaf kapda"],
+                "title": "भाप और ठंडक — मिट्टी के मटके का जादू",
+                "materials_needed": ["एक छोटा मिट्टी का मटका", "साफ पानी", "धूप", "एक साफ सूती कपड़ा"],
                 "steps": [
-                    "Matke mein paani bharo aur saaf kapde se dhakko.",
-                    "Use dhoop mein bahar rakh do — peepal ya neem ke ped ke neeche.",
-                    "Ek ghante baad apna haath matke par rakh ke mehsoos karo — kya matka thanda lag raha hai?",
-                    "Abhi ek katori mein alag se paani rakh do, bina dhakke dhoop mein.",
-                    "Ek ghante baad dono ka paani compare karo — kaunsa thanda raha?",
+                    "मटके में पानी भरो और उसे सूती कपड़े से ढक दो।",
+                    "उसे बाहर नीम या पीपल के पेड़ की छांव में रखो।",
+                    "एक घंटे बाद मटके को छूकर महसूस करो — क्या मटका ठंडा लग रहा है?",
+                    "अब एक कटोरी में अलग से पानी रखो और दोनों का तापमान तुलना करो।",
                 ],
                 "learning_outcome": (
-                    "Baccha feel karega ki matke ka paani thanda rehta hai kyunki mitti ke chhedon se "
-                    "vashpikaran hota rehta hai — yeh nature ka apna cooler hai!"
+                    "बच्चा महसूस करेगा कि मिट्टी के मटके में वाष्पीकरण से पानी ठंडा होता है — यह प्रकृति का अपना कूलर है!"
                 ),
             },
             "reflection_questions": [
                 {
-                    "question": "Subah ghaas par ya patti par jo paani ki boondein dikhti hain — woh kahan se aati hain?",
-                    "hint": "Raat mein hawaa thandi hoti hai — bhaap phir se paani ban jaati hai.",
+                    "question": "सुबह घास या पेड़ों के पत्तों पर पानी की बूँदें कहाँ से आती हैं?",
+                    "hint": "रात में हवा ठंडी होने से भाप फिर से पानी की बूँद बन जाती है।",
                 },
                 {
-                    "question": "Ghar ke badon se poochho — pehle refrigerator nahi hota tha toh paani ko thanda kaise rakhte the?",
-                    "hint": "Matka, surahee, ya mitti ka ghada use karte the.",
+                    "question": "घर के बुजुर्गों से पूछो — पहले जब फ्रिज नहीं था तब पानी को ठंडा कैसे रखते थे?",
+                    "hint": "मटका, सुराही या मिट्टी के घड़े का इस्तेमाल करते थे।",
                 },
             ],
             "voice_script": (
-                "Namaste doston! Aaj hum ek chhoti si jaadu ki baat karange — paani ka safar! "
-                "Socho, jab dhoop padti hai nadi ya talab par, toh paani dhire se upar uthne lagta hai — "
-                "bhaap ban jaata hai. Yeh hoti hai vashpikaran. Yeh bhaap upar jaake thandi hawaa se milti hai "
-                "aur badal ban jaati hai. Phir baarish! Aur baarish ka paani nadi mein aata hai. "
-                "Isi tarah paani ghoomta rehta hai — isko kehte hain jal chakra — paani ka chakkar! "
-                "Ab try karo ghar mein matke wala experiment — aur dekho kaun sa cooler hai — fridge ya matka?"
+                "नमस्ते दोस्तों! आज हम प्रकृति के एक अद्भुत जादू की बात करेंगे — पानी का अनोखा सफर! "
+                "सोचो, जब सूरज की धूप नदी या तालाब पर पड़ती है, तो पानी धीरे-धीरे भाप बनकर आसमान में उड़ने लगता है। "
+                "इसे वाष्पीकरण कहते हैं। यह भाप ऊपर जाकर ठंडी हवा से मिलती है और बड़े-बड़े बादल बन जाती है। "
+                "फिर झमाझम बारिश होती है और पानी वापस हमारे तालाब और नदियों में लौट आता है। "
+                "इसे कहते हैं जल चक्र — पानी का अमर सफर! "
+                "अब आप भी अपने घर में मटके का पानी पीकर इस ठंडक को महसूस करो!"
             ),
         }
         return json.dumps(lesson, ensure_ascii=False, indent=2)

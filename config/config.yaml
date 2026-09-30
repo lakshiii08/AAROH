@@ -117,7 +117,7 @@ voice:
   default_voice_gender: "FEMALE"
   audio_output_dir: "data/audio"
   sample_rate: 22050
-  enable_mock_voice: true           # Uses lightweight audio synthesizer when AWS Polly is offline
+  enable_mock_voice: false          # Uses AWS Polly Neural voice when available, falls back if offline
   polly_voices:
     hi: "Kajal"
     en: "Aditi"
@@ -127,6 +127,8 @@ voice:
     or: "Kajal"
     gon: "Kajal"
     sat: "Kajal"
+    bhi: "Kajal"
+    hne: "Kajal"
 
 copilot_edge:
   packages_export_dir: "data/packages"

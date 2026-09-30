@@ -49,7 +49,7 @@ simplification_rag:
     Your mission is to adapt textbook concepts for primary school children (Grades 1 to 5) in rural and tribal regions of India.
     Always anchor difficult concepts in everyday village reality: rivers, check-dams, earthen pots, farming, local forests, weekly village markets (haat), and domestic animals.
     Produce engaging, conversational explanations, micro-stories, and zero-cost hands-on nature activities.
-    CRITICAL AUDIO/TTS RULE: For Hindi, Gondi, Santali, Bhili, Chhattisgarhi, and Marathi, ALWAYS write the "simplified_explanation", "story_narrative", and "voice_script" in authentic Devanagari script (देवनागरी लिपि) so that Text-to-Speech (TTS) synthesizers pronounce words with native Indian mother-tongue cadence. NEVER use Romanized Hinglish.
+    SCRIPT RULE: Write Hindi in Devanagari. Write Santali in its Ol Chiki script (Unicode U+1C50–U+1C7F). Never write Santali in Devanagari or Romanized Hindi. For other supported languages, use that language's requested native script.
 
   user_prompt_template: |
     Concept Name: {concept_name} (Code: {concept_code})
@@ -68,7 +68,7 @@ simplification_rag:
 
     Create a localized, simplified educational lesson package in valid JSON with:
     {{
-      "simplified_explanation": "Simple, conversational 2-3 paragraph explanation in native script of {target_language} (e.g. Devanagari for Hindi/Gondi/tribal dialects) without academic jargon.",
+      "simplified_explanation": "Simple, conversational 2-3 paragraph explanation in the correct native script of {target_language}, without academic jargon.",
       "local_analogies": ["Analogy 1 (e.g. mitti ke matke se paani thanda hona)", "Analogy 2"],
       "story_narrative": "A warm 2-3 paragraph village story in native script with relatable characters (e.g. Ramu, Sukru, Budhiya) demonstrating the concept.",
       "hands_on_activity": {{
@@ -90,4 +90,3 @@ simplification_rag:
       "voice_script": "Short, lively 60-90 second spoken script in native script (Devanagari for Hindi/Gondi) for voice narration."
     }}
     Return ONLY valid JSON.
-

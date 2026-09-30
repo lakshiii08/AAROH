@@ -20,7 +20,10 @@ class ContentCacheManager:
         self._load_local_cache()
 
     def _make_key(self, concept_code: str, target_language: str, target_dialect: Optional[str]) -> str:
-        raw = f"{concept_code}|{target_language}|{target_dialect or 'none'}"
+        # Ignore legacy Santali entries generated with the incorrect Devanagari
+        # prompt; new Ol Chiki lessons get a separate cache namespace.
+        version = "|sat-ol-chiki-v2" if target_language == "sat" else ""
+        raw = f"{concept_code}|{target_language}|{target_dialect or 'none'}{version}"
         return hashlib.sha256(raw.encode()).hexdigest()[:32]
 
     def _load_local_cache(self):

@@ -167,6 +167,12 @@ class TranslationComponent:
 
     def _run_model_inference(self, text: str, source_lang: str, target_lang: str) -> str:
         """Executes model inference via SageMaker or internal fallback translator."""
+        # IndicTrans2 deployments may return Santali in Devanagari. Use the
+        # Santali-specific translator so the result is validated as Ol Chiki.
+        if (target_lang or "").lower() == "sat":
+            from src.aaroh.components.santali_engine import translate_to_santali
+            return translate_to_santali(text, source_lang)
+
         # 1. SageMaker IndicTrans2 Endpoint (Production on EC2 GPU)
         if self.sagemaker_runtime and not self.config.enable_mock_translation:
             try:

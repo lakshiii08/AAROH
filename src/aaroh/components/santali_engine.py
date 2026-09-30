@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Santali Translation & Ol Chiki Transliteration Engine for AAROH.
-Guarantees 100% authentic Ol Chiki (ᱚᱞ ᱪᱤᱠᱤ) script with Roman phonetic transliteration.
-Zero script leakage: English Latin characters and Hindi Devanagari characters are strictly eliminated.
+Uses a Santali translation service when available and validates Ol Chiki output.
 """
 
 import re
@@ -334,19 +333,43 @@ def translate_to_santali(text: str, source_lang: str = "en") -> str:
     clean_norm = re.sub(r'[?!.,।॥]+$', '', clean_input).strip()
     clean_norm = re.sub(r'\s+', ' ', clean_norm).lower()
 
+    def is_ol_chiki(value: str) -> bool:
+        """Reject legacy mojibake entries instead of returning corrupted script."""
+        return any('\u1c50' <= char <= '\u1c7f' for char in value) and not any(
+            char.isalpha() and not ('\u1c50' <= char <= '\u1c7f') for char in value
+        )
+
+    # Translate the complete sentence. Word-by-word substitution cannot produce
+    # reliable grammar, and transliterating English letters only creates nonsense.
+    try:
+        source_code = source_lang if source_lang and source_lang != "auto" else "auto"
+        url = (
+            "https://translate.googleapis.com/translate_a/single?client=gtx"
+            f"&sl={urllib.parse.quote(source_code)}&tl=sat&dt=t&q={urllib.parse.quote(clean_input)}"
+        )
+        request = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(request, timeout=5) as response:
+            payload = json.loads(response.read().decode("utf-8"))
+        translated = "".join(part[0] for part in payload[0] if part and part[0]).strip()
+        if is_ol_chiki(translated):
+            return translated
+    except Exception:
+        # Keep the curated local phrase/lexicon fallback available offline.
+        pass
+
     # 1. Direct Multi-Word Phrase Match
-    if clean_norm in SANTALI_PHRASES:
+    if clean_norm in SANTALI_PHRASES and is_ol_chiki(SANTALI_PHRASES[clean_norm][0]):
         ol_chiki, roman = SANTALI_PHRASES[clean_norm]
         return f"{ol_chiki} ({roman})"
 
     # Check without trailing punctuations / trimmed
     norm_no_punct = re.sub(r'[^\w\s\u0900-\u097f]', '', clean_norm).strip()
-    if norm_no_punct in SANTALI_PHRASES:
+    if norm_no_punct in SANTALI_PHRASES and is_ol_chiki(SANTALI_PHRASES[norm_no_punct][0]):
         ol_chiki, roman = SANTALI_PHRASES[norm_no_punct]
         return f"{ol_chiki} ({roman})"
 
     for phrase, (chiki, roman) in SANTALI_PHRASES.items():
-        if clean_norm == phrase.lower() or norm_no_punct == phrase.lower():
+        if (clean_norm == phrase.lower() or norm_no_punct == phrase.lower()) and is_ol_chiki(chiki):
             return f"{chiki} ({roman})"
 
     # 2. Word-Level Lexicon Translation with Grammatical Structuring
@@ -365,7 +388,7 @@ def translate_to_santali(text: str, source_lang: str = "en") -> str:
             next_w = words[idx + 1]
             next_clean = re.sub(r'[^\w]', '', next_w.lower())
             bigram = f"{w_clean} {next_clean}"
-            if bigram in SANTALI_PHRASES:
+            if bigram in SANTALI_PHRASES and is_ol_chiki(SANTALI_PHRASES[bigram][0]):
                 ch, ro = SANTALI_PHRASES[bigram]
                 chiki_tokens.append(ch)
                 roman_tokens.append(ro)
@@ -405,12 +428,9 @@ def translate_to_santali(text: str, source_lang: str = "en") -> str:
                 chiki_tokens.append(translated_chiki)
                 roman_tokens.append(translated_roman)
             else:
-                # Transliterate directly into Ol Chiki script!
-                # ABSOLUTELY NO ENGLISH OR HINDI LEFT IN OUTPUT!
-                ch_token = transliterate_to_ol_chiki(w_clean)
-                ro_token = w.capitalize()
-                chiki_tokens.append(ch_token)
-                roman_tokens.append(ro_token)
+                # Do not invent Santali by spelling an English/Hindi word in Ol Chiki.
+                # Keep unknown words visible in the Roman line so they can be corrected.
+                roman_tokens.append(w)
 
         idx += 1
 
@@ -418,7 +438,7 @@ def translate_to_santali(text: str, source_lang: str = "en") -> str:
     final_roman = " ".join(roman_tokens).strip()
 
     # Final guarantee: Ensure NOT A SINGLE Latin or Devanagari character exists in final_chiki
-    final_chiki = transliterate_to_ol_chiki(final_chiki)
+    final_chiki = " ".join(chiki_tokens).strip()
 
     # Preserve question mark if input had one
     if clean_input.endswith('?') and not final_chiki.endswith('?'):

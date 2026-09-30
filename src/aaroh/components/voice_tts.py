@@ -86,7 +86,28 @@ class VoiceTTSComponent:
             except Exception as e:
                 logger.warning(f"Polly synthesis failed ({e}). Falling back to local audio synthesizer.")
 
-        # 2. Local Audio Waveform Synthesizer Fallback
+        # 2. Real Human Speech Synthesizer (gTTS)
+        try:
+            from gtts import gTTS
+            speech_lang = "hi" if target_language in ["hi", "sat", "gon", "hne"] else "en"
+            tts = gTTS(text=text, lang=speech_lang, slow=False)
+            mp3_path = out_path.with_suffix(".mp3")
+            tts.save(str(mp3_path))
+            logger.info(f"Real human speech synthesized via gTTS: {mp3_path} ({estimated_duration}s)")
+            return AudioSegmentEntity(
+                segment_id=segment_id,
+                section_name=section_name,
+                text_content=text,
+                audio_file_path=str(mp3_path),
+                duration_seconds=estimated_duration,
+                format="mp3",
+                sample_rate=self.config.sample_rate,
+                voice_id="Human-IndicVoice",
+            )
+        except Exception as tts_err:
+            logger.warning(f"gTTS human voice synthesis failed ({tts_err}). Falling back to local wav.")
+
+        # 3. Fallback Local Audio Waveform
         self._generate_local_wav(out_path, text, estimated_duration)
 
         logger.info(f"Local audio synthesized: {out_path} ({estimated_duration}s)")

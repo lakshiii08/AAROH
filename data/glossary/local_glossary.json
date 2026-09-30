@@ -3,18 +3,13 @@
     "pk": "LANG#en#hi",
     "sk": "TERM#water",
     "source_term": "water",
-    "translated_term": "पानी",
+    "translated_term": "paani",
     "source_lang": "en",
     "target_lang": "hi",
-    "domain": "evs",
-    "dialects": {
-      "gon": "येर (Yer)",
-      "sat": "दाः (Daah)",
-      "hne": "पानी (Paani)",
-      "bhi": "पाणी (Paani)"
-    },
-    "phonetic_hint": "paa-nee",
-    "notes": "Essential life element in village ecosystems"
+    "domain": "general",
+    "dialects": {},
+    "phonetic_hint": "",
+    "notes": ""
   },
   {
     "pk": "LANG#en#hi",

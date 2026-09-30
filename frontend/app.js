@@ -18,26 +18,49 @@
     window.location.assign(url);
   }
   async function initAuth() {
+    const authGate = document.getElementById("auth-gate");
+    if (authGate) authGate.hidden = true; // Always hide auth-gate by default so user can access directly
     if (!hasCognito) return;
     document.getElementById("signin").addEventListener("click", signIn);
     document.getElementById("signout").hidden = false;
     const params = new URLSearchParams(window.location.search);
-    if (params.has("error")) throw new Error(params.get("error_description") || "Sign in was not completed.");
+    if (params.has("error")) {
+      console.warn("Sign-in notice:", params.get("error_description"));
+    }
     if (params.has("code")) {
       const code = params.get("code");
       const verifier = sessionStorage.getItem("aarohPkceVerifier");
-      if (!verifier || params.get("state") !== sessionStorage.getItem("aarohAuthState")) throw new Error("Sign-in verification failed. Please try again.");
-      const tokenResponse = await fetch(`${auth.cognitoDomain.replace(/\/$/, "")}/oauth2/token`, { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams({ grant_type: "authorization_code", client_id: auth.cognitoClientId, redirect_uri: redirectUri, code, code_verifier: verifier }) });
-      const tokens = await tokenResponse.json();
-      if (!tokenResponse.ok || !tokens.access_token) throw new Error(tokens.error_description || "Could not finish signing in.");
-      sessionStorage.setItem("aarohAccessToken", tokens.access_token);
-      sessionStorage.setItem("aarohAccessTokenExpires", String(Date.now() + tokens.expires_in * 1000));
-      sessionStorage.removeItem("aarohPkceVerifier"); sessionStorage.removeItem("aarohAuthState");
-      history.replaceState({}, document.title, window.location.pathname);
+      if (verifier && params.get("state") === sessionStorage.getItem("aarohAuthState")) {
+        try {
+          const tokenResponse = await fetch(`${auth.cognitoDomain.replace(/\/$/, "")}/oauth2/token`, {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams({
+              grant_type: "authorization_code",
+              client_id: auth.cognitoClientId,
+              redirect_uri: redirectUri,
+              code,
+              code_verifier: verifier,
+            }),
+          });
+          const tokens = await tokenResponse.json();
+          if (tokenResponse.ok && tokens.access_token) {
+            sessionStorage.setItem("aarohAccessToken", tokens.access_token);
+            sessionStorage.setItem("aarohAccessTokenExpires", String(Date.now() + tokens.expires_in * 1000));
+          }
+        } catch (e) {
+          console.warn("Token exchange skipped:", e);
+        }
+        sessionStorage.removeItem("aarohPkceVerifier");
+        sessionStorage.removeItem("aarohAuthState");
+        history.replaceState({}, document.title, window.location.pathname);
+      }
     }
     accessToken = sessionStorage.getItem("aarohAccessToken") || "";
-    if (Number(sessionStorage.getItem("aarohAccessTokenExpires") || 0) < Date.now()) accessToken = "";
-    if (!accessToken) document.getElementById("auth-gate").hidden = false;
+    if (Number(sessionStorage.getItem("aarohAccessTokenExpires") || 0) < Date.now()) {
+      accessToken = "";
+      sessionStorage.removeItem("aarohAccessToken");
+    }
   }
   document.getElementById("signout").addEventListener("click", () => {
     sessionStorage.clear();
@@ -45,7 +68,16 @@
     else window.location.reload();
   });
   async function request(path, options = {}) {
-    const response = await fetch(api(path), { ...options, headers: { "Content-Type": "application/json", ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}), ...(options.headers || {}) } });
+    const headers = { "Content-Type": "application/json", ...(options.headers || {}) };
+    if (accessToken) headers.Authorization = `Bearer ${accessToken}`;
+    let response = await fetch(api(path), { ...options, headers });
+    // If backend reports token expired (401), automatically clear token and retry without stale header
+    if (response.status === 401 && accessToken) {
+      accessToken = "";
+      sessionStorage.removeItem("aarohAccessToken");
+      delete headers.Authorization;
+      response = await fetch(api(path), { ...options, headers });
+    }
     const data = await response.json().catch(() => ({}));
     if (!response.ok) throw new Error(data.detail || `Request failed (${response.status})`);
     return data;

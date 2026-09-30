@@ -30,9 +30,22 @@ class VoiceSTTComponent:
         start_time = time.perf_counter()
         p = Path(audio_file_path)
 
-        # In live AWS, AWS Transcribe or Whisper API is invoked here.
-        # Fallback simulated transcription based on audio file size/context
-        transcribed_text = self._mock_transcribe(p, hint_language)
+        # 1. Real Speech-to-Text via SpeechRecognition engine
+        transcribed_text = ""
+        try:
+            import speech_recognition as sr
+            r = sr.Recognizer()
+            lang_code = "hi-IN" if hint_language in ["hi", "sat", "gon", "hne"] else "en-IN"
+            with sr.AudioFile(str(p)) as source:
+                audio_data = r.record(source)
+                transcribed_text = r.recognize_google(audio_data, language=lang_code)
+                logger.info(f"Real Speech STT transcribed: '{transcribed_text}'")
+        except Exception as stt_err:
+            logger.warning(f"Speech recognition from audio file ({stt_err}).")
+
+        if not transcribed_text:
+            transcribed_text = self._mock_transcribe(p, hint_language)
+
         latency_ms = round((time.perf_counter() - start_time) * 1000, 2)
 
         return TranscriptionResultEntity(

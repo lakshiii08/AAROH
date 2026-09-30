@@ -31,3 +31,4 @@ numpy
 requests
 PyJWT[crypto]
 pytest
+multipart

@@ -64,7 +64,7 @@ class QuizAssessmentPipeline:
     def generate_quiz_for_concept(
         self,
         concept_code: str,
-        target_language: str = "hi",
+        target_language: str = "sat",
         target_dialect: Optional[str] = None,
         grade_level: int = 3,
     ) -> QuizEntity:
@@ -137,7 +137,8 @@ class QuizAssessmentPipeline:
                 "concept_name": quiz.concept_name,
                 "score_pct": submission.score_pct,
                 "needs_remedial": assessment.needs_remedial,
-                "total_questions": len(quiz.questions),
+                "total_questions": len(submission.answers),
+                "theory_questions_for_teacher_review": len(quiz.questions) - len(submission.answers),
                 "correct_count": sum(1 for a in submission.answers if a.is_correct),
                 "answers": [
                     {

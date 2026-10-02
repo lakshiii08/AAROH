@@ -42,6 +42,20 @@
         <div id="interventions" class="list"><p class="empty">Loading active pathways…</p></div>
       </article>
     </section>
+    <section class="panel worksheet-panel">
+      <div class="panel-heading"><div><p class="eyebrow">STUDENT WORKSHEET</p><h2>Create a worksheet</h2><p class="panel-copy">Each worksheet has five multiple-choice questions and five written questions.</p></div><span class="panel-icon panel-icon-orange">✎</span></div>
+      <form id="worksheet-form" class="form-grid advisory-form">
+        <label>Concept code<input name="concept_code" value="EVS-G3-WAT-01" required></label>
+        <label>Grade<select name="grade_level"><option value="3" selected>Grade 3</option><option value="1">Grade 1</option><option value="2">Grade 2</option><option value="4">Grade 4</option><option value="5">Grade 5</option></select></label>
+        <label>Worksheet language<select name="target_language"><option value="sat" selected>Santhali (Ol Chiki)</option><option value="hi">Hindi</option><option value="en">English</option></select></label>
+        <button class="button button-primary full" type="submit">Generate worksheet <span>→</span></button>
+      </form>
+      <p id="worksheet-status" class="notice" role="status" aria-live="polite"></p>
+      <div id="worksheet-output" class="worksheet-output" hidden>
+        <div class="worksheet-title-row"><div><p class="eyebrow">READY TO PRINT</p><h3 id="worksheet-title"></h3></div><button id="print-worksheet" class="button button-light print-button" type="button">Print worksheet</button></div>
+        <ol id="worksheet-questions" class="worksheet-questions"></ol>
+      </div>
+    </section>
     <section class="panel advisory-panel">
       <div class="panel-heading"><div><p class="eyebrow">FAMILY CONNECTION</p><h2>Prepare a parent voice advisory</h2><p class="panel-copy">Share a short learning update in the family’s preferred language.</p></div><span class="panel-icon panel-icon-blue">♫</span></div>
       <form id="advisory-form" class="form-grid advisory-form">

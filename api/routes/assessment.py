@@ -14,7 +14,7 @@ pipeline = QuizAssessmentPipeline()
 
 class GenerateQuizRequest(BaseModel):
     concept_code: str = Field(..., description="Concept code, e.g. 'EVS-G3-WAT-01'")
-    target_language: str = Field("hi", description="Target mother tongue, e.g. 'hi', 'bn', 'or'")
+    target_language: str = Field("sat", description="Worksheet language: sat (Santali), hi, or en")
     target_dialect: Optional[str] = Field(None, description="Optional tribal dialect: 'gon', 'sat', 'hne', 'bhi'")
     grade_level: int = Field(3, description="Grade level (1-5)")
 
@@ -30,10 +30,7 @@ class SubmitQuizRequest(BaseModel):
 def generate_quiz(request: GenerateQuizRequest):
     """Generates a culturally-localized, pedagogical quiz for a curriculum concept in the child's mother tongue.
 
-    Output format:
-    - 3 Multiple Choice Questions (with options, difficulty, bloom level, village analogy)
-    - 1 Fill-in-the-blank question
-    - 1 True/False question
+    Output format: exactly 5 multiple-choice and 5 written theory questions.
     """
     try:
         quiz = pipeline.generate_quiz_for_concept(

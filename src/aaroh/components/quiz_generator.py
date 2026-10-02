@@ -20,10 +20,7 @@ QUESTION_TYPE_TF = "true_false"
 class QuizGeneratorComponent:
     """Generates culturally-localized quizzes from lesson content via Bedrock LLM.
 
-    Each quiz contains:
-      - 3 MCQ questions (A/B/C/D) with correct answer + explanation
-      - 1 Fill-in-the-blank question using a village analogy
-      - 1 True/False question on a common misconception
+    Each worksheet contains five MCQs and five open-ended theory questions.
     """
 
     def __init__(self, config: BedrockModelConfig, prompt_config: dict):
@@ -43,9 +40,9 @@ class QuizGeneratorComponent:
         concept: ConceptEntity,
         localized_explanation: str,
         grade_level: int,
-        target_language: str,
+        target_language: str = "sat",
         target_dialect: Optional[str] = None,
-        num_mcq: int = 3,
+        num_mcq: int = 5,
     ) -> QuizEntity:
         """Generates a full quiz for a concept in the child's mother tongue."""
         quiz_id = str(uuid.uuid4())
@@ -53,9 +50,47 @@ class QuizGeneratorComponent:
         raw = self._call_llm(concept, localized_explanation, grade_level, target_language, target_dialect, num_mcq)
         questions = self._parse_questions(raw, concept)
 
-        if not questions:
+        fallback_used = not bool(questions) or raw == self._fallback_raw_json(concept, target_language)
+        if fallback_used:
             logger.warning("LLM returned no parseable questions. Using structured fallback.")
             questions = self._fallback_questions(concept, target_language)
+
+        mcqs = [q for q in questions if q.question_type == QUESTION_TYPE_MCQ][:5]
+        theory = [q for q in questions if q.question_type in {"theory", "short_answer", "open_ended"}][:5]
+        if len(mcqs) != 5 or len(theory) != 5:
+            logger.warning("Quiz did not contain exactly 5 MCQs and 5 theory questions; using worksheet fallback.")
+            questions = self._fallback_questions(concept, target_language)
+            fallback_used = True
+        else:
+            questions = mcqs + theory
+
+        if target_language == "sat" or fallback_used:
+            if target_language == "sat":
+                from src.aaroh.components.santali_engine import translate_to_santali
+                translator = lambda text: self._to_santali(text, translate_to_santali)
+            else:
+                translator = lambda text: self._translate_fallback_text(text, target_language)
+
+            fields = []
+            for question in questions:
+                fields.extend([(question, "question_text", question.question_text), (question, "explanation", question.explanation)])
+                for index, option in enumerate(question.options):
+                    prefix, text = (option[:3], option[3:]) if len(option) > 3 and option[:2] in {"A)", "B)", "C)", "D)"} else ("", option)
+                    fields.append((question, f"option:{index}:{prefix}", text))
+
+            unique_texts = list(dict.fromkeys(text for _, _, text in fields if text))
+            from concurrent.futures import ThreadPoolExecutor
+            with ThreadPoolExecutor(max_workers=8) as executor:
+                translations = dict(zip(unique_texts, executor.map(translator, unique_texts)))
+            for question, field, text in fields:
+                if not text:
+                    continue
+                translated = translations.get(text, text)
+                if field.startswith("option:"):
+                    _, index, prefix = field.split(":", 2)
+                    question.options[int(index)] = f"{prefix}{translated}"
+                else:
+                    setattr(question, field, translated)
 
         quiz = QuizEntity(
             quiz_id=quiz_id,
@@ -88,8 +123,10 @@ class QuizGeneratorComponent:
     def _build_quiz_prompt(self, concept, explanation, grade, lang, dialect, num_mcq) -> str:
         anchors = "\n".join(f"- {a}" for a in concept.rural_tribal_anchors[:3])
         dialect_note = f" Adapt for {dialect} dialect." if dialect else ""
-        return f"""You are an expert quiz designer for Grade {grade} rural Indian children.
-Language: {lang}.{dialect_note}
+        language_names = {"sat": "Santali, written only in Ol Chiki", "hi": "Hindi, written in Devanagari", "en": "English"}
+        language = language_names.get(lang, lang)
+        return f"""You are an expert worksheet designer for Grade {grade} rural Indian children.
+Language: {language}.{dialect_note}
 
 CONCEPT: {concept.name}
 DEFINITION: {concept.definition}
@@ -98,31 +135,43 @@ SIMPLIFIED EXPLANATION (already given to child): {explanation[:800]}
 CULTURAL ANCHORS (use these in questions):
 {anchors}
 
-Generate a quiz with EXACTLY this structure in JSON:
+Generate a worksheet with EXACTLY this structure in JSON:
 {{
   "questions": [
     {{
       "question_id": "Q1",
       "question_type": "mcq",
-      "question_text": "<question in {lang}, using village context>",
+      "question_text": "<question in {language}, using village context>",
       "options": ["A) ...", "B) ...", "C) ...", "D) ..."],
       "correct_answer": "A",
-      "explanation": "<1-2 sentence explanation in {lang} why this is correct>",
+      "explanation": "<1-2 sentence explanation in {language} why this is correct>",
       "blooms_level": "Remember",
       "difficulty_level": 1,
       "cultural_anchor": "<which anchor was used>"
     }},
-    ... (total {num_mcq} MCQs, then 1 fill_blank, then 1 true_false)
+    {{
+      "question_id": "Q6",
+      "question_type": "theory",
+      "question_text": "<open-ended written question in {language}>",
+      "options": [],
+      "correct_answer": "",
+      "explanation": "",
+      "blooms_level": "Understand",
+      "difficulty_level": 2,
+      "cultural_anchor": "<which anchor was used>"
+    }},
+    ... (exactly 5 MCQs followed by exactly 5 theory questions; 10 total)
   ]
 }}
 
 RULES:
-- All question_text, options, explanation MUST be in {lang}.
+- All question_text, options, explanation MUST be in {language}.
 - MCQ options must have EXACTLY 4 items prefixed A) B) C) D).
 - correct_answer for MCQ is just "A" or "B" or "C" or "D".
-- fill_blank question_text contains "______" as blank; correct_answer is the word.
-- true_false correct_answer is "True" or "False".
-- Difficulty levels: first MCQ=1, second MCQ=2, third MCQ=3, fill_blank=2, true_false=1.
+- Theory questions use question_type "theory", have no options and an empty correct_answer, and ask for a short written explanation in the student's own words.
+- Do not include fill-in-the-blank or true/false questions.
+- Use valid Ol Chiki Unicode (U+1C50–U+1C7F) for Santali; never write Santali in Devanagari or Roman script.
+- Difficulty should increase gradually across the five MCQs; then ask five age-appropriate theory questions.
 - Use characters like Ramu, Budhiya, Soma from the village in question scenarios.
 - NO English words in questions (except proper nouns if unavoidable).
 Output ONLY the JSON object, no extra text."""
@@ -206,28 +255,58 @@ Output ONLY the JSON object, no extra text."""
                 },
                 {
                     "question_id": "Q4",
-                    "question_type": "fill_blank",
-                    "question_text": "Suraj ki garmi se paani bhaap banke upar uthta hai — ise ______ kehte hain.",
-                    "options": [],
-                    "correct_answer": "vashpikaran",
+                    "question_type": "mcq",
+                    "question_text": "Suraj ki garmi se paani bhaap banke upar uthta hai. Is badlav ko kya kehte hain?",
+                    "options": ["A) Vashpikaran", "B) Jamna", "C) Pighalna", "D) Barasna"],
+                    "correct_answer": "A",
                     "explanation": "Vashpikaran matlab paani ka bhaap mein badalna. Yahi jal chakra ki pehli seedi hai.",
                     "blooms_level": "Remember",
-                    "difficulty_level": 1,
+                    "difficulty_level": 4,
                     "cultural_anchor": "Monsoon rain",
                 },
                 {
                     "question_id": "Q5",
-                    "question_type": "true_false",
-                    "question_text": "Paani ek baar bhaap ban jaata hai toh hamesha ke liye khatam ho jaata hai — Sach hai ya Jhooth?",
-                    "options": [],
-                    "correct_answer": "False",
+                    "question_type": "mcq",
+                    "question_text": "Bhaap thandi hokar kya ban sakti hai?",
+                    "options": ["A) Mitti", "B) Badal", "C) Pathar", "D) Lakdi"],
+                    "correct_answer": "B",
                     "explanation": "Paani kabhi khatam nahi hota! Bhaap se badal, badal se baarish, baarish se nadi — yeh jal chakra hamesha chalti rehti hai.",
                     "blooms_level": "Understand",
-                    "difficulty_level": 1,
+                    "difficulty_level": 5,
                     "cultural_anchor": "Forest stream (jharna)",
                 },
+                *[
+                    {
+                        "question_id": f"Q{index}",
+                        "question_type": "theory",
+                        "question_text": prompt,
+                        "options": [],
+                        "correct_answer": "",
+                        "explanation": "",
+                        "blooms_level": "Understand" if index < 9 else "Apply",
+                        "difficulty_level": 2 if index < 9 else 3,
+                        "cultural_anchor": "Water cycle and village life",
+                    }
+                    for index, prompt in enumerate([
+                        "Apne shabdon mein batao, paani bhaap kaise banta hai?",
+                        "Badal banne mein thandi hawa ki kya bhoomika hai?",
+                        "Baarish ka paani gaon ke kuen ya talab tak kaise pahunchta hai?",
+                        "Mitti ka matka paani ko thanda kaise karta hai?",
+                        "Apne gaon mein paani bachane ke do tareeke likho.",
+                    ], start=6)
+                ],
             ]
         }, ensure_ascii=False)
 
     def _fallback_questions(self, concept: ConceptEntity, lang: str) -> List[QuizQuestionEntity]:
         return self._parse_questions(self._fallback_raw_json(concept, lang), concept)
+
+    @staticmethod
+    def _to_santali(text: str, translator) -> str:
+        if not text:
+            return text
+        has_ol_chiki = any("\u1c50" <= char <= "\u1c7f" for char in text)
+        has_other_letters = any(char.isalpha() and not ("\u1c50" <= char <= "\u1c7f") for char in text)
+        if has_ol_chiki and not has_other_letters:
+            return text
+        return translator(text, "auto")

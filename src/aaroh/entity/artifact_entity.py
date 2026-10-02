@@ -127,10 +127,10 @@ class LocalizedLessonEntity:
 
 @dataclass
 class QuizQuestionEntity:
-    """A single quiz question — MCQ, Fill-in-Blank, or True/False."""
+    """A worksheet question: multiple-choice or teacher-reviewed theory."""
     question_id: str
     concept_code: str
-    question_type: str          # "mcq" | "fill_blank" | "true_false"
+    question_type: str          # "mcq" | "theory"
     question_text: str          # In target language (e.g., Hindi)
     options: List[str]          # MCQ options (A, B, C, D); empty for fill_blank
     correct_answer: str         # "A" / "B" / exact text / "True" / "False"
@@ -452,7 +452,6 @@ class DistrictAnalyticsSummaryEntity:
     top_performing_concepts: List[str]
     critical_gap_concepts: List[str]
     school_rankings: List[Dict[str, Any]]
-
 
 
 

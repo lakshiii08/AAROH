@@ -42,7 +42,10 @@ class AssessmentEngine:
         submission_id = str(uuid.uuid4())
         scored_answers: List[StudentAnswerEntity] = []
 
+        # Written theory responses need teacher review and are not machine-scored.
         for q in quiz.questions:
+            if q.question_type != "mcq":
+                continue
             student_ans = raw_answers.get(q.question_id, "")
             is_correct = self._check_answer(q, student_ans)
             scored_answers.append(StudentAnswerEntity(
@@ -89,7 +92,7 @@ class AssessmentEngine:
         gaps: List[LearningGapEntity] = []
         if wrong_map:
             for blooms_level, wrong_qs in wrong_map.items():
-                total_in_level = sum(1 for q in quiz.questions if q.blooms_level == blooms_level)
+                total_in_level = sum(1 for q in quiz.questions if q.question_type == "mcq" and q.blooms_level == blooms_level)
                 wrong_count = len(wrong_qs)
                 correct_pct = ((total_in_level - wrong_count) / total_in_level) * 100
 

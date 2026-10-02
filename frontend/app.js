@@ -126,5 +126,67 @@
     try { const result = await request("/district/parent-advisory/send-voice-note", { method: "POST", body: JSON.stringify(Object.fromEntries(new FormData(form))) }); setNotice(`Advisory ${result.advisory_id} prepared (${result.dispatch_status}).`); }
     catch (error) { setNotice(error.message, true); } finally { button.disabled = false; }
   });
+  const worksheetForm = document.getElementById("worksheet-form");
+  worksheetForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const button = form.querySelector("button[type='submit']");
+    const status = document.getElementById("worksheet-status");
+    const output = document.getElementById("worksheet-output");
+    button.disabled = true;
+    status.textContent = "Preparing the worksheet…";
+    status.classList.remove("error");
+    output.hidden = true;
+    try {
+      const values = Object.fromEntries(new FormData(form));
+      const worksheet = await request("/assessment/quizzes/generate", {
+        method: "POST",
+        body: JSON.stringify({ ...values, grade_level: Number(values.grade_level) }),
+      });
+      const questions = document.getElementById("worksheet-questions");
+      questions.replaceChildren();
+      worksheet.questions.forEach((question, index) => {
+        const item = document.createElement("li");
+        item.className = "worksheet-question";
+        const prompt = document.createElement("p");
+        prompt.textContent = question.question_text;
+        item.append(prompt);
+        if (question.question_type === "mcq") {
+          const choices = document.createElement("div");
+          choices.className = "worksheet-choices";
+          (question.options || []).forEach((option, choiceIndex) => {
+            const label = document.createElement("label");
+            const radio = document.createElement("input");
+            radio.type = "radio";
+            radio.name = question.question_id;
+            radio.value = String.fromCharCode(65 + choiceIndex);
+            const choiceText = document.createElement("span");
+            choiceText.textContent = option;
+            label.append(radio, choiceText);
+            choices.append(label);
+          });
+          item.append(choices);
+        } else {
+          const answer = document.createElement("textarea");
+          answer.className = "theory-answer";
+          answer.rows = 3;
+          answer.setAttribute("aria-label", `Answer for question ${index + 1}`);
+          item.append(answer);
+        }
+        questions.append(item);
+      });
+      const languageName = form.elements.target_language.selectedOptions[0].textContent;
+      document.getElementById("worksheet-title").textContent = `${worksheet.concept_name} · ${languageName}`;
+      output.setAttribute("lang", values.target_language === "sat" ? "sat-Olck" : values.target_language);
+      output.hidden = false;
+      status.textContent = "Worksheet ready. Theory answers are for the teacher to review.";
+    } catch (error) {
+      status.textContent = error.message;
+      status.classList.add("error");
+    } finally {
+      button.disabled = false;
+    }
+  });
+  document.getElementById("print-worksheet").addEventListener("click", () => window.print());
   initAuth().then(() => refresh()).catch((error) => setNotice(error.message, true));
 })();

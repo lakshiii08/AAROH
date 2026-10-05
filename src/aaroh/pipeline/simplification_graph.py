@@ -93,10 +93,10 @@ class SimplificationLocalizationGraph:
 
         cached = self.cache.get(concept.concept_code, state["target_language"], state.get("target_dialect"))
         if cached:
-            logger.info(f"[LangGraph] Cache HIT → '{concept.concept_code}'")
+            logger.info(f"[LangGraph] Cache HIT -> '{concept.concept_code}'")
             return {**state, "cache_hit": True, "cached_payload": cached}
 
-        logger.info(f"[LangGraph] Cache MISS → proceeding to RAG for '{concept.concept_code}'")
+        logger.info(f"[LangGraph] Cache MISS -> proceeding to RAG for '{concept.concept_code}'")
         return {**state, "cache_hit": False, "cached_payload": None}
 
     def _route_after_cache_check(self, state: LocalizationState) -> str:
@@ -117,7 +117,7 @@ class SimplificationLocalizationGraph:
 
     def _node_llm_simplification(self, state: LocalizationState) -> LocalizationState:
         concept = state["concept"]
-        logger.info(f"[LangGraph] LLM Simplification → '{concept.concept_code}' ({state['target_language']})")
+        logger.info(f"[LangGraph] LLM Simplification -> '{concept.concept_code}' ({state['target_language']})")
         lesson_dict = self.simplifier.simplify_and_localize(
             concept=concept,
             curriculum_context=state["curriculum_context"],

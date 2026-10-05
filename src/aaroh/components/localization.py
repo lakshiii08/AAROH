@@ -75,7 +75,7 @@ class LocalizationComponent:
             curriculum_context = f"{concept_entity.name}: {concept_entity.definition}"
 
         # 4. Generate via LLM + cultural anchors
-        logger.info(f"Generating localized lesson: '{concept_code}' → {target_language}/{target_dialect}")
+        logger.info(f"Generating localized lesson: '{concept_code}' -> {target_language}/{target_dialect}")
         lesson_dict = self.simplifier.simplify_and_localize(
             concept=concept_entity,
             curriculum_context=curriculum_context,

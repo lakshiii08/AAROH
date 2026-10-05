@@ -41,6 +41,7 @@ ingestion:
     - ".pdf"
     - ".txt"
     - ".md"
+    - ".pptx"
   max_file_size_mb: 50
   chunking:
     target_chunk_size: 800

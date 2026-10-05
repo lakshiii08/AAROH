@@ -79,7 +79,7 @@ class ConfigurationManager:
             use_sqlite_fallback=os.getenv(
                 "DB_USE_SQLITE_FALLBACK", str(db.get("use_sqlite_fallback", True))
             ).lower() == "true",
-            sqlite_db_path=Path(db.get("sqlite_db_path", "data/aaroh_local.db")),
+            sqlite_db_path=Path(os.getenv("SQLITE_DB_PATH") or db.get("sqlite_db_path", "data/aaroh_local.db")),
         )
 
     def get_bedrock_model_config(self) -> BedrockModelConfig:

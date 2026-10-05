@@ -2,7 +2,7 @@
 set -e
 
 AWS_REGION="${AWS_REGION:-ap-south-1}"
-AWS_ACCOUNT_ID="${AWS_ACCOUNT_ID:-123456789012}"
+AWS_ACCOUNT_ID="${AWS_ACCOUNT_ID:?AWS_ACCOUNT_ID is required}"
 IMAGE_NAME="aaroh-translation-service"
 TAG="${1:-latest}"
 ECR_URI="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${IMAGE_NAME}:${TAG}"

@@ -23,6 +23,7 @@ class TranslationComponent:
             DynamoDBConfig(table_name="aaroh_glossary", region_name=self.config.region_name)
         )
         self.sagemaker_runtime = self._init_sagemaker_client()
+        self._last_backend_used = self.config.backend
 
     def _init_sagemaker_client(self):
         try:
@@ -63,6 +64,7 @@ class TranslationComponent:
             )
 
         # 2. Model Inference (SageMaker Endpoint / IndicTrans2 / Fallback)
+        self._last_backend_used = self.config.backend
         translated_masked = self._run_model_inference(masked_text, source_lang, target_lang)
 
         # 3. Post-Processing & Demasking
@@ -78,7 +80,7 @@ class TranslationComponent:
             target_lang=target_lang,
             applied_glossary_terms=applied_glossary_terms,
             latency_ms=elapsed_ms,
-            backend_used=self.config.backend,
+            backend_used=self._last_backend_used,
         )
 
     def translate_batch(
@@ -171,6 +173,7 @@ class TranslationComponent:
         # Santali-specific translator so the result is validated as Ol Chiki.
         if (target_lang or "").lower() == "sat":
             from src.aaroh.components.santali_engine import translate_to_santali
+            self._last_backend_used = "santali_engine"
             return translate_to_santali(text, source_lang)
 
         # 1. SageMaker IndicTrans2 Endpoint (Production on EC2 GPU)
@@ -190,6 +193,7 @@ class TranslationComponent:
                 )
                 res_json = json.loads(response["Body"].read().decode())
                 if isinstance(res_json, list) and len(res_json) > 0:
+                    self._last_backend_used = f"sagemaker:{self.config.sagemaker_endpoint_name}"
                     return res_json[0].get("translation_text", text)
             except Exception as e:
                 logger.warning(f"SageMaker IndicTrans2 inference failed ({e}). Using intelligent fallback.")
@@ -210,6 +214,7 @@ class TranslationComponent:
         # 1. Handle Santali (sat) with real Ol Chiki script & Roman transliteration
         if tgt == "sat":
             from src.aaroh.components.santali_engine import translate_to_santali
+            self._last_backend_used = "santali_engine"
             return translate_to_santali(clean, src)
 
         # 2. Standard Indic Translation (Hindi, Bengali, Odia, English, etc.)
@@ -221,7 +226,9 @@ class TranslationComponent:
             with urllib.request.urlopen(req, timeout=5) as resp:
                 data = json.loads(resp.read().decode())
                 translated = "".join([part[0] for part in data[0] if part[0]])
+                self._last_backend_used = "translate.googleapis.com"
                 return translated
         except Exception as err:
             logger.warning(f"Live neural translation failed ({err}).")
+            self._last_backend_used = "identity_fallback"
             return clean

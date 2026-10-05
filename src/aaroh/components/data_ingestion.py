@@ -4,6 +4,9 @@ import boto3
 from botocore.exceptions import ClientError
 from pathlib import Path
 from typing import List, Dict, Any, Optional
+import re
+import zipfile
+import xml.etree.ElementTree as ET
 import pymupdf
 
 from src.aaroh.entity.config_entity import IngestionConfig
@@ -64,8 +67,56 @@ class DocumentIngestionComponent:
             logger.error(f"Failed to upload to S3: {e}")
             raise AarohException(e, sys)
 
+    def _parse_pptx_pages(self, path: Path) -> tuple[List[ParsedDocumentPage], List[str]]:
+        """Extracts visible text from PPTX slides without requiring desktop Office libraries."""
+        try:
+            with zipfile.ZipFile(path) as archive:
+                slide_paths = [
+                    name
+                    for name in archive.namelist()
+                    if re.fullmatch(r"ppt/slides/slide\d+\.xml", name)
+                ]
+                slide_paths.sort(key=lambda name: int(re.search(r"slide(\d+)\.xml$", name).group(1)))
+
+                pages: List[ParsedDocumentPage] = []
+                full_text_fragments: List[str] = []
+
+                for slide_number, slide_path in enumerate(slide_paths, start=1):
+                    try:
+                        root = ET.fromstring(archive.read(slide_path))
+                    except ET.ParseError as exc:
+                        logger.warning(f"Skipping malformed PPTX slide {slide_path}: {exc}")
+                        continue
+
+                    text_runs = [
+                        node.text.strip()
+                        for node in root.iter()
+                        if node.tag.endswith("}t") and node.text and node.text.strip()
+                    ]
+                    cleaned = clean_text("\n".join(text_runs))
+                    if not cleaned:
+                        continue
+
+                    words = cleaned.split()
+                    pages.append(
+                        ParsedDocumentPage(
+                            page_number=slide_number,
+                            text=cleaned,
+                            char_count=len(cleaned),
+                            word_count=len(words),
+                        )
+                    )
+                    full_text_fragments.append(cleaned)
+
+                if not pages:
+                    raise ValueError("No readable text found in PPTX slides.")
+
+                return pages, full_text_fragments
+        except zipfile.BadZipFile as exc:
+            raise ValueError("Invalid PPTX file.") from exc
+
     def parse_document(self, file_path: Path | str, s3_bucket: Optional[str] = None, s3_key: Optional[str] = None) -> ParsedDocument:
-        """Parses a document (PDF, TXT, MD) using PyMuPDF and creates structured pages."""
+        """Parses a document (PDF, TXT, MD, PPTX) into structured pages."""
         path = Path(file_path)
         if not path.exists():
             raise FileNotFoundError(f"File not found: {path}")
@@ -122,6 +173,9 @@ class DocumentIngestionComponent:
                 )
             )
             full_text_fragments.append(content)
+
+        elif file_extension == ".pptx":
+            pages, full_text_fragments = self._parse_pptx_pages(path)
 
         full_text = "\n\n".join(full_text_fragments)
 

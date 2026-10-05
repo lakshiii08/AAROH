@@ -83,7 +83,7 @@ class VoiceSTTComponent:
                 else f"Good try! The correct answer was '{expected_answer}'."
             )
 
-        logger.info(f"Oral Quiz [Q: {question_id}, Student: {student_id}] → Transcribed: '{transcribed_text}' | Correct: {is_correct}")
+        logger.info(f"Oral Quiz [Q: {question_id}, Student: {student_id}] -> Transcribed: '{transcribed_text}' | Correct: {is_correct}")
 
         return OralQuizResultEntity(
             question_id=question_id,

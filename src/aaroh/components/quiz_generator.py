@@ -302,6 +302,40 @@ Output ONLY the JSON object, no extra text."""
         return self._parse_questions(self._fallback_raw_json(concept, lang), concept)
 
     @staticmethod
+    def _translate_fallback_text(text: str, target_language: str) -> str:
+        """Return stable fallback quiz text when a live translation service is unavailable.
+
+        The structured fallback content is already authored in classroom-friendly
+        Hindi/Hinglish. Keeping it intact is better than failing quiz generation
+        or returning partially translated options.
+        """
+        if not text:
+            return text
+
+        target = (target_language or "hi").lower()
+        if target in {"hi", "en", "gon", "hne"}:
+            return text
+
+        try:
+            import json as _json
+            import urllib.parse
+            import urllib.request
+
+            target_code = "hi" if target in {"bhi", "kud", "sad"} else target
+            trans_url = (
+                "https://translate.googleapis.com/translate_a/single"
+                f"?client=gtx&sl=auto&tl={target_code}&dt=t&q={urllib.parse.quote(text)}"
+            )
+            req = urllib.request.Request(trans_url, headers={"User-Agent": "Mozilla/5.0"})
+            with urllib.request.urlopen(req, timeout=3) as resp:
+                data = _json.loads(resp.read().decode())
+                translated = "".join(part[0] for part in data[0] if part[0])
+                return translated or text
+        except Exception as err:
+            logger.warning(f"Fallback quiz translation unavailable ({err}). Keeping source text.")
+            return text
+
+    @staticmethod
     def _to_santali(text: str, translator) -> str:
         if not text:
             return text

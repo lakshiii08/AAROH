@@ -3,6 +3,7 @@ import json
 import re
 import boto3
 import hashlib
+from collections import Counter
 from typing import List, Dict, Any, Optional
 from src.aaroh.entity.config_entity import BedrockModelConfig
 from src.aaroh.entity.artifact_entity import (
@@ -53,7 +54,7 @@ class ContentTransformationComponent:
             document_text=text_snippet,
         )
 
-        raw_llm_output = self._call_llm(sys_prompt, user_prompt)
+        raw_llm_output = self._call_llm(sys_prompt, user_prompt, parsed_doc, grade_hint, subject_hint)
         parsed_json = self._parse_json_response(raw_llm_output, parsed_doc)
 
         # Parse Metadata
@@ -92,7 +93,14 @@ class ContentTransformationComponent:
             chunks=[],
         )
 
-    def _call_llm(self, system_prompt: str, user_prompt: str) -> str:
+    def _call_llm(
+        self,
+        system_prompt: str,
+        user_prompt: str,
+        parsed_doc: ParsedDocument,
+        grade_hint: str,
+        subject_hint: str,
+    ) -> str:
         """Invokes Claude on Bedrock with Converse API, falling back to mock parser if needed."""
         if self.bedrock_runtime and not self.config.enable_mock_llm:
             try:
@@ -116,7 +124,7 @@ class ContentTransformationComponent:
             except Exception as e:
                 logger.warning(f"Bedrock invocation failed ({e}). Using intelligent fallback extractor.")
 
-        return self._heuristic_concept_extractor(user_prompt)
+        return self._heuristic_concept_extractor(parsed_doc, grade_hint, subject_hint)
 
     def _parse_json_response(self, text: str, parsed_doc: ParsedDocument) -> Dict[str, Any]:
         """Cleans and extracts JSON payload from LLM output."""
@@ -130,55 +138,191 @@ class ContentTransformationComponent:
             logger.warning("Failed to parse LLM JSON output. Generating fallback curriculum structure.")
             return self._heuristic_fallback_json(parsed_doc)
 
-    def _heuristic_concept_extractor(self, text: str) -> str:
-        """High-fidelity heuristic extractor for rural/tribal curriculum when Bedrock is offline."""
-        data = {
-            "metadata": {
-                "title": "Water and Living Things in Rural Ecosystems",
-                "subject": "Environmental Studies (EVS)",
-                "grade_level": 3,
-                "language": "en",
-                "summary": "This lesson explores the essential role of water in daily village life, agriculture, and natural forest habitats.",
-                "target_competencies": [
-                    "Identify natural and community sources of water",
-                    "Understand water conservation in village households",
-                    "Recognize dependence of plants and animals on seasonal rain"
-                ]
-            },
-            "concepts": [
+    def _heuristic_concept_extractor(
+        self,
+        parsed_doc: ParsedDocument,
+        grade_hint: str,
+        subject_hint: str,
+    ) -> str:
+        """Document-aware extractor used when Bedrock is offline or mock mode is enabled."""
+        text = parsed_doc.full_text or parsed_doc.filename
+        grade_level = self._infer_grade_level(grade_hint)
+        title = self._infer_title(parsed_doc)
+        sections = self._select_concept_sections(text)
+        keywords = self._extract_keywords(text, limit=12)
+        summary = self._build_summary(text, parsed_doc.filename)
+        subject_prefix = self._subject_prefix(subject_hint)
+
+        concepts = []
+        used_codes = set()
+        for index, section in enumerate(sections[:3], start=1):
+            section_keywords = self._extract_keywords(section, limit=5) or keywords[:5]
+            concept_name = self._concept_name_from_section(section, section_keywords, index)
+            definition = self._definition_from_section(section, concept_name)
+            code_key = section_keywords[0] if section_keywords else concept_name
+            concept_code = self._make_concept_code(subject_prefix, grade_level, code_key, index, used_codes)
+            used_codes.add(concept_code)
+            concepts.append(
                 {
-                    "concept_code": "EVS-G3-WAT-01",
-                    "name": "Sources of Water",
-                    "definition": "Places where we get water for drinking, cooking, and crops, such as rivers, wells, ponds, and rain.",
-                    "blooms_level": "Remember",
-                    "difficulty_level": 1,
-                    "prerequisite_concepts": ["Daily uses of water"],
-                    "rural_tribal_anchors": ["Village well (kuan)", "Handpump (chapakal)", "Forest stream (jharna)", "Monsoon rain"],
-                    "key_vocabulary": ["source", "groundwater", "reservoir", "stream"]
-                },
+                    "concept_code": concept_code,
+                    "name": concept_name,
+                    "definition": definition,
+                    "blooms_level": ["Remember", "Understand", "Apply"][min(index - 1, 2)],
+                    "difficulty_level": min(index, 3),
+                    "prerequisite_concepts": [] if index == 1 else [concepts[index - 2]["name"]],
+                    "rural_tribal_anchors": self._local_anchors(section, subject_hint),
+                    "key_vocabulary": section_keywords,
+                }
+            )
+
+        if not concepts:
+            concepts.append(
                 {
-                    "concept_code": "EVS-G3-WAT-02",
-                    "name": "Water Cycle & Rainfall",
-                    "definition": "How water rises from ponds and rivers into clouds and falls back to earth as rain.",
+                    "concept_code": self._make_concept_code(subject_prefix, grade_level, title, 1, used_codes),
+                    "name": title,
+                    "definition": summary,
                     "blooms_level": "Understand",
                     "difficulty_level": 2,
-                    "prerequisite_concepts": ["Sources of Water", "Heat and Sunshine"],
-                    "rural_tribal_anchors": ["Drying clothes in sun", "Steam from boiling pot", "Monsoon clouds over the hills"],
-                    "key_vocabulary": ["evaporation", "clouds", "rain", "condensation"]
-                },
-                {
-                    "concept_code": "EVS-G3-WAT-03",
-                    "name": "Water Conservation and Traditional Storage",
-                    "definition": "Methods to protect, save, and cleanly store drinking water in earthen pots and village check-dams.",
-                    "blooms_level": "Apply",
-                    "difficulty_level": 3,
-                    "prerequisite_concepts": ["Clean vs Dirty Water"],
-                    "rural_tribal_anchors": ["Clay pitcher (matka)", "Village check-dam (bandhara)", "Clean ladle with handle"],
-                    "key_vocabulary": ["conservation", "storage", "harvesting", "cleanliness"]
+                    "prerequisite_concepts": [],
+                    "rural_tribal_anchors": self._local_anchors(text, subject_hint),
+                    "key_vocabulary": keywords[:5],
                 }
-            ]
+            )
+
+        data = {
+            "metadata": {
+                "title": title,
+                "subject": subject_hint,
+                "grade_level": grade_level,
+                "language": "en",
+                "summary": summary,
+                "target_competencies": [
+                    f"Explain the main idea of {title}",
+                    "Use lesson vocabulary in short written answers",
+                    "Connect the uploaded lesson to local examples",
+                ],
+            },
+            "concepts": concepts,
         }
         return json.dumps(data, indent=2)
+
+    @staticmethod
+    def _infer_grade_level(grade_hint: str) -> int:
+        match = re.search(r"\d+", grade_hint or "")
+        if not match:
+            return 3
+        return max(1, min(int(match.group(0)), 12))
+
+    @staticmethod
+    def _infer_title(parsed_doc: ParsedDocument) -> str:
+        lines = [line.strip() for line in (parsed_doc.full_text or "").splitlines() if line.strip()]
+        for line in lines[:8]:
+            words = line.split()
+            if 2 <= len(words) <= 12:
+                return line[:120]
+        return re.sub(r"[_-]+", " ", parsed_doc.filename.rsplit(".", 1)[0]).strip().title() or parsed_doc.filename
+
+    @staticmethod
+    def _build_summary(text: str, filename: str) -> str:
+        sentences = re.split(r"(?<=[.!?])\s+", text.strip())
+        useful = [s.strip() for s in sentences if len(s.strip()) > 30]
+        if useful:
+            return " ".join(useful[:2])[:420]
+        compact = re.sub(r"\s+", " ", text).strip()
+        return compact[:420] or f"Ingested lesson from {filename}"
+
+    @staticmethod
+    def _select_concept_sections(text: str) -> List[str]:
+        blocks = [b.strip() for b in re.split(r"\n{2,}|(?<=[.!?])\s+", text) if len(b.strip()) >= 45]
+        if not blocks:
+            compact = re.sub(r"\s+", " ", text).strip()
+            return [compact] if compact else []
+
+        sections: List[str] = []
+        current = ""
+        for block in blocks:
+            if len(current) + len(block) <= 700:
+                current = f"{current} {block}".strip()
+            else:
+                sections.append(current)
+                current = block
+            if len(sections) >= 3:
+                break
+        if current and len(sections) < 3:
+            sections.append(current)
+        return sections
+
+    @staticmethod
+    def _extract_keywords(text: str, limit: int = 8) -> List[str]:
+        stopwords = {
+            "about", "after", "again", "also", "because", "before", "being", "between",
+            "could", "every", "from", "have", "into", "lesson", "should", "their",
+            "there", "these", "this", "through", "under", "using", "where", "which",
+            "with", "would", "your", "students", "teacher", "class", "slide",
+        }
+        words = [
+            w.lower()
+            for w in re.findall(r"[A-Za-z][A-Za-z-]{3,}", text)
+            if w.lower() not in stopwords
+        ]
+        counts = Counter(words)
+        return [word for word, _ in counts.most_common(limit)]
+
+    @staticmethod
+    def _subject_prefix(subject_hint: str) -> str:
+        normalized = (subject_hint or "").lower()
+        if "math" in normalized:
+            return "MATH"
+        if "science" in normalized:
+            return "SCI"
+        if "environment" in normalized or "evs" in normalized:
+            return "EVS"
+        if "social" in normalized:
+            return "SOC"
+        if "language" in normalized or "english" in normalized:
+            return "LANG"
+        return "GEN"
+
+    @staticmethod
+    def _concept_name_from_section(section: str, keywords: List[str], index: int) -> str:
+        heading = section.split(".")[0].strip()
+        heading_words = heading.split()
+        if 2 <= len(heading_words) <= 8:
+            return heading[:80].title()
+        if keywords:
+            return " ".join(keywords[:3]).title()
+        return f"Lesson Concept {index}"
+
+    @staticmethod
+    def _definition_from_section(section: str, concept_name: str) -> str:
+        first_sentence = re.split(r"(?<=[.!?])\s+", section.strip())[0]
+        first_sentence = re.sub(r"\s+", " ", first_sentence).strip()
+        if len(first_sentence) >= 30:
+            return first_sentence[:360]
+        return f"{concept_name} is a key idea explained in the uploaded lesson."
+
+    @staticmethod
+    def _make_concept_code(prefix: str, grade_level: int, source: str, index: int, used_codes: set[str]) -> str:
+        slug = re.sub(r"[^A-Za-z0-9]+", "", source.upper())[:3] or "KEY"
+        code = f"{prefix}-G{grade_level}-{slug}-{index:02d}"
+        while code in used_codes:
+            index += 1
+            code = f"{prefix}-G{grade_level}-{slug}-{index:02d}"
+        return code
+
+    @staticmethod
+    def _local_anchors(section: str, subject_hint: str) -> List[str]:
+        text = f"{section} {subject_hint}".lower()
+        anchors = []
+        if any(word in text for word in ["seed", "plant", "soil", "crop", "water", "rain"]):
+            anchors.extend(["School garden observation", "Local farm or kitchen garden"])
+        if any(word in text for word in ["fraction", "number", "divide", "measure", "shape"]):
+            anchors.extend(["Sharing grains or fruit equally", "Measuring classroom materials"])
+        if any(word in text for word in ["story", "poem", "grammar", "sentence", "language"]):
+            anchors.extend(["Village story circle", "Home-language sentence practice"])
+        if not anchors:
+            anchors.extend(["Village community example", "Local classroom observation"])
+        return anchors[:3]
 
     def _heuristic_fallback_json(self, parsed_doc: ParsedDocument) -> Dict[str, Any]:
         return {

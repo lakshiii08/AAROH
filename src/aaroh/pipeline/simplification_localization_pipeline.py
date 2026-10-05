@@ -52,7 +52,7 @@ class SimplificationLocalizationPipeline:
         """Runs the Phase 3 pipeline for a single concept."""
         try:
             logger.info("=" * 60)
-            logger.info(f"Phase 3 Pipeline: '{concept_code}' → {target_language} / {target_dialect or 'Standard'}")
+            logger.info(f"Phase 3 Pipeline: '{concept_code}' -> {target_language} / {target_dialect or 'Standard'}")
             logger.info("=" * 60)
 
             result = self.localization_component.generate_localized_lesson(

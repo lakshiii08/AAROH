@@ -1,0 +1,888 @@
+{
+  "subjects": [
+    {
+      "id": "sub-2",
+      "name": "Science",
+      "icon": "flask",
+      "description": "Plants, Animals & Natural Phenomena",
+      "createdAt": "2026-09-01T10:00:00Z"
+    },
+    {
+      "id": "sub-3",
+      "name": "Social Science",
+      "icon": "globe",
+      "description": "History, Village & Community",
+      "createdAt": "2026-09-01T10:00:00Z"
+    },
+    {
+      "id": "sub-4",
+      "name": "Language & Literature",
+      "icon": "book",
+      "description": "Santali & Hindi Grammar & Reading",
+      "createdAt": "2026-09-01T10:00:00Z"
+    }
+  ],
+  "worksheets": [
+    {
+      "title": "Plants Around Us Sample Document",
+      "subjectId": "sub-2",
+      "subjectName": "Science",
+      "originalLanguage": "English",
+      "fileName": "Plants_Around_Us_Sample_Document.pdf",
+      "deadline": "2026-10-20T11:30:00.000Z",
+      "status": "active",
+      "items": [
+        {
+          "id": "w-item-1790702721538-0",
+          "original": "पाठ 'Plants Around Us Sample Document' का मुख्य उद्देश्य और संक्षेप समझाइए। (Explain the main concept and summary of 'Plants Around Us Sample Document'.)",
+          "translated": "1. पाठ 'Plants Around Us Sample Document' का मुख्य उद्देश्य और संक्षेप समझाइए। (Explain the main concept and summary of 'Plants Around Us Sample Document'.) (Santhali: Niya paṛhao reyaɡ muṇut katha bujhao me)",
+          "translatedOlChiki": "᱐1. पाठ 'Plants Around Us Sample Document' का मुख्य उद्देश्य और संक्षेप समझाइए। (Explain the main concept and summary of 'Plants Around Us Sample Document'.) (ᱥᱟᱱᱛᱟᱲᱤ: ᱱᱤᱭᱟᱹ ᱯᱟᱲᱦᱟᱣ ᱨᱮᱭᱟᱜ ᱢᱩᱬᱩᱛ ᱠᱟᱛᱷᱟ ᱵᱩᱡᱷᱟᱹᱣ ᱢᱮ ᱾)",
+          "concept": "Plants Around Us Sample Document — Question 1",
+          "localExample": "Local example: Context from tribal village environment & culture."
+        },
+        {
+          "id": "w-item-1790702721538-1",
+          "original": "अपने दैनिक जीवन या गाँव के परिवेश से जुड़ा कोई व्यावहारिक उदाहरण लिखिए। (Write a practical example from your village or daily life.)",
+          "translated": "2. अपने दैनिक जीवन या गाँव के परिवेश से जुड़ा कोई व्यावहारिक उदाहरण लिखिए। (Write a practical example from your village or daily life.) (Santhali: Niya paṛhao reyaɡ muṇut katha bujhao me)",
+          "translatedOlChiki": "᱐2. अपने दैनिक जीवन या गाँव के परिवेश से जुड़ा कोई व्यावहारिक उदाहरण लिखिए। (Write a practical example from your village or daily life.) (ᱥᱟᱱᱛᱟᱲᱤ: ᱱᱤᱭᱟᱹ ᱯᱟᱲᱦᱟᱣ ᱨᱮᱭᱟᱜ ᱢᱩᱬᱩᱛ ᱠᱟᱛᱷᱟ ᱵᱩᱡᱷᱟᱹᱣ ᱢᱮ ᱾)",
+          "concept": "Plants Around Us Sample Document — Question 2",
+          "localExample": "Local example: Context from tribal village environment & culture."
+        }
+      ],
+      "id": "ws-1790702721541",
+      "createdAt": "2026-09-29T17:25:21.541Z"
+    },
+    {
+      "id": "ws-101",
+      "title": "Fractions & Basic Division",
+      "subjectId": "sub-1",
+      "subjectName": "Mathematics",
+      "originalLanguage": "Hindi",
+      "fileName": "Fractions_Worksheet.pdf",
+      "deadline": "2026-10-15T18:00:00Z",
+      "status": "active",
+      "createdAt": "2026-09-20T09:00:00Z",
+      "items": [
+        {
+          "id": "w1",
+          "original": "यदि आपके पास 8 आम हैं और आप उन्हें 4 दोस्तों में बराबर बांटते हैं, तो प्रत्येक को कितने मिलेंगे?",
+          "translated": "ᱡᱩᱫᱤ ᱟᱢ ᱴᱷᱮᱱ ᱘ ᱴᱤ ᱩᱞ ᱢᱮᱱᱟᱜ-ᱟ ᱟᱨ ᱟᱢ ᱔ ᱡᱚᱱ ᱜᱟᱛᱮ ᱨᱮ ᱥᱚᱢᱟᱱ ᱮᱢ ᱦᱟᱹᱴᱤᱧᱟ, ᱛᱚᱵᱮ ᱡᱚᱛᱚ ᱦᱚᱲ ᱛᱤᱱᱟᱹᱜ ᱠᱚ ᱧᱟᱢᱟ?",
+          "translatedOlChiki": "ᱡᱩᱫᱤ ᱟᱢ ᱴᱷᱮᱱ ᱘ ᱴᱤ ᱩᱞ ᱢᱮᱱᱟᱜ-ᱟ ᱟᱨ ᱟᱢ ᱔ ᱡᱚᱱ ᱜᱟᱛᱮ ᱨᱮ ᱥᱚᱢᱟᱱ ᱮᱢ ᱦᱟᱹᱴᱤᱧᱟ?",
+          "concept": "Equal Sharing",
+          "localExample": "Local example: Distributing mangoes in your village orchard equally."
+        },
+        {
+          "id": "w2",
+          "original": "1/2 और 1/4 में से कौन सा भिन्न बड़ा है?",
+          "translated": "᱑/᱒ ᱟᱨ ᱑/᱔ ᱢᱩᱫᱽ ᱨᱮ ᱚᱠᱟ ᱦᱟᱹᱴᱤᱧ ᱞᱮᱠᱷᱟ ᱢᱟᱨᱟᱝᱟ?",
+          "translatedOlChiki": "᱑/᱒ ᱟᱨ ᱑/᱔ ᱢᱩᱫᱽ ᱨᱮ ᱚᱠᱟ ᱦᱟᱹᱴᱤᱧ ᱞᱮᱠᱷᱟ ᱢᱟᱨᱟᱝᱟ?",
+          "concept": "Fractions Comparison",
+          "localExample": "Local example: Half a roti vs one-quarter of a roti."
+        }
+      ]
+    },
+    {
+      "id": "ws-102",
+      "title": "Plants Around Us (Chapter 4)",
+      "subjectId": "sub-2",
+      "subjectName": "Science",
+      "originalLanguage": "Hindi",
+      "fileName": "Plants_Around_Us.pdf",
+      "deadline": "2026-10-05T17:00:00Z",
+      "status": "active",
+      "createdAt": "2026-09-22T14:30:00Z",
+      "items": [
+        {
+          "id": "w101",
+          "original": "पौधे अपना भोजन कैसे बनाते हैं? कारण सहित उत्तर दीजिए।",
+          "translated": "গাছ রেয়াগ যোম ওকা লেকান বেনাও কাটু? कारण सह उत्तर मे।",
+          "translatedOlChiki": "ᱜᱟᱪ ᱨᱮᱭᱟᱜ ᱡᱚᱢ ᱚᱠᱟ ᱞᱮᱠᱟᱱ ᱵᱮᱱᱟᱣ ᱠᱟᱱᱟ?",
+          "concept": "Photosynthesis",
+          "localExample": "Local example: Sal trees turning lush green after monsoon rains."
+        },
+        {
+          "id": "w102",
+          "original": "एक बीज को पौधा बनने के लिए किन-किन चीज़ों की आवश्यकता होती है?",
+          "translated": "মিত্ জাङ् দেᱟ গাছ বাᱲᱟᱭ আᱲᱤ লাগিত্ চেᱴ্ চᱮᱴ্ বা'ᱱᱩᱠ লাগিত্ چاہিয়'?",
+          "translatedOlChiki": "ᱢᱤᱫ ᱡᱟᱶ ᱫᱚ ᱫᱟᱨᱮ ᱵᱟᱲᱟᱭ ᱞᱟᱹᱜᱤᱫ ᱪᱮᱫ ᱪᱮᱫ ᱵᱟᱹᱱᱩᱠ ᱪᱟᱦᱤ",
+          "concept": "Seed Germination",
+          "localExample": "Local example: Paddy seeds sown before rain."
+        }
+      ]
+    }
+  ],
+  "submissions": [
+    {
+      "id": "subm-1790703725020",
+      "worksheetId": "ws-1790702721541",
+      "worksheetTitle": "Plants Around Us Sample Document",
+      "subjectName": "Science",
+      "studentId": "s1",
+      "studentName": "Sona Murmu",
+      "submittedAt": "2026-09-29T17:42:05.020Z",
+      "fileName": "Plants_Around_Us_Sample_Document (1).pdf",
+      "status": "Graded",
+      "marks": "18/20",
+      "grade": "A",
+      "feedback": "Good understanding of the core concept. Handwriting in Ol Chiki is neat and legible.",
+      "scorePercentage": 90,
+      "checkedAt": "2026-09-29T17:44:59.195Z",
+      "checkedFileName": "Sona_Murmu_Checked.pdf",
+      "aiConvertedFileName": "Converted_En_Hi_subm-1790703725020.pdf",
+      "aiConvertedText": "Student submitted answers in Santali. Reverse translated to Hindi and English."
+    },
+    {
+      "id": "subm-1",
+      "worksheetId": "ws-101",
+      "worksheetTitle": "Fractions & Basic Division",
+      "subjectId": "sub-1",
+      "subjectName": "Mathematics",
+      "studentId": "s1",
+      "studentName": "Sona Murmu",
+      "submittedAt": "2026-09-24T11:20:00Z",
+      "fileName": "Sona_Math_Fractions_Completed.pdf",
+      "status": "Graded",
+      "grade": "A",
+      "marks": "18/20",
+      "scorePercentage": 90,
+      "feedback": "Very neat work on fractions! Ol Chiki handwriting is clear. Keep practicing unit comparisons.",
+      "checkedAt": "2026-09-25T14:15:00Z",
+      "checkedFileName": "Sona_Math_Fractions_Checked.pdf",
+      "aiConvertedFileName": "Sona_Math_Fractions_Converted_En_Hi.pdf",
+      "aiConvertedText": "Student Answer 1: 2 mangoes each (ᱡᱚᱛᱚ ᱦᱚᱲ ᱵᱟᱨᱭᱟ ᱠᱟᱛᱮ ᱩᱞ ᱠᱚ ᱧᱟᱢᱟ - प्रत्येक को 2 आम मिलेंगे)\nStudent Answer 2: 1/2 is greater than 1/4 (᱑/᱒ ᱫᱚ ᱑/᱔ ᱠᱷᱚᱱ ᱢᱟᱨᱟᱝᱟ - 1/2, 1/4 से बड़ा है)",
+      "answers": [
+        {
+          "questionId": "w1",
+          "question": "यदि आपके पास 8 आम हैं और आप उन्हें 4 दोस्तों में बराबर बांटते हैं, तो प्रत्येक को कितने मिलेंगे?",
+          "studentAnswerSantali": "ᱡᱚᱛᱚ ᱦᱚᱲ ᱵᱟᱨᱭᱟ (2) ᱠᱟᱛᱮ ᱩᱞ ᱠᱚ ᱧᱟᱢᱟ",
+          "aiConvertedHindi": "प्रत्येक दोस्त को 2 आम मिलेंगे (8 ÷ 4 = 2)",
+          "aiConvertedEnglish": "Each friend gets 2 mangoes (8 divided by 4 = 2)",
+          "marksAwarded": "10/10"
+        },
+        {
+          "questionId": "w2",
+          "question": "1/2 और 1/4 में से कौन सा भिन्न बड़ा है?",
+          "studentAnswerSantali": "᱑/᱒ ᱫᱚ ᱑/᱔ ᱠᱷᱚᱱ ᱢᱟᱨᱟᱝ ᱦᱟᱹᱴᱤᱧ ᱠᱟᱱᱟ",
+          "aiConvertedHindi": "1/2, 1/4 से बड़ा भिन्न है",
+          "aiConvertedEnglish": "1/2 is a larger fraction than 1/4",
+          "marksAwarded": "8/10"
+        }
+      ]
+    },
+    {
+      "id": "subm-2",
+      "worksheetId": "ws-102",
+      "worksheetTitle": "Plants Around Us (Chapter 4)",
+      "subjectId": "sub-2",
+      "subjectName": "Science",
+      "studentId": "s1",
+      "studentName": "Sona Murmu",
+      "submittedAt": "2026-09-28T09:40:00Z",
+      "fileName": "Sona_Science_Plants_Submitted.pdf",
+      "status": "Graded",
+      "marks": "20/20",
+      "feedback": "Good understanding of the core concept. Handwriting in Ol Chiki is neat and legible.",
+      "answers": [
+        {
+          "questionId": "w101",
+          "question": "पौधे अपना भोजन कैसे बनाते हैं? कारण सहित उत्तर दीजिए।",
+          "studentAnswerSantali": "ᱫᱟᱨᱮ ᱠᱚᱫᱚ ᱥᱤᱛᱩᱝ ᱵᱮᱲᱟ ᱟᱨ ᱫᱟᱜ ᱦᱟᱥᱟ ᱠᱷᱚᱱ ᱡᱚᱢᱟᱜ ᱠᱚ ᱛᱮᱭᱟᱨᱟ (ᱯᱷᱚᱴᱚᱥᱤᱱᱛᱷᱮᱥᱤᱥ)",
+          "aiConvertedHindi": "पौधे धूप, पानी और मिट्टी से भोजन बनाते हैं (प्रकाश संश्लेषण द्वारा)",
+          "aiConvertedEnglish": "Plants prepare food using sunlight, water, and soil nutrients (photosynthesis)"
+        },
+        {
+          "questionId": "w102",
+          "question": "एक बीज को पौधा बनने के लिए किन-किन चीज़ों की आवश्यकता होती है?",
+          "studentAnswerSantali": "ᱢᱤᱫᱴᱟᱹᱝ ᱡᱟᱝ ᱫᱟᱨᱮ ᱵᱮᱱᱟᱣ ᱞᱟᱹᱜᱤᱫ ᱦᱟᱥᱟ, ᱫᱟᱜ ᱟᱨ ᱥᱤᱛᱩᱝ ᱞᱟᱹᱠᱛᱤᱜ-ᱟ",
+          "aiConvertedHindi": "बीज को अंकुरित होने के लिए मिट्टी, पानी और धूप की आवश्यकता होती है",
+          "aiConvertedEnglish": "A seed needs soil, moisture/water, and sunlight to germinate into a plant"
+        }
+      ],
+      "grade": "A",
+      "scorePercentage": 90,
+      "checkedAt": "2026-09-29T17:47:05.137Z",
+      "checkedFileName": "Sona_Murmu_Checked.pdf",
+      "aiConvertedFileName": "Converted_En_Hi_subm-2.pdf",
+      "aiConvertedText": "Student submitted answers in Santali. Reverse translated to Hindi and English."
+    },
+    {
+      "id": "subm-3",
+      "worksheetId": "ws-101",
+      "worksheetTitle": "Fractions & Basic Division",
+      "subjectId": "sub-1",
+      "subjectName": "Mathematics",
+      "studentId": "s2",
+      "studentName": "Bijay Hembrom",
+      "submittedAt": "2026-09-24T16:00:00Z",
+      "fileName": "Bijay_Fractions_Worksheet.pdf",
+      "status": "Graded",
+      "grade": "A+",
+      "marks": "20/20",
+      "scorePercentage": 100,
+      "feedback": "Exceptional mastery of fractional reasoning and clear step-by-step Ol Chiki solution.",
+      "checkedAt": "2026-09-25T15:00:00Z",
+      "checkedFileName": "Bijay_Fractions_Checked.pdf",
+      "aiConvertedFileName": "Bijay_Fractions_Converted.pdf",
+      "aiConvertedText": "Student answered both questions with complete accuracy and reasoning."
+    }
+  ],
+  "notifications": [
+    {
+      "id": "notif-1790704025137",
+      "studentId": "s1",
+      "title": "Worksheet Evaluated",
+      "message": "Plants Around Us (Chapter 4) has been evaluated: 20/20",
+      "subjectName": "Science",
+      "worksheetId": "ws-102",
+      "deadline": "",
+      "read": false,
+      "createdAt": "2026-09-29T17:47:05.137Z"
+    },
+    {
+      "id": "notif-1790703899195",
+      "studentId": "s1",
+      "title": "Worksheet Evaluated",
+      "message": "Plants Around Us Sample Document has been evaluated: 18/20",
+      "subjectName": "Science",
+      "worksheetId": "ws-1790702721541",
+      "deadline": "",
+      "read": false,
+      "createdAt": "2026-09-29T17:44:59.195Z"
+    },
+    {
+      "id": "notif-1790702721541",
+      "studentId": "s1",
+      "title": "New worksheet published",
+      "message": "Science — Plants Around Us Sample Document",
+      "subjectName": "Science",
+      "worksheetId": "ws-1790702721541",
+      "deadline": "2026-10-20T11:30:00.000Z",
+      "read": false,
+      "createdAt": "2026-09-29T17:25:21.541Z"
+    },
+    {
+      "id": "notif-1790702122486",
+      "studentId": "s1",
+      "title": "New worksheet published",
+      "message": "Science — Plants Around Us Sample Document",
+      "subjectName": "Science",
+      "worksheetId": "ws-1790702122486",
+      "deadline": "2026-10-20T11:30:00.000Z",
+      "read": false,
+      "createdAt": "2026-09-29T17:15:22.486Z"
+    },
+    {
+      "id": "notif-1",
+      "studentId": "s1",
+      "title": "New worksheet published",
+      "message": "Science — Plants Around Us (Chapter 4)",
+      "subjectName": "Science",
+      "worksheetId": "ws-102",
+      "deadline": "2026-10-05T17:00:00Z",
+      "read": false,
+      "createdAt": "2026-09-22T14:30:00Z"
+    }
+  ],
+  "userProfile": {
+    "id": "s1",
+    "name": "Sona Murmu",
+    "role": "student",
+    "rollNo": "24",
+    "grade": "Grade 4",
+    "school": "Rajkiya Prathmik Vidyalaya, Dumka",
+    "pin": "1234",
+    "language": "en",
+    "badges": 6,
+    "accuracy": 82,
+    "weakConcepts": [
+      "Photosynthesis",
+      "Addition carry-over"
+    ],
+    "seenCardIds": [
+      "fc-1",
+      "fc-2",
+      "fc-3",
+      "fc-4",
+      "fc-5",
+      "fc-6",
+      "fc-7",
+      "fc-10",
+      "fc-vocab-11",
+      "fc-vocab-19",
+      "fc-8",
+      "fc-9",
+      "fc-vocab-2275374",
+      "fc-word-14",
+      "fc-word-2",
+      "fc-word-97"
+    ]
+  },
+  "students": [
+    {
+      "id": "s1",
+      "name": "Sona Murmu",
+      "rollNo": "24",
+      "grade": "Grade 4",
+      "school": "Rajkiya Prathmik Vidyalaya, Dumka",
+      "pin": "1234",
+      "language": "en",
+      "accuracy": 82,
+      "badges": 6,
+      "weakConcepts": [
+        "Photosynthesis",
+        "Addition carry-over"
+      ],
+      "cardsReviewed": 142,
+      "masteryPercentage": 78,
+      "createdAt": "2026-09-01T08:00:00Z"
+    },
+    {
+      "id": "s2",
+      "name": "Bijay Hembrom",
+      "rollNo": "12",
+      "grade": "Grade 4",
+      "school": "Rajkiya Prathmik Vidyalaya, Dumka",
+      "pin": "4821",
+      "language": "sat",
+      "accuracy": 91,
+      "badges": 9,
+      "weakConcepts": [
+        "Fractions Comparison"
+      ],
+      "cardsReviewed": 198,
+      "masteryPercentage": 88,
+      "createdAt": "2026-09-01T08:00:00Z"
+    },
+    {
+      "id": "s3",
+      "name": "Rupa Tudu",
+      "rollNo": "08",
+      "grade": "Grade 4",
+      "school": "Rajkiya Prathmik Vidyalaya, Dumka",
+      "pin": "7319",
+      "language": "hi",
+      "accuracy": 74,
+      "badges": 4,
+      "weakConcepts": [
+        "Plant Parts",
+        "Seed Germination"
+      ],
+      "cardsReviewed": 110,
+      "masteryPercentage": 69,
+      "createdAt": "2026-09-01T08:00:00Z"
+    },
+    {
+      "id": "s4",
+      "name": "Chandan Hansda",
+      "rollNo": "17",
+      "grade": "Grade 4",
+      "school": "Rajkiya Prathmik Vidyalaya, Dumka",
+      "pin": "5602",
+      "language": "en",
+      "accuracy": 86,
+      "badges": 7,
+      "weakConcepts": [
+        "Division remainder"
+      ],
+      "cardsReviewed": 165,
+      "masteryPercentage": 82,
+      "createdAt": "2026-09-01T08:00:00Z"
+    },
+    {
+      "id": "s-1790686652999",
+      "name": "hw",
+      "school": "Rajkiya Prathmik Vidyalaya, Dumka",
+      "grade": "Grade 4",
+      "rollNo": "23",
+      "pin": "4078",
+      "language": "en",
+      "accuracy": 0,
+      "badges": 0,
+      "weakConcepts": [],
+      "cardsReviewed": 0,
+      "masteryPercentage": 0,
+      "createdAt": "2026-09-29T12:57:32.999Z"
+    }
+  ],
+  "teacherProfile": {
+    "id": "t1",
+    "name": "Guruji Hemant Soren",
+    "email": "hemant.soren@aaroh-edu.in",
+    "role": "teacher",
+    "employeeId": "EDU-JH-2024-089",
+    "assignedGrade": "Grade 4 (Sections A & B)",
+    "schoolName": "Rajkiya Prathmik Vidyalaya, Dumka",
+    "subjectSpecialization": "Science & Santali Language",
+    "language": "en",
+    "autoAiTranslation": true,
+    "lateSubmissionsAllowed": true,
+    "notifyOnSubmission": true
+  },
+  "materials": [
+    {
+      "title": "Sciene",
+      "subjectId": "sub-2",
+      "subjectName": "Science",
+      "grade": "Grade 4",
+      "chapterTopic": "palnts",
+      "fileName": "Plants_Around_Us_Sample_Document.pdf",
+      "fileSize": "0.0 MB",
+      "status": "ready",
+      "approvalStatus": "approved",
+      "id": "mat-1790702489799",
+      "uploadedAt": "2026-09-29T17:21:29.799Z",
+      "aiProcessedAt": "2026-09-29T17:21:29.803Z",
+      "aiSummary": "AI successfully analyzed \"Plants_Around_Us_Sample_Document.pdf\" (palnts, Grade 4). Extracted 5 conceptual multiple-choice quiz questions and 5 structured writing worksheet problems tailored for Medium difficulty.",
+      "generatedContent": {
+        "quiz": {
+          "id": "quiz-gen-1790702489803",
+          "title": "Sciene — Quick Quiz (Grade 4)",
+          "instructions": "Read each question carefully. Choose the single best answer and circle or tick the corresponding option. Total marks: 10.",
+          "difficulty": "Medium",
+          "questions": [
+            {
+              "id": "q-quiz-1",
+              "questionNumber": 1,
+              "question": "In the study of palnts, what is the primary function of the root system?",
+              "type": "mcq",
+              "options": [
+                "Roots (ᱚᱛ ᱞᱟᱛᱟᱨ ᱨᱮ ᱨᱮᱦᱮᱫ)",
+                "Green Leaves (ᱥᱟᱠᱟᱢ)",
+                "Flower petals (ᱵᱟᱦᱟ)",
+                "Tree trunk bark (ᱫᱟᱨᱮ ᱪᱷᱟᱞ)"
+              ],
+              "correctAnswer": "Roots (ᱚᱛ ᱞᱟᱛᱟᱨ ᱨᱮ ᱨᱮᱦᱮᱫ)",
+              "explanation": "Roots anchor the plant firmly and absorb vital groundwater and minerals from the soil.",
+              "marks": 2
+            },
+            {
+              "id": "q-quiz-2",
+              "questionNumber": 2,
+              "question": "What green pigment inside leaves captures sunlight to prepare food through photosynthesis?",
+              "type": "mcq",
+              "options": [
+                "Chlorophyll (ᱦᱟᱹᱨᱤᱭᱟᱹᱲ ᱨᱚᱝ)",
+                "Carotene (ᱥᱟᱥᱟᱝ ᱨᱚᱝ)",
+                "Rainwater drops",
+                "Dry nitrogen"
+              ],
+              "correctAnswer": "Chlorophyll (ᱦᱟᱹᱨᱤᱭᱟᱹᱲ ᱨᱚᱝ)",
+              "explanation": "Chlorophyll absorbs red and blue light spectra from the sun, converting carbon dioxide and water into glucose.",
+              "marks": 2
+            },
+            {
+              "id": "q-quiz-3",
+              "questionNumber": 3,
+              "question": "Which gas do healthy forest trees release into the air that all humans and animals need to breathe?",
+              "type": "mcq",
+              "options": [
+                "Oxygen (ᱡᱤᱣᱤ ᱦᱚᱭ / Oxygen)",
+                "Carbon dioxide",
+                "Methane gas",
+                "Smoke particles"
+              ],
+              "correctAnswer": "Oxygen (ᱡᱤᱣᱤ ᱦᱚᱭ / Oxygen)",
+              "explanation": "Plants produce oxygen as a byproduct of daytime photosynthesis.",
+              "marks": 2
+            },
+            {
+              "id": "q-quiz-4",
+              "questionNumber": 4,
+              "question": "What is the protective outer layer that covers a dormant seed before it sprouts?",
+              "type": "mcq",
+              "options": [
+                "Seed Coat / Testa (ᱡᱟᱶ ᱪᱷᱟᱞ)",
+                "Flower Nectar",
+                "Pollen grain",
+                "Tree leaf"
+              ],
+              "correctAnswer": "Seed Coat / Testa (ᱡᱟᱶ ᱪᱷᱟᱞ)",
+              "explanation": "The seed coat protects the delicate embryo inside until moisture and warmth trigger germination.",
+              "marks": 2
+            },
+            {
+              "id": "q-quiz-5",
+              "questionNumber": 5,
+              "question": "Which seasonal change prompts deciduous trees in Chotanagpur forests to shed their leaves?",
+              "type": "mcq",
+              "options": [
+                "Winter and dry spring to conserve water",
+                "Heavy monsoon downpour",
+                "Full moon night",
+                "High underground humidity"
+              ],
+              "correctAnswer": "Winter and dry spring to conserve water",
+              "explanation": "Shedding leaves minimizes transpiration water loss during the dry season before pre-monsoon showers.",
+              "marks": 2
+            }
+          ],
+          "totalMarks": 10,
+          "estimatedTimeMinutes": 15
+        },
+        "worksheet": {
+          "id": "ws-gen-1790702489803",
+          "title": "Sciene — Practice Worksheet & Concept Review",
+          "instructions": "Answer all questions neatly in the ruled spaces provided. Show calculations and diagrams where applicable. Total marks: 20.",
+          "difficulty": "Medium",
+          "questions": [
+            {
+              "id": "q-ws-1",
+              "questionNumber": 1,
+              "question": "Q1. Explain why trees like Sal (Sarjom) and Mahua need deep roots during dry summer months in Jharkhand.",
+              "type": "descriptive",
+              "writingSpaceLines": 4,
+              "suggestedAnswer": "Deep taproots reach subterranean water tables beneath rocky soil, sustaining the tree even when seasonal ponds dry up.",
+              "marks": 4
+            },
+            {
+              "id": "q-ws-2",
+              "questionNumber": 2,
+              "question": "Q2. List the three essential natural ingredients that a green leaf needs to make food for the plant.",
+              "type": "descriptive",
+              "writingSpaceLines": 3,
+              "suggestedAnswer": "1. Sunlight (ᱥᱤᱝᱜᱮᱞ / ᱵᱮᱲᱟ ᱢᱟᱨᱥᱟᱞ), 2. Water from roots (ᱫᱟᱜ), 3. Carbon Dioxide from the air (ᱦᱚᱭ).",
+              "marks": 4
+            },
+            {
+              "id": "q-ws-3",
+              "questionNumber": 3,
+              "question": "Q3. How do community forests around our villages help keep the air clean and provide shade for domestic livestock?",
+              "type": "descriptive",
+              "writingSpaceLines": 4,
+              "suggestedAnswer": "Trees filter dust particles, release pure oxygen, reduce ambient temperature, and provide cooling canopy cover.",
+              "marks": 4
+            },
+            {
+              "id": "q-ws-4",
+              "questionNumber": 4,
+              "question": "Q4. Describe what happens when a farmer sows paddy seeds in wet plowed field soil.",
+              "type": "descriptive",
+              "writingSpaceLines": 4,
+              "suggestedAnswer": "The seed absorbs soil water, swells, cracks open the seed coat, sends down a primary radicle (root), and shoots a green plumule toward the sunlight.",
+              "marks": 4
+            },
+            {
+              "id": "q-ws-5",
+              "questionNumber": 5,
+              "question": "Q5. Why is conserving natural water reservoirs and planting indigenous saplings important for village agriculture?",
+              "type": "descriptive",
+              "writingSpaceLines": 4,
+              "suggestedAnswer": "Water reservoirs recharge groundwater, prevent topsoil erosion, and provide irrigation during dry spells.",
+              "marks": 4
+            }
+          ],
+          "totalMarks": 20,
+          "estimatedTimeMinutes": 35
+        }
+      },
+      "approvedAt": "2026-09-29T17:24:57.184Z"
+    },
+    {
+      "id": "mat-101",
+      "title": "SCERT Jharkhand Science: Chapter 4 - Plants Around Us",
+      "subjectId": "sub-2",
+      "subjectName": "Science",
+      "grade": "Grade 4",
+      "chapterTopic": "Chapter 4: Plant Roots, Leaves & Forest Trees",
+      "fileName": "Ch4_Science_Plants_Around_Us.pdf",
+      "fileSize": "2.4 MB",
+      "uploadedAt": "2026-09-24T10:00:00Z",
+      "status": "ready",
+      "aiProcessedAt": "2026-09-24T10:02:15Z",
+      "aiSummary": "AI successfully analyzed Ch4_Science_Plants_Around_Us.pdf. Extracted 5 quiz questions and 5 descriptive worksheet problems on root systems, photosynthesis, and Jharkhand trees.",
+      "approvalStatus": "approved",
+      "approvedAt": "2026-09-24T10:15:00Z",
+      "assignedWorksheetId": "ws-102",
+      "generatedContent": {
+        "quiz": {
+          "id": "quiz-mat-101",
+          "title": "Plants Around Us — Concept Quiz",
+          "instructions": "Read each question carefully and select the correct option. Total marks: 10.",
+          "difficulty": "Medium",
+          "totalMarks": 10,
+          "estimatedTimeMinutes": 15,
+          "questions": [
+            {
+              "id": "q-1",
+              "questionNumber": 1,
+              "question": "Which part of a tree anchors it into the soil and absorbs groundwater?",
+              "type": "mcq",
+              "options": [
+                "Roots (ᱨᱮᱦᱮᱫ)",
+                "Leaves (ᱥᱟᱠᱟᱢ)",
+                "Flower (ᱵᱟᱦᱟ)",
+                "Bark (ᱪᱷᱟᱞ)"
+              ],
+              "correctAnswer": "Roots (ᱨᱮᱦᱮᱫ)",
+              "explanation": "Roots anchor the plant firmly and absorb vital groundwater and minerals from the soil.",
+              "marks": 2
+            },
+            {
+              "id": "q-2",
+              "questionNumber": 2,
+              "question": "What green substance inside leaves captures solar energy to prepare plant food?",
+              "type": "mcq",
+              "options": [
+                "Chlorophyll (ᱦᱟᱹᱨᱤᱭᱟᱹᱲ ᱨᱚᱝ)",
+                "Carotene",
+                "Pure water",
+                "Nitrogen dust"
+              ],
+              "correctAnswer": "Chlorophyll (ᱦᱟᱹᱨᱤᱭᱟᱹᱲ ᱨᱚᱝ)",
+              "explanation": "Chlorophyll absorbs sunlight to synthesize glucose from carbon dioxide and water.",
+              "marks": 2
+            },
+            {
+              "id": "q-3",
+              "questionNumber": 3,
+              "question": "Which vital gas do green forest trees release during daylight that humans breathe?",
+              "type": "mcq",
+              "options": [
+                "Oxygen (ᱡᱤᱣᱤ ᱦᱚᱭ)",
+                "Carbon Dioxide",
+                "Argon",
+                "Smoke"
+              ],
+              "correctAnswer": "Oxygen (ᱡᱤᱣᱤ ᱦᱚᱭ)",
+              "explanation": "Plants produce oxygen as a byproduct of daylight photosynthesis.",
+              "marks": 2
+            },
+            {
+              "id": "q-4",
+              "questionNumber": 4,
+              "question": "What protective coat wraps around a seed before it germinates in moist soil?",
+              "type": "mcq",
+              "options": [
+                "Seed Coat (ᱡᱟᱶ ᱪᱷᱟᱞ)",
+                "Leaf vein",
+                "Stem bark",
+                "Flower petal"
+              ],
+              "correctAnswer": "Seed Coat (ᱡᱟᱶ ᱪᱷᱟᱞ)",
+              "explanation": "The seed coat shields the dormant embryo until moisture and warmth induce sprouting.",
+              "marks": 2
+            },
+            {
+              "id": "q-5",
+              "questionNumber": 5,
+              "question": "Why do Sal trees in Jharkhand shed leaves during late winter and dry spring?",
+              "type": "mcq",
+              "options": [
+                "To reduce water loss through transpiration",
+                "Because of heavy rainfall",
+                "To attract butterflies",
+                "Due to excessive shade"
+              ],
+              "correctAnswer": "To reduce water loss through transpiration",
+              "explanation": "Deciduous shedding conserves vital moisture in dry weather prior to summer rains.",
+              "marks": 2
+            }
+          ]
+        },
+        "worksheet": {
+          "id": "ws-mat-101",
+          "title": "Plants Around Us — Classroom Practice Worksheet",
+          "instructions": "Answer each question neatly in the lines provided below. Total marks: 20.",
+          "difficulty": "Medium",
+          "totalMarks": 20,
+          "estimatedTimeMinutes": 30,
+          "questions": [
+            {
+              "id": "wsq-1",
+              "questionNumber": 1,
+              "question": "Explain why indigenous trees like Sal and Mahua need deep taproots in our district.",
+              "type": "descriptive",
+              "writingSpaceLines": 4,
+              "suggestedAnswer": "Deep taproots penetrate deep underground to reach water tables during dry hot months.",
+              "marks": 4
+            },
+            {
+              "id": "wsq-2",
+              "questionNumber": 2,
+              "question": "List the three essential raw materials that green leaves use to produce food through photosynthesis.",
+              "type": "descriptive",
+              "writingSpaceLines": 3,
+              "suggestedAnswer": "1. Sunlight (ᱵᱮᱲᱟ ᱢᱟᱨᱥᱟᱞ), 2. Water from soil (ᱫᱟᱜ), 3. Carbon Dioxide from air (ᱦᱚᱭ).",
+              "marks": 4
+            },
+            {
+              "id": "wsq-3",
+              "questionNumber": 3,
+              "question": "How do village forests help keep the ambient air cool and reduce seasonal soil erosion?",
+              "type": "descriptive",
+              "writingSpaceLines": 4,
+              "suggestedAnswer": "Tree root networks bind loose topsoil against runoff, and leafy canopy provides transpiration cooling.",
+              "marks": 4
+            },
+            {
+              "id": "wsq-4",
+              "questionNumber": 4,
+              "question": "Describe the changes observed when a farmer sows paddy seeds into freshly plowed soil.",
+              "type": "descriptive",
+              "writingSpaceLines": 4,
+              "suggestedAnswer": "The seed absorbs soil moisture, swells, splits its testa, and sprouts a downward radicle root and upward green shoot.",
+              "marks": 4
+            },
+            {
+              "id": "wsq-5",
+              "questionNumber": 5,
+              "question": "Give two reasons why planting and protecting fruit and shade trees near our school is beneficial.",
+              "type": "descriptive",
+              "writingSpaceLines": 4,
+              "suggestedAnswer": "Trees offer shade during recess, improve air quality, and provide seasonal nutritious fruits like Jamun and Mango.",
+              "marks": 4
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "mat-102",
+      "title": "Fractions & Fair Sharing - Chapter 2 Notes",
+      "subjectId": "sub-1",
+      "subjectName": "Mathematics",
+      "grade": "Grade 4",
+      "chapterTopic": "Chapter 2: Fractions & Sharing Produce",
+      "fileName": "Math_Ch2_Fractions_Notes.pdf",
+      "fileSize": "1.8 MB",
+      "uploadedAt": "2026-09-26T11:30:00Z",
+      "status": "ready",
+      "aiProcessedAt": "2026-09-26T11:31:40Z",
+      "aiSummary": "AI successfully analyzed Math_Ch2_Fractions_Notes.pdf. Extracted 5 multiple-choice fraction comparison items and 4 word problems on equal division.",
+      "approvalStatus": "pending_review",
+      "generatedContent": {
+        "quiz": {
+          "id": "quiz-mat-102",
+          "title": "Fractions & Equal Sharing — Quick Quiz",
+          "instructions": "Select the correct option for each problem. Total marks: 10.",
+          "difficulty": "Medium",
+          "totalMarks": 10,
+          "estimatedTimeMinutes": 15,
+          "questions": [
+            {
+              "id": "qm-1",
+              "questionNumber": 1,
+              "question": "If 12 guavas are shared equally among 3 friends, how many guavas does each friend get?",
+              "type": "mcq",
+              "options": [
+                "4 guavas (᱔ ᱴᱤ)",
+                "3 guavas",
+                "6 guavas",
+                "2 guavas"
+              ],
+              "correctAnswer": "4 guavas (᱔ ᱴᱤ)",
+              "explanation": "12 divided by 3 equals 4 (12 ÷ 3 = 4).",
+              "marks": 2
+            },
+            {
+              "id": "qm-2",
+              "questionNumber": 2,
+              "question": "Which fraction represents one half of a whole unit?",
+              "type": "mcq",
+              "options": [
+                "1/2",
+                "1/4",
+                "3/4",
+                "2/1"
+              ],
+              "correctAnswer": "1/2",
+              "explanation": "1/2 indicates 1 equal part out of 2.",
+              "marks": 2
+            },
+            {
+              "id": "qm-3",
+              "questionNumber": 3,
+              "question": "Which fraction is bigger: 1/2 or 1/4?",
+              "type": "mcq",
+              "options": [
+                "1/2 is bigger",
+                "1/4 is bigger",
+                "Both are equal",
+                "Cannot be determined"
+              ],
+              "correctAnswer": "1/2 is bigger",
+              "explanation": "Dividing into 2 parts creates larger pieces than dividing into 4 parts.",
+              "marks": 2
+            },
+            {
+              "id": "qm-4",
+              "questionNumber": 4,
+              "question": "If a string of length 20 cm is cut into 4 equal segments, what is the length of each segment?",
+              "type": "mcq",
+              "options": [
+                "5 cm",
+                "4 cm",
+                "10 cm",
+                "2 cm"
+              ],
+              "correctAnswer": "5 cm",
+              "explanation": "20 cm ÷ 4 = 5 cm.",
+              "marks": 2
+            },
+            {
+              "id": "qm-5",
+              "questionNumber": 5,
+              "question": "What is 3/4 + 1/4 equal to?",
+              "type": "mcq",
+              "options": [
+                "1 (One whole)",
+                "4/8",
+                "2/4",
+                "3/8"
+              ],
+              "correctAnswer": "1 (One whole)",
+              "explanation": "(3 + 1) / 4 = 4/4 = 1.",
+              "marks": 2
+            }
+          ]
+        },
+        "worksheet": {
+          "id": "ws-mat-102",
+          "title": "Fractions & Equal Sharing — Practice Sheet",
+          "instructions": "Solve the word problems clearly showing calculations. Total marks: 16.",
+          "difficulty": "Medium",
+          "totalMarks": 16,
+          "estimatedTimeMinutes": 25,
+          "questions": [
+            {
+              "id": "wsm-1",
+              "questionNumber": 1,
+              "question": "Solve: 24 kilograms of rice are shared equally among 4 families. How much does each family receive?",
+              "type": "descriptive",
+              "writingSpaceLines": 4,
+              "suggestedAnswer": "24 kg ÷ 4 = 6 kg per family.",
+              "marks": 4
+            },
+            {
+              "id": "wsm-2",
+              "questionNumber": 2,
+              "question": "Draw two identical circular rotis. Shade 1/2 of the first and 1/4 of the second to demonstrate which is larger.",
+              "type": "descriptive",
+              "writingSpaceLines": 4,
+              "suggestedAnswer": "Shading half of a circle covers twice the area of one quarter.",
+              "marks": 4
+            },
+            {
+              "id": "wsm-3",
+              "questionNumber": 3,
+              "question": "A piece of cloth measures 15 meters. If Guruji cuts 3/5 of it for school banner craft, how many meters are cut?",
+              "type": "descriptive",
+              "writingSpaceLines": 4,
+              "suggestedAnswer": "(15 ÷ 5) × 3 = 3 × 3 = 9 meters cut.",
+              "marks": 4
+            },
+            {
+              "id": "wsm-4",
+              "questionNumber": 4,
+              "question": "Sona had ₹60. She spent 1/3 of it on colored pencils. How much did she spend, and how much money is left?",
+              "type": "descriptive",
+              "writingSpaceLines": 4,
+              "suggestedAnswer": "Spent = 60 ÷ 3 = ₹20. Remaining = 60 - 20 = ₹40.",
+              "marks": 4
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

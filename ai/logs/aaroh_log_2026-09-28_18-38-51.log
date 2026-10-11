@@ -1,0 +1,16 @@
+[2026-09-28 18:38:52,351] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:38:52,353] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:38:52,364] botocore.credentials - INFO - credentials.py:1252 - Found credentials in environment variables.
+[2026-09-28 18:38:52,496] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:38:52,499] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:38:52,551] AAROH - INFO - glossary_db.py:57 - Loaded 12 glossary terms into local memory cache.
+[2026-09-28 18:38:53,151] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:38:53,153] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:38:53,158] AAROH - INFO - content_cache.py:31 - Loaded 7 entries from local content cache.
+[2026-09-28 18:38:53,165] AAROH - INFO - content_cache.py:31 - Loaded 7 entries from local content cache.
+[2026-09-28 18:38:53,187] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:38:53,190] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:38:53,202] AAROH - INFO - content_cache.py:31 - Loaded 7 entries from local content cache.
+[2026-09-28 18:38:53,220] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:38:53,222] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:38:53,231] AAROH - INFO - content_cache.py:31 - Loaded 7 entries from local content cache.

@@ -1,0 +1,40 @@
+services:
+  aaroh-postgres-pgvector:
+    image: pgvector/pgvector:pg16
+    container_name: aaroh-pgvector
+    environment:
+      POSTGRES_DB: aaroh_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  aaroh-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: aaroh-api-server
+    environment:
+      - DB_DIALECT=postgresql
+      - DB_HOST=aaroh-postgres-pgvector
+      - DB_PORT=5432
+      - DB_NAME=aaroh_db
+      - DB_USER=postgres
+      - DB_PASSWORD=password
+      - DB_USE_SQLITE_FALLBACK=false
+      - AWS_REGION=ap-south-1
+    ports:
+      - "8000:8000"
+    depends_on:
+      aaroh-postgres-pgvector:
+        condition: service_healthy
+
+volumes:
+  pgdata:

@@ -1,0 +1,72 @@
+name: Build and deploy AAROH
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: aaroh-deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN || vars.AWS_ROLE_ARN }}
+          role-session-name: GitHubActionsSession
+          aws-region: ${{ secrets.AWS_REGION || vars.AWS_REGION || 'ap-south-1' }}
+
+      - name: Log in to Amazon ECR
+        id: ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build and push API image
+        env:
+          REGISTRY: ${{ steps.ecr.outputs.registry }}
+          REPOSITORY: ${{ vars.ECR_REPOSITORY || 'aaroh-api' }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build --pull -t "$REGISTRY/$REPOSITORY:$IMAGE_TAG" -t "$REGISTRY/$REPOSITORY:latest" -f Dockerfile .
+          docker push "$REGISTRY/$REPOSITORY:$IMAGE_TAG"
+          docker push "$REGISTRY/$REPOSITORY:latest"
+
+      - name: Deploy API service
+        if: ${{ vars.ECS_CLUSTER != '' && vars.ECS_SERVICE != '' }}
+        env:
+          CLUSTER: ${{ vars.ECS_CLUSTER }}
+          SERVICE: ${{ vars.ECS_SERVICE }}
+        run: |
+          aws ecs update-service --cluster "$CLUSTER" --service "$SERVICE" --desired-count 2 --force-new-deployment
+          aws ecs wait services-stable --cluster "$CLUSTER" --services "$SERVICE"
+
+      - name: Publish district dashboard
+        if: ${{ vars.FRONTEND_BUCKET != '' }}
+        env:
+          BUCKET: ${{ vars.FRONTEND_BUCKET }}
+          COGNITO_DOMAIN: ${{ vars.COGNITO_DOMAIN }}
+          COGNITO_CLIENT_ID: ${{ vars.COGNITO_APP_CLIENT_ID }}
+        run: |
+          cat > frontend/config.js <<EOF
+          window.AAROH_CONFIG = { apiBaseUrl: "", cognitoDomain: "$COGNITO_DOMAIN", cognitoClientId: "$COGNITO_CLIENT_ID" };
+          EOF
+          aws s3 sync frontend/ "s3://$BUCKET/" --delete --cache-control "public,max-age=300"
+          aws s3 cp frontend/config.js "s3://$BUCKET/config.js" --content-type "application/javascript" --cache-control "no-cache"
+
+      - name: Invalidate CloudFront cache
+        if: ${{ vars.CLOUDFRONT_DISTRIBUTION_ID != '' }}
+        env:
+          DISTRIBUTION_ID: ${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}
+        run: aws cloudfront create-invalidation --distribution-id "$DISTRIBUTION_ID" --paths '/*'

@@ -1,0 +1,3 @@
+[2026-09-28 17:10:42,387] botocore.credentials - INFO - credentials.py:1252 - Found credentials in environment variables.
+[2026-09-28 17:10:43,752] AAROH - INFO - glossary_db.py:165 - Seeded 11 primary curriculum glossary terms.
+[2026-09-28 17:10:43,761] AAROH - INFO - translation.py:72 - Translated (en->hi) in 0.31ms with 1 glossary terms.

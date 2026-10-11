@@ -1,0 +1,34 @@
+# Core Framework & API
+fastapi
+uvicorn
+python-multipart
+pydantic
+pydantic-settings
+python-dotenv
+pyyaml
+
+# Document Processing (Phase 1)
+pymupdf
+pypdf
+pdfplumber
+
+# Database & Vector Storage
+sqlalchemy
+psycopg2-binary
+pgvector
+
+# Cloud & LLM Providers (AWS Bedrock, etc.)
+boto3
+botocore
+langgraph
+langchain
+langchain-core
+pydub
+
+# Utilities
+tqdm
+numpy
+requests
+PyJWT[crypto]
+pytest
+multipart

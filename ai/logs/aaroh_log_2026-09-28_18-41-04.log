@@ -1,0 +1,41 @@
+[2026-09-28 18:41:04,965] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:41:04,968] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:41:04,980] botocore.credentials - INFO - credentials.py:1252 - Found credentials in environment variables.
+[2026-09-28 18:41:05,117] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:41:05,119] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:41:05,159] AAROH - INFO - glossary_db.py:57 - Loaded 12 glossary terms into local memory cache.
+[2026-09-28 18:41:05,823] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:41:05,825] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:41:05,830] AAROH - INFO - content_cache.py:31 - Loaded 9 entries from local content cache.
+[2026-09-28 18:41:05,837] AAROH - INFO - content_cache.py:31 - Loaded 9 entries from local content cache.
+[2026-09-28 18:41:05,854] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:41:05,856] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:41:05,862] AAROH - INFO - content_cache.py:31 - Loaded 9 entries from local content cache.
+[2026-09-28 18:41:05,883] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:41:05,885] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:41:05,906] AAROH - INFO - content_cache.py:31 - Loaded 9 entries from local content cache.
+[2026-09-28 18:41:05,928] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:41:05,931] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:41:05,940] AAROH - INFO - content_cache.py:31 - Loaded 9 entries from local content cache.
+[2026-09-28 18:41:05,974] httpx2 - INFO - _client.py:1085 - HTTP Request: GET http://testserver/ "HTTP/1.1 200 OK"
+[2026-09-28 18:41:05,992] AAROH - INFO - teacher_copilot.py:96 - Multigrade lesson plan generated: 'Sources of Water' (Plan ID: c95bcc1a)
+[2026-09-28 18:41:06,007] AAROH - INFO - copilot_edge_pipeline.py:292 - Lesson plan 'c95bcc1a' saved to DB.
+[2026-09-28 18:41:06,008] httpx2 - INFO - _client.py:1085 - HTTP Request: POST http://testserver/api/v1/copilot/lesson-plans/generate "HTTP/1.1 200 OK"
+[2026-09-28 18:41:06,015] AAROH - INFO - teacher_copilot.py:155 - Remedial teaching aid generated for 'EVS-G3-WAT-01' (Apply)
+[2026-09-28 18:41:06,018] httpx2 - INFO - _client.py:1085 - HTTP Request: POST http://testserver/api/v1/copilot/remedial-aid/generate "HTTP/1.1 200 OK"
+[2026-09-28 18:41:06,024] AAROH - INFO - localization.py:57 - Cache HIT for concept 'EVS-G3-WAT-01' (hi/gon)
+[2026-09-28 18:41:06,024] AAROH - INFO - quiz_generator.py:69 - Quiz generated: 'EVS-G3-WAT-01' — 5 questions
+[2026-09-28 18:41:06,203] AAROH - INFO - voice_tts.py:92 - Local audio synthesized: data\audio\track_EVS-G3-WAT-01_hi_1adcf81b.wav (46.15s)
+[2026-09-28 18:41:06,203] AAROH - INFO - localization.py:57 - Cache HIT for concept 'EVS-G3-WAT-02' (hi/gon)
+[2026-09-28 18:41:06,204] AAROH - INFO - quiz_generator.py:69 - Quiz generated: 'EVS-G3-WAT-02' — 5 questions
+[2026-09-28 18:41:06,369] AAROH - INFO - voice_tts.py:92 - Local audio synthesized: data\audio\track_EVS-G3-WAT-02_hi_cde9bc4d.wav (46.15s)
+[2026-09-28 18:41:06,370] AAROH - INFO - localization.py:57 - Cache HIT for concept 'EVS-G3-WAT-03' (hi/gon)
+[2026-09-28 18:41:06,370] AAROH - INFO - quiz_generator.py:69 - Quiz generated: 'EVS-G3-WAT-03' — 5 questions
+[2026-09-28 18:41:06,538] AAROH - INFO - voice_tts.py:92 - Local audio synthesized: data\audio\track_EVS-G3-WAT-03_hi_c0d197b3.wav (46.15s)
+[2026-09-28 18:41:06,599] AAROH - INFO - edge_sync.py:119 - Offline package exported: aaroh_bundle_g3_env_hi_gon_e96e5c19.zip (1270919 bytes)
+[2026-09-28 18:41:06,607] AAROH - INFO - copilot_edge_pipeline.py:319 - Offline package record 'e96e5c19' saved.
+[2026-09-28 18:41:06,608] httpx2 - INFO - _client.py:1085 - HTTP Request: POST http://testserver/api/v1/copilot/edge/packages/export "HTTP/1.1 200 OK"
+[2026-09-28 18:41:06,627] httpx2 - INFO - _client.py:1085 - HTTP Request: GET http://testserver/api/v1/copilot/edge/packages/download/aaroh_bundle_g3_env_hi_gon_e96e5c19.zip "HTTP/1.1 200 OK"
+[2026-09-28 18:41:06,643] AAROH - INFO - edge_sync.py:192 - Edge Sync: 1 submissions ingested from device 'tablet_dantewada_01' (School: dantewada_ashram_shala)
+[2026-09-28 18:41:06,645] httpx2 - INFO - _client.py:1085 - HTTP Request: POST http://testserver/api/v1/copilot/edge/sync/import "HTTP/1.1 200 OK"
+[2026-09-28 18:41:06,651] httpx2 - INFO - _client.py:1085 - HTTP Request: GET http://testserver/api/v1/copilot/analytics/mastery-heatmap "HTTP/1.1 200 OK"

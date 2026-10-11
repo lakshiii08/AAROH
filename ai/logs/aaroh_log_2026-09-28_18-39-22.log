@@ -1,0 +1,23 @@
+[2026-09-28 18:39:22,590] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:39:22,592] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:39:22,602] botocore.credentials - INFO - credentials.py:1252 - Found credentials in environment variables.
+[2026-09-28 18:39:22,695] fastapi - ERROR - utils.py:128 - Form data requires "python-multipart" to be installed. 
+You can install "python-multipart" with: 
+
+pip install python-multipart
+
+ized successfully.
+[2026-09-28 18:39:22,704] AAROH - INFO - glossary_db.py:57 - Loaded 12 glossary terms into local memory cache.
+[2026-09-28 18:39:23,281] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:39:23,283] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:39:23,288] AAROH - INFO - content_cache.py:31 - Loaded 7 entries from local content cache.
+[2026-09-28 18:39:23,295] AAROH - INFO - content_cache.py:31 - Loaded 7 entries from local content cache.
+[2026-09-28 18:39:23,316] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:39:23,318] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:39:23,327] AAROH - INFO - content_cache.py:31 - Loaded 7 entries from local content cache.
+[2026-09-28 18:39:23,345] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:39:23,347] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:39:23,354] AAROH - INFO - content_cache.py:31 - Loaded 7 entries from local content cache.
+[2026-09-28 18:39:23,373] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:39:23,374] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:39:23,382] AAROH - INFO - content_cache.py:31 - Loaded 7 entries from local content cache.

@@ -1,0 +1,159 @@
+app:
+  name: "AAROH - AI Rural & Tribal Primary Education Platform"
+  version: "0.3.0"
+  env: "development"
+  log_level: "INFO"
+
+aws:
+  region: "ap-south-1" # Mumbai region for low latency in India
+  s3:
+    raw_bucket: "aaroh-raw-lessons-storage"
+    processed_bucket: "aaroh-processed-lessons-storage"
+    upload_prefix: "raw_uploads/"
+    processed_prefix: "extracted_artifacts/"
+    localized_prefix: "localized_lessons/"
+  dynamodb:
+    glossary_table: "aaroh_glossary"
+    content_cache_table: "aaroh_localized_content_cache"
+
+database:
+  dialect: "postgresql"
+  host: "localhost"
+  port: 5432
+  name: "aaroh_db"
+  user: "postgres"
+  password: "password"
+  pool_size: 10
+  max_overflow: 20
+  echo: false
+  use_sqlite_fallback: true # Uses local sqlite with pgvector simulation if Postgres is unavailable
+  sqlite_db_path: "data/aaroh_local.db"
+
+vector_store:
+  backend: "pgvector" # "pgvector" or "opensearch"
+  dimension: 1536
+  metric: "cosine"
+  table_name: "content_chunks"
+  index_name: "idx_content_chunks_embedding"
+
+ingestion:
+  allowed_extensions:
+    - ".pdf"
+    - ".txt"
+    - ".md"
+    - ".pptx"
+  max_file_size_mb: 50
+  chunking:
+    target_chunk_size: 800
+    chunk_overlap: 120
+    split_by_sections: true
+    min_chunk_length: 80
+
+translation:
+  default_source_lang: "en"
+  default_target_lang: "hi"
+  enable_glossary_lookup: true
+  glossary_cache_size: 10000
+  max_batch_size: 50
+  supported_languages:
+    - code: "en"
+      name: "English"
+      script: "Latin"
+    - code: "hi"
+      name: "Hindi"
+      script: "Devanagari"
+    - code: "bn"
+      name: "Bengali"
+      script: "Bengali"
+    - code: "mr"
+      name: "Marathi"
+      script: "Devanagari"
+    - code: "or"
+      name: "Odia"
+      script: "Odia"
+    - code: "te"
+      name: "Telugu"
+      script: "Telugu"
+    - code: "gu"
+      name: "Gujarati"
+      script: "Gujarati"
+    - code: "sat"
+      name: "Santali"
+      script: "Ol Chiki / Devanagari"
+      tribal: true
+    - code: "gon"
+      name: "Gondi"
+      script: "Gunjala Gondi / Devanagari"
+      tribal: true
+    - code: "bhi"
+      name: "Bhili"
+      script: "Devanagari"
+      tribal: true
+    - code: "hne"
+      name: "Chhattisgarhi"
+      script: "Devanagari"
+      dialect: true
+    - code: "mai"
+      name: "Maithili"
+      script: "Devanagari"
+
+localization:
+  enable_cache: true
+  cache_ttl_days: 30
+  max_retrieved_chunks: 3
+  local_cache_path: "data/cache/localized_content_cache.json"
+
+quiz:
+  max_questions_per_quiz: 5
+  mcq_options_count: 4
+  enable_difficulty_adaptation: true
+  enable_bilingual_questions: false
+  student_results_table: "aaroh_student_assessment_results"
+  local_results_path: "data/cache/student_assessment_results.json"
+  remedial_threshold_pct: 60.0
+
+voice:
+  tts_engine: "polly"               # "polly" | "indic_tts" | "local_synthesizer"
+  stt_engine: "whisper"             # "whisper" | "transcribe" | "local_stt"
+  default_voice_gender: "FEMALE"
+  audio_output_dir: "data/audio"
+  sample_rate: 22050
+  enable_mock_voice: false          # Uses AWS Polly Neural voice when available, falls back if offline
+  polly_voices:
+    hi: "Kajal"
+    en: "Aditi"
+    bn: "Kajal"
+    mr: "Kajal"
+    te: "Kajal"
+    or: "Kajal"
+    gon: "Kajal"
+    sat: "Kajal"
+    bhi: "Kajal"
+    hne: "Kajal"
+
+copilot_edge:
+  packages_export_dir: "data/packages"
+  sync_import_dir: "data/sync"
+  max_bundle_size_mb: 250
+  enable_offline_compression: true
+  multigrade_support: true
+
+gamification:
+  points_per_lesson_complete: 50
+  points_per_quiz_pass: 100
+  points_per_quest_complete: 75
+  streak_bonus_multiplier: 1.2
+  badges_catalog_path: "data/gamification/badges.json"
+  flashcards_output_dir: "data/flashcards"
+
+district_admin:
+  parent_voice_output_dir: "data/parent_audio"
+  enable_mock_ivr_dispatch: true
+  district_code: "CG-BASTAR"
+  state_name: "Chhattisgarh"
+  max_pathway_steps: 4
+
+
+
+
+

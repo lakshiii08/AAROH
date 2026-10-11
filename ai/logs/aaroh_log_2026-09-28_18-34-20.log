@@ -1,0 +1,15 @@
+[2026-09-28 18:34:20,804] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:34:20,810] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:34:20,827] botocore.credentials - INFO - credentials.py:1252 - Found credentials in environment variables.
+[2026-09-28 18:34:20,918] AAROH - INFO - content_cache.py:31 - Loaded 7 entries from local content cache.
+[2026-09-28 18:34:21,016] AAROH - INFO - voice_tts.py:92 - Local audio synthesized: data\audio\intro_hi_ee403f77.wav (5.08s)
+[2026-09-28 18:34:21,017] AAROH - INFO - voice_intelligence_pipeline.py:64 - Phase 5: Generating voice lesson for concept 'EVS-G3-WAT-01' (hi)
+[2026-09-28 18:34:21,017] AAROH - INFO - localization.py:57 - Cache HIT for concept 'EVS-G3-WAT-01' (hi/gon)
+[2026-09-28 18:34:21,017] AAROH - INFO - voice_tts.py:109 - Generating full voice lesson package for 'EVS-G3-WAT-01' (hi)
+[2026-09-28 18:34:21,199] AAROH - INFO - voice_tts.py:92 - Local audio synthesized: data\audio\explanation_hi_7676638f.wav (48.0s)
+[2026-09-28 18:34:21,369] AAROH - INFO - voice_tts.py:92 - Local audio synthesized: data\audio\story_hi_d2303227.wav (52.62s)
+[2026-09-28 18:34:21,558] AAROH - INFO - voice_tts.py:92 - Local audio synthesized: data\audio\voice_recap_hi_abce2570.wav (46.15s)
+[2026-09-28 18:34:21,593] AAROH - INFO - voice_intelligence_pipeline.py:167 - Voice lesson for 'EVS-G3-WAT-01' saved in DB.
+[2026-09-28 18:34:21,647] AAROH - INFO - voice_stt.py:73 - Oral Quiz [Q: Q2, Student: student_soma_01] \u2192 Transcribed: 'matke ka paani bhaap banke thanda hota hai' | Correct: False
+[2026-09-28 18:34:21,765] AAROH - INFO - voice_tts.py:92 - Local audio synthesized: data\audio\oral_feedback_hi_12e1e624.wav (6.92s)
+[2026-09-28 18:34:21,773] AAROH - INFO - voice_intelligence_pipeline.py:190 - Oral quiz attempt saved for student 'student_soma_01'.

@@ -1,0 +1,52 @@
+[2026-09-28 18:16:12,432] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:16:12,434] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:16:12,444] botocore.credentials - INFO - credentials.py:1252 - Found credentials in environment variables.
+[2026-09-28 18:16:12,578] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:16:12,579] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:16:12,614] AAROH - INFO - glossary_db.py:57 - Loaded 12 glossary terms into local memory cache.
+[2026-09-28 18:16:13,222] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:16:13,223] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:16:13,227] AAROH - INFO - content_cache.py:31 - Loaded 1 entries from local content cache.
+[2026-09-28 18:16:13,233] AAROH - INFO - content_cache.py:31 - Loaded 1 entries from local content cache.
+[2026-09-28 18:16:13,251] httpx2 - INFO - _client.py:1085 - HTTP Request: GET http://testserver/ "HTTP/1.1 200 OK"
+[2026-09-28 18:16:13,257] AAROH - INFO - simplification_localization_pipeline.py:54 - ============================================================
+[2026-09-28 18:16:13,257] AAROH - INFO - simplification_localization_pipeline.py:55 - Phase 3 Pipeline: 'EVS-G3-WAT-01' \u2192 hi / gon
+[2026-09-28 18:16:13,257] AAROH - INFO - simplification_localization_pipeline.py:56 - ============================================================
+[2026-09-28 18:16:13,271] AAROH - INFO - localization.py:78 - Generating localized lesson: 'EVS-G3-WAT-01' \u2192 hi/gon
+[2026-09-28 18:16:13,272] AAROH - INFO - content_cache.py:71 - Cached localized lesson for concept 'EVS-G3-WAT-01' (hi/gon) in local store.
+[2026-09-28 18:16:13,272] AAROH - INFO - localization.py:91 - Localized lesson generated in 15.48ms for 'EVS-G3-WAT-01'
+[2026-09-28 18:16:13,272] AAROH - INFO - simplification_localization_pipeline.py:66 - Phase 3 complete. Cached: False
+[2026-09-28 18:16:13,274] httpx2 - INFO - _client.py:1085 - HTTP Request: POST http://testserver/api/v1/simplification/concepts/EVS-G3-WAT-01 "HTTP/1.1 200 OK"
+[2026-09-28 18:16:13,276] AAROH - INFO - simplification_localization_pipeline.py:54 - ============================================================
+[2026-09-28 18:16:13,276] AAROH - INFO - simplification_localization_pipeline.py:55 - Phase 3 Pipeline: 'EVS-G3-WAT-02' \u2192 hi / Standard
+[2026-09-28 18:16:13,276] AAROH - INFO - simplification_localization_pipeline.py:56 - ============================================================
+[2026-09-28 18:16:13,280] AAROH - INFO - localization.py:78 - Generating localized lesson: 'EVS-G3-WAT-02' \u2192 hi/None
+[2026-09-28 18:16:13,281] AAROH - INFO - content_cache.py:71 - Cached localized lesson for concept 'EVS-G3-WAT-02' (hi/None) in local store.
+[2026-09-28 18:16:13,281] AAROH - INFO - localization.py:91 - Localized lesson generated in 4.48ms for 'EVS-G3-WAT-02'
+[2026-09-28 18:16:13,281] AAROH - INFO - simplification_localization_pipeline.py:66 - Phase 3 complete. Cached: False
+[2026-09-28 18:16:13,282] httpx2 - INFO - _client.py:1085 - HTTP Request: POST http://testserver/api/v1/simplification/concepts/EVS-G3-WAT-02 "HTTP/1.1 200 OK"
+[2026-09-28 18:16:13,284] AAROH - INFO - simplification_localization_pipeline.py:54 - ============================================================
+[2026-09-28 18:16:13,284] AAROH - INFO - simplification_localization_pipeline.py:55 - Phase 3 Pipeline: 'EVS-G3-WAT-02' \u2192 hi / Standard
+[2026-09-28 18:16:13,284] AAROH - INFO - simplification_localization_pipeline.py:56 - ============================================================
+[2026-09-28 18:16:13,284] AAROH - INFO - localization.py:57 - Cache HIT for concept 'EVS-G3-WAT-02' (hi/None)
+[2026-09-28 18:16:13,284] AAROH - INFO - simplification_localization_pipeline.py:66 - Phase 3 complete. Cached: True
+[2026-09-28 18:16:13,285] httpx2 - INFO - _client.py:1085 - HTTP Request: POST http://testserver/api/v1/simplification/concepts/EVS-G3-WAT-02 "HTTP/1.1 200 OK"
+[2026-09-28 18:16:13,291] AAROH - INFO - simplification_graph.py:91 - Force regenerate for 'EVS-G3-WAT-03'. Skipping cache.
+[2026-09-28 18:16:13,295] AAROH - INFO - simplification_graph.py:115 - [LangGraph] RAG retrieved 2 chunks for 'Water Conservation and Traditional Storage'
+[2026-09-28 18:16:13,295] AAROH - INFO - simplification_graph.py:120 - [LangGraph] LLM Simplification \u2192 'EVS-G3-WAT-03' (hi)
+[2026-09-28 18:16:13,297] AAROH - INFO - content_cache.py:71 - Cached localized lesson for concept 'EVS-G3-WAT-03' (hi/sat) in local store.
+[2026-09-28 18:16:13,297] AAROH - INFO - simplification_graph.py:139 - [LangGraph] Lesson cached and emitted for 'EVS-G3-WAT-03'
+[2026-09-28 18:16:13,298] httpx2 - INFO - _client.py:1085 - HTTP Request: POST http://testserver/api/v1/simplification/langgraph/concepts/EVS-G3-WAT-03 "HTTP/1.1 200 OK"
+[2026-09-28 18:16:13,303] httpx2 - INFO - _client.py:1085 - HTTP Request: GET http://testserver/api/v1/content/documents "HTTP/1.1 200 OK"
+[2026-09-28 18:16:13,311] AAROH - INFO - localization.py:78 - Generating localized lesson: 'EVS-G3-WAT-01' \u2192 hi/hne
+[2026-09-28 18:16:13,312] AAROH - INFO - content_cache.py:71 - Cached localized lesson for concept 'EVS-G3-WAT-01' (hi/hne) in local store.
+[2026-09-28 18:16:13,312] AAROH - INFO - localization.py:91 - Localized lesson generated in 4.56ms for 'EVS-G3-WAT-01'
+[2026-09-28 18:16:13,316] AAROH - INFO - localization.py:78 - Generating localized lesson: 'EVS-G3-WAT-02' \u2192 hi/hne
+[2026-09-28 18:16:13,317] AAROH - INFO - content_cache.py:71 - Cached localized lesson for concept 'EVS-G3-WAT-02' (hi/hne) in local store.
+[2026-09-28 18:16:13,317] AAROH - INFO - localization.py:91 - Localized lesson generated in 4.69ms for 'EVS-G3-WAT-02'
+[2026-09-28 18:16:13,321] AAROH - INFO - localization.py:78 - Generating localized lesson: 'EVS-G3-WAT-03' \u2192 hi/hne
+[2026-09-28 18:16:13,322] AAROH - INFO - content_cache.py:71 - Cached localized lesson for concept 'EVS-G3-WAT-03' (hi/hne) in local store.
+[2026-09-28 18:16:13,322] AAROH - INFO - localization.py:91 - Localized lesson generated in 4.57ms for 'EVS-G3-WAT-03'
+[2026-09-28 18:16:13,322] AAROH - INFO - localization.py:127 - Generated 3 localized lessons for document 'd6604496-1eb4-41a4-9562-35619372ca85'
+[2026-09-28 18:16:13,323] httpx2 - INFO - _client.py:1085 - HTTP Request: POST http://testserver/api/v1/simplification/documents/d6604496-1eb4-41a4-9562-35619372ca85 "HTTP/1.1 200 OK"
+[2026-09-28 18:16:13,326] httpx2 - INFO - _client.py:1085 - HTTP Request: GET http://testserver/api/v1/simplification/cache/status "HTTP/1.1 200 OK"

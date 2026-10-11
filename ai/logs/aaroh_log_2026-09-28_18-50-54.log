@@ -1,0 +1,33 @@
+[2026-09-28 18:50:54,678] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:50:54,681] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:50:54,692] botocore.credentials - INFO - credentials.py:1252 - Found credentials in environment variables.
+[2026-09-28 18:50:54,826] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:50:54,828] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:50:54,863] AAROH - INFO - glossary_db.py:57 - Loaded 12 glossary terms into local memory cache.
+[2026-09-28 18:50:55,489] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:50:55,492] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:50:55,496] AAROH - INFO - content_cache.py:31 - Loaded 9 entries from local content cache.
+[2026-09-28 18:50:55,503] AAROH - INFO - content_cache.py:31 - Loaded 9 entries from local content cache.
+[2026-09-28 18:50:55,523] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:50:55,526] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:50:55,533] AAROH - INFO - content_cache.py:31 - Loaded 9 entries from local content cache.
+[2026-09-28 18:50:55,558] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:50:55,560] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:50:55,568] AAROH - INFO - content_cache.py:31 - Loaded 9 entries from local content cache.
+[2026-09-28 18:50:55,588] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:50:55,590] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:50:55,596] AAROH - INFO - content_cache.py:31 - Loaded 9 entries from local content cache.
+[2026-09-28 18:50:55,621] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:50:55,623] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:50:55,642] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-28 18:50:55,644] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-28 18:50:55,675] httpx2 - INFO - _client.py:1085 - HTTP Request: GET http://testserver/ "HTTP/1.1 200 OK"
+[2026-09-28 18:50:55,697] AAROH - INFO - remedial_intervention.py:70 - Created remedial pathway 'pathway_student_ramu_p8_evs-g3-wat-01_b6a92f' for student 'student_ramu_p8' on 'EVS-G3-WAT-01'
+[2026-09-28 18:50:55,704] AAROH - INFO - district_admin_pipeline.py:210 - Intervention pathway 'pathway_student_ramu_p8_evs-g3-wat-01_b6a92f' saved.
+[2026-09-28 18:50:55,705] httpx2 - INFO - _client.py:1085 - HTTP Request: POST http://testserver/api/v1/district/interventions/generate-pathway "HTTP/1.1 200 OK"
+[2026-09-28 18:50:55,879] AAROH - INFO - voice_tts.py:92 - Local audio synthesized: data\audio\parent_student_ramu_p8_hi_be9f14d9.wav (19.85s)
+[2026-09-28 18:50:55,879] AAROH - INFO - parent_voice_bridge.py:61 - Parent Voice Advisory generated: 'adv_student_ramu_p8_441fc6' for Ramu Mandavi (Phone: +91-9876543210)
+[2026-09-28 18:50:55,886] AAROH - INFO - district_admin_pipeline.py:235 - Parent voice advisory 'adv_student_ramu_p8_441fc6' saved.
+[2026-09-28 18:50:55,888] httpx2 - INFO - _client.py:1085 - HTTP Request: POST http://testserver/api/v1/district/parent-advisory/send-voice-note "HTTP/1.1 200 OK"
+[2026-09-28 18:50:55,892] httpx2 - INFO - _client.py:1085 - HTTP Request: GET http://testserver/api/v1/district/interventions/pending "HTTP/1.1 200 OK"
+[2026-09-28 18:50:55,904] httpx2 - INFO - _client.py:1085 - HTTP Request: GET http://testserver/api/v1/district/analytics/overview "HTTP/1.1 200 OK"

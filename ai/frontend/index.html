@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#164e43">
+  <title>AAROH | District Learning Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="config.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#"><span class="brand-mark">A</span><span>AAROH<small>District learning dashboard</small></span></a>
+    <div class="top-actions"><span class="live"><i></i> Learning insights</span><button class="button button-light" id="refresh">Refresh data</button><button class="button button-light" id="signout" hidden>Sign out</button></div>
+  </header>
+  <main class="page">
+    <section class="welcome">
+      <div><p class="eyebrow">DISTRICT OVERVIEW</p><h1>Learning grows when every child is seen.</h1><p class="subhead">Track learning progress and coordinate support across your schools.</p></div>
+      <div class="district-chip"><span class="pin">⌖</span><span><b id="district-name">Loading district…</b><small id="district-state">Connecting to AAROH</small></span></div>
+    </section>
+    <section class="metrics" aria-label="District learning measures">
+      <article class="metric"><div class="metric-icon green">↗</div><span class="metric-label">Schools supported</span><strong id="schools">—</strong><small>Across this district</small></article>
+      <article class="metric"><div class="metric-icon orange">◎</div><span class="metric-label">Children reached</span><strong id="students">—</strong><small>Learning with AAROH</small></article>
+      <article class="metric"><div class="metric-icon blue">✳</div><span class="metric-label">Assessments completed</span><strong id="concepts">—</strong><small>Student learning checks</small></article>
+      <article class="metric"><div class="metric-icon rose">♡</div><span class="metric-label">Support pathways</span><strong id="pending">—</strong><small>Ready for follow-up</small></article>
+    </section>
+    <section class="content-grid">
+      <article class="panel">
+        <div class="panel-heading"><div><p class="eyebrow">STUDENT SUPPORT</p><h2>Create a learning pathway</h2><p class="panel-copy">Build a four-step, locally grounded plan around a learning gap.</p></div><span class="panel-icon">✦</span></div>
+        <form id="pathway-form" class="form-grid">
+          <label>Student name<input name="student_name" placeholder="e.g. Ramu Mandavi" required></label>
+          <label>Student ID<input name="student_id" placeholder="School student ID" required></label>
+          <label>Concept code<input name="concept_code" value="EVS-G3-WAT-01" required></label>
+          <label>Learning language<select name="target_language"><option value="hi">Hindi</option><option value="en">English</option><option value="gon">Gondi</option><option value="sat">Santhali</option></select></label>
+          <label class="full">Learning area<select name="weak_bloom_level"><option>Understand</option><option>Remember</option><option>Apply</option></select></label>
+          <button class="button button-primary full" type="submit">Create support pathway <span>→</span></button>
+        </form>
+      </article>
+      <article class="panel pending-panel">
+        <div class="panel-heading"><div><p class="eyebrow">FOLLOW-UP QUEUE</p><h2>Students needing support</h2><p class="panel-copy">Open pathways ready for teacher follow-up.</p></div><span class="panel-icon panel-icon-orange">↗</span></div>
+        <div id="interventions" class="list"><p class="empty">Loading active pathways…</p></div>
+      </article>
+    </section>
+    <section class="panel worksheet-panel">
+      <div class="panel-heading"><div><p class="eyebrow">STUDENT WORKSHEET</p><h2>Create a worksheet</h2><p class="panel-copy">Each worksheet has five multiple-choice questions and five written questions.</p></div><span class="panel-icon panel-icon-orange">✎</span></div>
+      <form id="worksheet-form" class="form-grid advisory-form">
+        <label>Concept code<input name="concept_code" value="EVS-G3-WAT-01" required></label>
+        <label>Grade<select name="grade_level"><option value="3" selected>Grade 3</option><option value="1">Grade 1</option><option value="2">Grade 2</option><option value="4">Grade 4</option><option value="5">Grade 5</option></select></label>
+        <label>Worksheet language<select name="target_language"><option value="sat" selected>Santhali (Ol Chiki)</option><option value="hi">Hindi</option><option value="en">English</option></select></label>
+        <button class="button button-primary full" type="submit">Generate worksheet <span>→</span></button>
+      </form>
+      <p id="worksheet-status" class="notice" role="status" aria-live="polite"></p>
+      <div id="worksheet-output" class="worksheet-output" hidden>
+        <div class="worksheet-title-row"><div><p class="eyebrow">READY TO PRINT</p><h3 id="worksheet-title"></h3></div><button id="print-worksheet" class="button button-light print-button" type="button">Print worksheet</button></div>
+        <ol id="worksheet-questions" class="worksheet-questions"></ol>
+      </div>
+    </section>
+    <section class="panel advisory-panel">
+      <div class="panel-heading"><div><p class="eyebrow">FAMILY CONNECTION</p><h2>Prepare a parent voice advisory</h2><p class="panel-copy">Share a short learning update in the family’s preferred language.</p></div><span class="panel-icon panel-icon-blue">♫</span></div>
+      <form id="advisory-form" class="form-grid advisory-form">
+        <label>Student name<input name="student_name" required></label>
+        <label>Student ID<input name="student_id" required></label>
+        <label>Parent phone<input name="parent_phone" type="tel" placeholder="+91…" required></label>
+        <label>Concept code<input name="concept_code" value="EVS-G3-WAT-01" required></label>
+        <label>Language<select name="target_language"><option value="hi">Hindi</option><option value="en">English</option><option value="gon">Gondi</option><option value="sat">Santhali</option></select></label>
+        <label>Mother tongue<select name="target_dialect"><option value="gon">Gondi</option><option value="sat">Santhali</option><option value="bhi">Bhili</option></select></label>
+        <button class="button button-primary full" type="submit">Prepare voice advisory <span>→</span></button>
+      </form>
+      <div id="notice" class="notice" role="status" aria-live="polite"></div>
+    </section>
+    <footer>Built for local learning, family voice, and every child’s next step.</footer>
+  </main>
+  <section id="auth-gate" class="auth-gate" hidden><div class="auth-card"><span class="brand-mark">A</span><p class="eyebrow">AAROH DISTRICT DASHBOARD</p><h1>Welcome back.</h1><p>Sign in with your district staff account to view learning insights and coordinate student support.</p><button id="signin" class="button button-primary">Sign in securely <span>→</span></button></div></section>
+</body>
+</html>

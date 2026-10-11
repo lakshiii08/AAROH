@@ -1,0 +1,100 @@
+version: '3.8'
+
+services:
+  # ── MongoDB: Authentication & Identity Database ───────────────────────────
+  mongodb:
+    image: mongo:7.0
+    container_name: aaroh-mongodb
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: ${MONGODB_DATABASE:-aaroh_auth_db}
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - aaroh-net
+
+  # ── PostgreSQL: Curriculum, Learning, Assessment & pgvector Store ─────────
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: aaroh-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-aaroh_admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
+      POSTGRES_DB: ${POSTGRES_DB:-aaroh_learning_db}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    networks:
+      - aaroh-net
+
+  # ── Redis: Cache & Async Worker Queue ─────────────────────────────────────
+  redis:
+    image: redis:7.2-alpine
+    container_name: aaroh-redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - aaroh-net
+
+  # ── FastAPI Backend with Aaroh-AI Core Integration ───────────────────────
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        AAROH_AI_REPO_URL: ${AAROH_AI_REPO_URL:-https://github.com/Pahuja07/Aaroh-AI.git}
+        AAROH_AI_REF: ${AAROH_AI_REF:-main}
+    container_name: aaroh-backend
+    restart: always
+    depends_on:
+      - mongodb
+      - postgres
+      - redis
+    environment:
+      - APP_ENV=production
+      - DEBUG=false
+      - HOST=0.0.0.0
+      - PORT=8000
+      - MONGODB_URI=mongodb://mongodb:27017
+      - MONGODB_DATABASE=${MONGODB_DATABASE:-aaroh_auth_db}
+      - MONGODB_USE_MOCK_FALLBACK=false
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-aaroh_admin}:${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}@postgres:5432/${POSTGRES_DB:-aaroh_learning_db}
+      - USE_SQLITE_FALLBACK=false
+      - REDIS_URL=redis://redis:6379/0
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY:?JWT_SECRET_KEY is required}
+      - CORS_ORIGINS=${CORS_ORIGINS:?CORS_ORIGINS is required}
+      - ENABLE_DEMO_LOGINS=${ENABLE_DEMO_LOGINS:-true}
+      - DEMO_SCHOOL_ID=${DEMO_SCHOOL_ID:-SCH_DEMO_01}
+      - DEMO_SCHOOL_CODE=${DEMO_SCHOOL_CODE:-DEMO01}
+      - DEMO_DISTRICT_ID=${DEMO_DISTRICT_ID:-DIST_DEMO_01}
+      - DEMO_TEACHER_LOGIN=${DEMO_TEACHER_LOGIN:-teacher@123}
+      - DEMO_TEACHER_PASSWORD=${DEMO_TEACHER_PASSWORD:-teacher@123}
+      - DEMO_STUDENT_ROLL_NUMBER=${DEMO_STUDENT_ROLL_NUMBER:-24}
+      - DEMO_STUDENT_PASSWORD=${DEMO_STUDENT_PASSWORD:-1234}
+      - AAROH_AI_PATH=/app/Aaroh-AI
+      - AWS_REGION=${AWS_REGION:-ap-south-1}
+      - S3_BUCKET=${S3_BUCKET:-aaroh-content-storage}
+      - LOCAL_STORAGE_DIR=/app/Aaroh-backend/data/storage
+    ports:
+      - "8000:8000"
+    volumes:
+      - backend_uploads:/app/Aaroh-backend/data
+    networks:
+      - aaroh-net
+
+volumes:
+  mongo_data:
+  pg_data:
+  redis_data:
+  backend_uploads:
+
+networks:
+  aaroh-net:
+    driver: bridge

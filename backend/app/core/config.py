@@ -15,8 +15,10 @@ def find_aaroh_ai_path() -> Path:
     current_file = Path(__file__).resolve()
     for parent in current_file.parents:
         candidates = [
+            parent / "ai",
             parent / "Aaroh-AI",
             parent / "Aaroh-AI" / "Aaroh-AI",
+            parent.parent / "ai",
             parent.parent / "Aaroh-AI",
             parent.parent / "Aaroh-AI" / "Aaroh-AI",
         ]
@@ -24,6 +26,9 @@ def find_aaroh_ai_path() -> Path:
             if candidate.exists() and (candidate / "src" / "aaroh").exists():
                 return candidate
 
+    ai_fallback = current_file.parents[3] / "ai"
+    if ai_fallback.exists():
+        return ai_fallback.resolve()
     return (current_file.parents[3] / "Aaroh-AI").resolve()
 
 AAROH_AI_DIR = find_aaroh_ai_path()
